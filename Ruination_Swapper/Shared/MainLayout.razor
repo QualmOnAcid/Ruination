@@ -1,0 +1,1224 @@
+﻿@using BlazorWpfApp.CUE4Parse;
+@using CUE4Parse.Encryption.Aes;
+@using CUE4Parse.MappingsProvider;
+@using CUE4Parse.UE4.Assets;
+@using CUE4Parse.UE4.Assets.Exports;
+@using CUE4Parse.UE4.Assets.Objects;
+@using CUE4Parse.UE4.Assets.Readers;
+@using CUE4Parse.UE4.Objects.Core.Misc;
+@using CUE4Parse.UE4.Objects.UObject;
+@using CUE4Parse.UE4.Readers;
+@using Newtonsoft.Json.Linq;
+@using System.Threading;
+@using System.IO;
+@using System.Text;
+@using Utils;
+
+@inject IJSRuntime JS;
+
+@using Newtonsoft.Json;
+@using System.Net;
+@using WebviewAppShared.Models;
+@using WebviewAppShared.Swapper;
+@inherits LayoutComponentBase
+
+<body>
+    <div class="rectangle-root">
+        <div class="group-child24"></div>
+
+        @if (CurrentState == State.LOADING)
+        {
+            <div class="loaderdiv" style="margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column;">
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+        } else if(CurrentState == State.KEY)
+        {
+            <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                <p class="keyTitle">Ruination - Key</p>
+                <p class="keyDescription">Please enter a free key</p>
+                <input type="text" placeholder="Key" class="keyBox" @bind=keyBoxText>
+                <div class="swapButton" style="position: absolute; top: 60%;" @onclick="@(async() => await ValidateKey())">
+                    <p style="font-size: 15px; position: relative;">Submit</p>
+                </div>
+                <p class="getKey" @onclick="@(async() => await OpenKeySite())">Get free key</p>
+            </div>
+        }
+        else {
+        <div>
+                <b class="cosmetics" @onclick="@(async() => await ShowTabSelectionModal())">Cosmetics</b>
+                <b class="settings" @onclick="@(async() => await ShowSettings())">Settings</b>
+                <b class="ruination">Ruination</b>
+                @if(false)
+                {
+                    <div style="width: 100%; display: flex; justify-content: center;">
+                        <input type="text" placeholder="Search.." @bind=searchBarText class="searchBar">
+                    </div>
+                }
+                <div class="parent">
+                    
+                    @if (_showTabSelectionModal)
+                    {
+                        <div id="myModal" class="modal" style="z-index: 9999;">
+                            
+                            <div style="position: absolute; top: 0%; background-color: transparent; width: 99%; height: 99%;" @onclick="@(async () => await CloseTabSelectionModal())"></div>
+
+                            <div class="modal-content">
+
+                                <div class="tabButton" style="left: 11.5%" @onclick="@(async() => await SkipToTab(0))">
+                                    <img src="/CharacterIcon.png" class="tabButtonIcon">
+                                    <p class="tabButtonText">Skins</p>
+                                </div>
+
+                                <div class="tabButton" style="left: 27.5%" @onclick="@(async() => await ShowUEFNTab())">
+                                    <img src="/CharacterIcon.png" class="tabButtonIcon">
+                                    <p class="tabButtonText">UEFN Skins</p>
+                                </div>
+
+                                <div class="tabButton" style="left: 43.5%;" @onclick="@(async() => await SkipToTab(1))">
+                                    <img src="/BackpackIcon2.png" class="tabButtonIcon">
+                                    <p class="tabButtonText">Backpacks</p>
+                                </div>
+
+                                <div class="tabButton" style="left: 59.5%;" @onclick="@(async() => await SkipToTab(2))">
+                                    <img src="/PickaxeIcon2.png" class="tabButtonIcon">
+                                    <p class="tabButtonText">Pickaxes</p>
+                                </div>
+
+                                <div class="tabButton" style="left: 75.5%;" @onclick="@(async() => await SkipToTab(3))">
+                                    <img src="/DanceIcon.png" class="tabButtonIcon">
+                                    <p class="tabButtonText">Emotes</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+
+                        @if (CurrentState == State.COSMETICS)
+                        {
+                            <div class="item-container" style="background-color: transparent; display: flex; height: 585px; gap: 3vh; flex-direction: row; flex-flow: row wrap; overflow:hidden scroll; bottom: 4.5vh;">
+
+                                @foreach (var item in _items)
+                                {
+                                string itemNameColor = "white";
+
+                                if(Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(item.id.ToLower()) && (x.Type == "standard" || x.Type == "transform")))
+                                {
+                                    itemNameColor = "#42f581";
+                                }
+
+                                <div class="itemm" @onclick="@(async() => await ShowSwapForm(item))">
+                                        <div class="itemImages">
+                                            <img src="@item.rarity" style="border: 4px solid @item.rarcolor;" class="rarityImage">
+                                            <img src="@item.icon" class="itemImage">
+                                        </div>
+                                        <p class="itemName" style="color: @itemNameColor;">@item.name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(item.description, 31, true)</p>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                        else if (CurrentState == State.SWAP_OPTION)
+                        {
+                            <div class="swapform" style="display: flex; justify-content: center; align-items: center;">
+                                <div class="itemm" style="position: relative; left: -5%;" @onclick="(async() => await ShowOptionForm(currentitem))">
+                                    @if (currentoption == null)
+                                    {
+                                        <div class="itemImages">
+                                            <img style="border: 4px solid #37d0ff;" src="https://cdn.discordapp.com/attachments/1136637018634453045/1170706244391157831/rare-212x.png?ex=655a0427&is=65478f27&hm=5b43e9b63ed53fc9b0267ccac0f4079f0f9389c36bab80fe9fbeb92206a7d2fc&" class="rarityImage">
+                                            <img src="https://media.valorant-api.com/competitivetiers/564d8e28-c226-3180-6285-e48a390db8b1/0/largeicon.png" class="itemImage">
+                                        </div>
+
+                                        <p class="itemName">Unknown - Click here</p>
+                                        <p class="itemDescription">Please select option</p>
+                                    }
+                                    else
+                                    {
+                                        <div class="itemImages">
+                                            <img src="@currentoption.rarity" style="border: 4px solid @currentoption.rarcolor;" class="rarityImage">
+                                            <img src="@currentoption.icon" class="itemImage">
+                                        </div>
+
+                                        <p class="itemName">@currentoption.name</p>
+                                        <p class="itemDescription">@Utils.CutOffString(currentoption.description, 31, true)</p>
+                                    }
+                                </div>
+
+                                <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1136637018634453045/1170816694617395320/ArrowIcon.png?ex=655a6b04&is=6547f604&hm=164feec9d6247517009580646739ab174768d25e659aa191f5103787a805c721&">
+
+                                <div class="itemm" style="left: 5%; position: relative;">
+                                    <div class="itemImages">
+                                        <img src="@currentitem.rarity" style="border: 4px solid @currentitem.rarcolor;" class="rarityImage">
+                                        <img src="@currentitem.icon" class="itemImage">
+                                    </div>
+
+                                    <p class="itemName">@currentitem.name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(currentitem.description, 31, true)</p>
+                                </div>
+
+                                @if (currentoption == null)
+                                {
+                                    <p style="position: absolute; font-size: 15px; top: 50%;">Please select an option</p>
+                                }
+                                else
+                                {
+                                    <p style="position: absolute; font-size: 15px; top: 50%;">@LogText</p>
+
+                                    <div class="swapButton" style="top:65%;" @onclick="@(async() => await Standard.Convert(currentitem, currentoption))">
+                                        <p style="font-size: 15px; position: relative;">Convert</p>
+                                    </div>
+
+                                    <div class="swapButton" style="top: 78%;" @onclick="@(async() => await Standard.Revert(currentitem, currentoption))">
+                                        <p style="font-size: 15px; position: relative;">Revert</p>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                        else if (CurrentState == State.CHOOSE_OPTION)
+                        {
+                            <div class="item-container" style="background-color: transparent; display: flex; height: 585px; gap: 3vh; flex-direction: row; flex-flow: row wrap; overflow: hidden scroll; bottom: 4.5vh;">
+
+                                @foreach (var item in _items)
+                                {
+
+                                var showKickableOptions = Config.GetConfig().ShowKickableOptions;
+
+                                //Emotes and Pickaxes can't swap rarity
+                                if (item.Type == ItemType.PICKAXE || item.Type == ItemType.EMOTE)
+                                    showKickableOptions = false;
+
+                                string itemNameColor = "white";
+
+                                if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(currentitem.id.ToLower()) && x.OptionID.ToLower().Equals(item.id.ToLower()) && x.Type == "standard"))
+                                {
+                                    itemNameColor = "#42f581";
+                                }
+
+                                @if (showKickableOptions || Options.IsOption(item, currentitem))
+                                    {
+                                        <div class="itemm" @onclick="@(async() => await SetOption(item))">
+                                            <div class="itemImages">
+                                                <img src="@item.rarity" style="border: 4px solid @item.rarcolor;" class="rarityImage">
+                                                <img src="@item.icon" class="itemImage">
+                                            </div>
+                                            <p class="itemName" style="color: @itemNameColor;">@item.name</p>
+                                            <p class="itemDescription">@Utils.CutOffString(item.description, 31, true)</p>
+                                        </div>
+                                    }
+
+                                }
+
+                                @if (currentitem.Type == ItemType.SKIN)
+                                {
+
+                                    var transformOptions = Options.GetAllTransformOptions(SwapUtils.GetProvider(), currentitem);
+
+                                    @foreach(var transformChar in transformOptions)
+                                    {
+
+                                    var actualLoadedChar = GetActualChararacterFromLoadeditems(transformChar.ID);
+                                        actualLoadedChar.IsTransformCharacter = true;
+
+                                    string itemNameColor = "white";
+
+                                    if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(currentitem.id.ToLower()) && x.OptionID.ToLower().Equals(actualLoadedChar.id.ToLower()) && x.Type == "transform"))
+                                    {
+                                        itemNameColor = "#42f581";
+                                    }
+
+                                        <div class="itemm" @onclick=@(async() => await SetOption(actualLoadedChar))>
+                                            <div class="itemImages">
+                                                <img src="@actualLoadedChar.rarity" style="border: 4px solid @actualLoadedChar.rarcolor;" class="rarityImage">
+                                                <img src="@transformChar.Icon" class="itemImage">
+                                            </div>
+                                            <p class="itemName" style="color: @itemNameColor;">@transformChar.Name</p>
+                                            <p class="itemDescription">@Utils.CutOffString(actualLoadedChar.description, 31, true)</p>
+                                        </div>
+                                    }
+
+                                }
+
+                        </div>
+                    } else if(CurrentState == State.UEFN_SKINS)
+                    {
+                        <div class="item-container" style="background-color: transparent; display: flex; height: 585px; gap: 3vh; flex-direction: row; flex-flow: row wrap; overflow: hidden scroll; bottom: 4.5vh;">
+                            @foreach(var uefnItem in API.GetApi().Characters)
+                        {
+
+                            string itemNameColor = "white";
+
+                            if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(uefnItem.ID.ToLower()) && x.Type == "uefn"))
+                            {
+                               itemNameColor = "#42f581";
+                            }
+
+                            <div class="itemm" @onclick="@(async() => await ShowUEFNSwapForm(uefnItem))">
+                                <div class="itemImages">
+                                    <img src="@Rarities.GetRarityImage(uefnItem.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(uefnItem.Rarity.ToLower());" class="rarityImage">
+                                    <img src="@uefnItem.Icon" class="itemImage">
+                                </div>
+                                <p class="itemName" style="color: @itemNameColor;">@uefnItem.Name</p>
+                                <p class="itemDescription">@Utils.CutOffString(uefnItem.Description, 31, true)</p>
+                            </div>
+                        }
+                        </div>
+                    } else if(CurrentState == State.UEFN_SWAPFORM)
+                    {
+                        <div class="swapform" style="display: flex; justify-content: center; align-items: center;">
+                            <div class="itemm" style="position: relative; left: -5%;" @onclick="(async() => await ShowUEFNOptionForm(CurrentUefnitem))">
+                                @if (currentoption == null)
+                                {
+                                    <div class="itemImages">
+                                        <img style="border: 4px solid #37d0ff;" src="https://cdn.discordapp.com/attachments/1136637018634453045/1170706244391157831/rare-212x.png?ex=655a0427&is=65478f27&hm=5b43e9b63ed53fc9b0267ccac0f4079f0f9389c36bab80fe9fbeb92206a7d2fc&" class="rarityImage">
+                                        <img src="https://media.valorant-api.com/competitivetiers/564d8e28-c226-3180-6285-e48a390db8b1/0/largeicon.png" class="itemImage">
+                                    </div>
+
+                                    <p class="itemName">Unknown - Click here</p>
+                                    <p class="itemDescription">Please select option</p>
+                                }
+                                else
+                                {
+                                    <div class="itemImages">
+                                        <img src="@currentoption.rarity" style="border: 4px solid @currentoption.rarcolor;" class="rarityImage">
+                                        <img src="@currentoption.icon" class="itemImage">
+                                    </div>
+
+                                    <p class="itemName">@currentoption.name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(currentoption.description, 31, true)</p>
+                                }
+                            </div>
+
+                            <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1136637018634453045/1170816694617395320/ArrowIcon.png?ex=655a6b04&is=6547f604&hm=164feec9d6247517009580646739ab174768d25e659aa191f5103787a805c721&">
+
+                            <div class="itemm" style="left: 5%; position: relative;">
+                                <div class="itemImages">
+                                    <img src="@Rarities.GetRarityImage(CurrentUefnitem.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(CurrentUefnitem.Rarity.ToLower());" class="rarityImage">
+                                    <img src="@CurrentUefnitem.Icon" class="itemImage">
+                                </div>
+
+                                <p class="itemName">@CurrentUefnitem.Name</p>
+                                <p class="itemDescription">@Utils.CutOffString(CurrentUefnitem.Description, 31, true)</p>
+                            </div>
+
+                            @if (currentoption == null)
+                            {
+                                <p style="position: absolute; font-size: 15px; top: 50%;">Please select an option</p>
+                            }
+                            else
+                            {
+                                <p style="position: absolute; font-size: 15px; top: 50%;">@LogText</p>
+
+                                <div class="swapButton" style="top:65%;" @onclick="@(async() => await UEFN.ConvertUEFN(CurrentUefnitem, currentoption, SwapUtils.GetProvider()))">
+                                    <p style="font-size: 15px; position: relative;">Convert</p>
+                                </div>
+
+                                <div class="swapButton" style="top: 78%;" @onclick="@(async() => await UEFN.RevertUEFN(currentoption, SwapUtils.GetProvider()))">
+                                    <p style="font-size: 15px; position: relative;">Revert</p>
+                                </div>
+                            }
+
+                        </div>
+                    } else if(CurrentState == State.UEFN_CHOOSEOPTION)
+                    {
+                        <div class="item-container" style="background-color: transparent; display: flex; height: 585px; gap: 3vh; flex-direction: row; flex-flow: row wrap; overflow: hidden scroll; bottom: 4.5vh;">
+                            @foreach (var item in cachedTabItems["outfit"])
+                            {
+
+                                string itemNameColor = "white";
+
+                                if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentUefnitem.ID.ToLower()) && x.OptionID.ToLower().Equals(item.id.ToLower()) && x.Type == "uefn"))
+                                {
+                                    itemNameColor = "#42f581";
+                                }
+
+                                <div class="itemm" @onclick="@(async() => await SetUEFNOption(item))">
+                                    <div class="itemImages">
+                                        <img src="@item.rarity" style="border: 4px solid @item.rarcolor;" class="rarityImage">
+                                        <img src="@item.icon" class="itemImage">
+                                    </div>
+                                    <p class="itemName" style="color: @itemNameColor;">@item.name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(item.description, 31, true)</p>
+                                </div>
+                            }
+                        </div>
+                    } else if(CurrentState == State.SETTINGS)
+                    {
+                        <div class="item-container" style="background-color: transparent; display: flex; flex-direction: column; align-items: center; height: 585px; gap: 1vh; overflow: hidden scroll; bottom: 1.5vh;">
+
+                            <p style="font-size: 25px;">SETTINGS</p>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await ChangeKickableOptions())">
+                                @if (Config.GetConfig().ShowKickableOptions)
+                                {
+                                    <p style="font-size: 15px; position: relative;">SHOW KICKABLE SWAPS: ON</p>
+                                }
+                                else
+                                {
+                                    <p style="font-size: 15px; position: relative;">SHOW KICKABLE SWAPS: OFF</p>
+                                }
+                            </div>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await Utils.StartFortnite())">
+                                <p style="font-size: 15px; position: relative;">START FORTNITE</p>
+                            </div>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await Utils.ShowConvertedItems())">
+                                <p style="font-size: 15px; position: relative;">SHOW CONVERTED ITEMS</p>
+                            </div>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await Utils.RevertAllItems())">
+                                <p style="font-size: 15px; position: relative;">REVERT ALL ITEMS</p>
+                            </div>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await Logger.Open())">
+                                <p style="font-size: 15px; position: relative;">OPEN LOGS</p>
+                            </div>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await Utils.ResetEverything())">
+                                <p style="font-size: 15px; position: relative;">RESET EVERYTHING</p>
+                            </div>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await Utils.OpenDC())">
+                                <p style="font-size: 15px; position: relative;">DISCORD</p>
+                            </div>
+
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        }
+    </div>
+</body>
+
+<style>
+
+    @@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
+    * {
+        user-select: none;
+        font-family: var(--font-nunito);
+    }
+
+    body {
+        margin: 0;
+        line-height: normal;
+    }
+
+    :root {
+        /* fonts */
+        --font-nunito: Nunito;
+        /* font sizes */
+        --font-size-xs: 12px;
+        --font-size-base: 16px;
+        --font-size-7xs: 6px;
+        --font-size-3xs: 10px;
+        --font-size-5xl: 24px;
+        /* Colors */
+        --color-darkgray-100: #b4b4b4;
+        --color-darkgray-200: #a4a4a4;
+        --color-darkgray-300: #b6b6b6;
+        --color-white: #fff;
+        --color-gray-200: #25262f;
+        --color-gray-100: #19191d;
+        /* Border radiuses */
+        --br-8xs: 5px;
+        --br-6xs: 7px;
+    }
+
+    ::-webkit-scrollbar {
+        width: .9vh;
+        cursor: pointer;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 2vh;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #3d77cd;
+        border-radius: 1vh;
+        cursor: pointer;
+    }
+
+    .group-child24 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: var(--color-gray-100);
+        width: 1184px;
+        height: 716px;
+    }
+
+    .cosmetics,
+    .ruination,
+    .settings {
+        position: absolute;
+        top: 29px;
+        left: 807px;
+    }
+
+    .searchBar {
+        position: relative;
+        top: 29px;
+        background-color: var(--color-gray-200);
+        color: white;
+        height: 30px;
+        width: 250px;
+        border-color: transparent;
+        border-radius: 5px;
+        transition: 0.3s ease all;
+    }
+
+    .searchBar:hover {
+        border-color: white;
+    }
+
+    .settings {
+        transition: 0.3s ease all;
+        cursor: pointer;
+    }
+
+    .settings:hover {
+        color: #2d5896;
+    }
+
+    .cosmetics {
+        left: 930px;
+        cursor: pointer;
+        transition: 0.3s ease all;
+    }
+
+    .cosmetics:hover {
+        color: #2d5896;
+    }
+
+    .ruination,
+    .settings {
+        left: 1060px;
+    }
+
+    .ruination {
+        left: 27px;
+        color: #3d77cd;
+    }
+
+    .child {
+        border-radius: var(--br-6xs);
+        background-color: var(--color-gray-200);
+        width: 134px;
+        height: 152px;
+    }
+
+    .rare-renegade-raider18,
+    .renegade-raider {
+        position: relative;
+        top: 118px;
+        left: 6px;
+    }
+
+    .rare-renegade-raider18 {
+        top: 132px;
+        font-size: var(--font-size-7xs);
+        color: var(--color-darkgray-200);
+    }
+
+    .rare-2-icon18 {
+        top: 0;
+        left: 0;
+        border-radius: var(--br-6xs) var(--br-6xs) 0 0;
+        width: 134px;
+        height: 108px;
+        object-fit: cover;
+    }
+
+    .icon-2,
+    .item,
+    .rare-2-icon18 {
+        position: absolute;
+    }
+
+    .icon-2 {
+        top: 9px;
+        left: 18px;
+        width: 98px;
+        height: 98px;
+        object-fit: cover;
+    }
+
+    .item {
+        top: 119px;
+        left: 107px;
+        border-radius: var(--br-8xs);
+        background-color: var(--color-gray-100);
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        width: 17px;
+        height: 18px;
+    }
+
+    .arrrrow-1-icon {
+        position: absolute;
+        top: 122px;
+        left: 109px;
+        width: 13px;
+        height: 12px;
+        object-fit: cover;
+    }
+
+    .div,
+    .div1,
+    .div2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 134px;
+        height: 152px;
+    }
+
+    .div1,
+    .div2 {
+        top: 168px;
+    }
+
+    .div2 {
+        top: 336px;
+    }
+
+    .div10,
+    .div11,
+    .div3,
+    .div4,
+    .div5,
+    .div6,
+    .div7,
+    .div8,
+    .div9 {
+        position: absolute;
+        top: 0;
+        left: 328px;
+        width: 134px;
+        height: 152px;
+    }
+
+    .div10,
+    .div11,
+    .div4,
+    .div5,
+    .div6,
+    .div7,
+    .div8,
+    .div9 {
+        top: 168px;
+    }
+
+    .div10,
+    .div11,
+    .div5,
+    .div6,
+    .div7,
+    .div8,
+    .div9 {
+        top: 336px;
+    }
+
+    .div10,
+    .div11,
+    .div6,
+    .div7,
+    .div8,
+    .div9 {
+        top: 0;
+        left: 656px;
+    }
+
+    .div10,
+    .div11,
+    .div7,
+    .div8,
+    .div9 {
+        top: 168px;
+    }
+
+    .div10,
+    .div11,
+    .div8,
+    .div9 {
+        top: 336px;
+    }
+
+    .div10,
+    .div11,
+    .div9 {
+        top: 0;
+        left: 164px;
+    }
+
+    .div10,
+    .div11 {
+        top: 168px;
+    }
+
+    .div11 {
+        top: 336px;
+    }
+
+    .div12,
+    .div13,
+    .div14,
+    .div15,
+    .div16,
+    .div17,
+    .parent {
+        position: absolute;
+        top: 0;
+        left: 492px;
+        width: 134px;
+        height: 152px;
+    }
+
+    .div13,
+    .div14,
+    .div15,
+    .div16,
+    .div17,
+    .parent {
+        top: 168px;
+    }
+
+    .parent {
+        top: 336px;
+    }
+
+    .parent {
+        top: 112px;
+        left: 27px;
+        width: 1100px;
+        height: 550px;
+        font-size: var(--font-size-3xs);
+    }
+
+    .rectangle-root {
+        position: relative;
+        width: 100%;
+        height: 690px;
+        text-align: left;
+        font-size: var(--font-size-5xl);
+        color: var(--color-white);
+        font-family: var(--font-nunito);
+    }
+
+    .itemm {
+        position: relative;
+        height: 200px;
+        width: 160px;
+        background-color: var(--color-gray-200);
+        border-radius: var(--br-6xs);
+        transition: 0.3s ease all;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+        .itemm:hover {
+            transform: scale(1.1);
+        }
+
+    .itemImages {
+        width: 100%;
+        height: 150px;
+        position: relative; /* Add this to set a stacking context */
+    }
+
+    .rarityImage {
+        width:95%;
+        height: 100%;
+        border-radius: var(--br-6xs) var(--br-6xs) 0 0;
+        object-fit: cover;
+        position: relative; /* Add this for stacking context */
+        z-index: 1; /* Set the z-index for stacking order */
+    }
+
+    .itemImage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -46%);
+        width: 144px;
+        height: 144px;
+        z-index: 2;
+    }
+
+    .itemName {
+        position: relative;
+        left: 5px;
+        top: 7px;
+        font-size: 12px;
+    }
+
+    .itemDescription {
+        position: relative;
+        color: var(--color-darkgray-300);
+        top: -8px;
+        left: 5px;
+    }
+
+    .swapButton {
+        position: absolute;
+        background-color: var(--color-gray-200);
+        width: 300px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--br-6xs);
+        transition: 0.3s ease all;
+        cursor: pointer;
+    }
+
+    .swapButton:hover {
+        transform: scale(1.1);
+    }
+
+    .lds-ellipsis {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .lds-ellipsis div {
+      position: absolute;
+      top: 33px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #fff;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .lds-ellipsis div:nth-child(1) {
+      left: 8px;
+      animation: lds-ellipsis1 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(2) {
+      left: 8px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(3) {
+      left: 32px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(4) {
+      left: 56px;
+      animation: lds-ellipsis3 0.6s infinite;
+    }
+    @@keyframes lds-ellipsis1 {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @@keyframes lds-ellipsis3 {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0);
+      }
+    }
+    @@keyframes lds-ellipsis2 {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(24px, 0);
+      }
+    }
+
+    .tabButton {
+        position: absolute;
+        width: 160px;
+        height: 93px;
+        border-radius: var(--br-6xs);
+        background-color: var(--color-gray-200);
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s ease all;
+    }
+
+        .tabButton:hover {
+            transform: scale(1.1);
+        }
+
+    .tabButtonIcon {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        top: 10%;
+    }
+
+    .tabButtonText {
+        position: absolute;
+        top: 45%;
+        font-size: large;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: var(--color-gray-200);
+        width: 1000px;
+        height: 18%;
+        border-radius: var(--br-8xs);
+        display: flex;
+        align-items: center;
+    }
+    .close {
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s ease all;
+    }
+
+    .close:hover {
+        transform: scale(1.1);
+    }
+
+    .tabButton {
+        position: absolute;
+        width: 160px;
+        height: 93px;
+        border-radius: var(--br-6xs);
+        background-color: var(--color-gray-100);
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s ease all;
+    }
+
+        .tabButton:hover {
+            transform: scale(1.1);
+        }
+
+    .tabButtonIcon {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        top: 10%;
+    }
+
+    .tabButtonText {
+        position: absolute;
+        top: 45%;
+        font-size: large;
+        font-family: var(--font-nunito);
+        color: white;
+    }
+
+    .modal {
+        display: flex;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.3);
+        justify-content: center;
+    }
+
+    .keyTitle {
+        position: absolute;
+        top: 10%;
+        font-size: larger;
+        color: white;
+        z-index: 22;
+    }
+
+    .keyDescription {
+        position: absolute;
+        top: 17%;
+        font-size: medium;
+        color: var(--color-darkgray-200);
+        z-index: 22;
+    }
+
+    .keyBox {
+        position: absolute;
+        background-color: var(--color-gray-200);
+        color: white;
+        height: 30px;
+        width: 400px;
+        border-color: transparent;
+        border-radius: 5px;
+        transition: 0.3s ease all;
+    }
+
+    .keyBox:hover {
+        border-color: white;
+    }
+
+    .getKey {
+        position: absolute;
+        top: 70%;
+        font-size: medium;
+        cursor: pointer;
+        color: cornflowerblue;
+        z-index: 22;
+        transition: 0.3s ease all;
+    }
+
+    .getKey:hover {
+        transform: scale(1.1);
+    }
+
+</style>
+
+@code {
+
+    public List<Item> _items = new();
+    public State CurrentState = State.COSMETICS;
+    public Item currentitem;
+    public Item currentoption;
+
+    public ApiUEFNSkinObject CurrentUefnitem;
+
+    public bool _showTabSelectionModal = false;
+    public string searchBarText = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender != null && firstRender)
+        {
+            CurrentState = State.LOADING;
+            StateHasChanged();
+            Utils.MainWindow = this;
+            Utils.module = await JS.InvokeAsync<IJSObjectReference>("import", "/js/Main.js");
+            Logger.Init();
+            Epicgames.Load();
+            API.Load();
+            await Utils.CheckForUpdate();
+            Config.Load();
+            await DiscordRPC.Load();
+            Logger.Log("Checking for Config Key");
+            if(API.GetApi().PremiumUsers.Contains(DiscordRPC.GetID().ToString()) || await Key.CheckConfigKey())
+            {
+                Logger.Log("Config Key valid");
+                await Setup();
+            } else
+            {
+                Logger.Log("Config Key expired or invalid");
+                DiscordRPC.UpdatePresence("Key");
+                CurrentState = State.KEY;
+                StateHasChanged();
+            }
+        }
+    }
+
+    public async Task Setup()
+    {
+        await Mappings.DownloadMappings();
+        await SwapUtils.LoadProvider();
+        await Utils.CheckForChangedConvertedItems();
+        await Utils.ParseAllCosmetics();
+        CurrentState = State.SETTINGS;
+        StateHasChanged();
+        DiscordRPC.UpdatePresence("Watching Settings");
+    }
+
+    public async Task ChangeKickableOptions() => Config.GetConfig().ShowKickableOptions = !Config.GetConfig().ShowKickableOptions;
+
+    public async Task ShowSwapForm(Item item)
+    {
+        LogText = "Waiting for Input";
+        currentitem = item;
+        CurrentState = State.SWAP_OPTION;
+        DiscordRPC.UpdatePresence((currentoption != null ? currentoption.name : "Unkown") + " To " + item.name);
+    }
+
+    public async Task ShowUEFNSwapForm(ApiUEFNSkinObject item)
+    {
+        if(item.Info != null && !string.IsNullOrWhiteSpace(item.Info))
+        {
+            Utils.MessageBox(item.Info);
+        }
+        LogText = "Waiting for Input";
+        CurrentUefnitem = item;
+        CurrentState = State.UEFN_SWAPFORM;
+        DiscordRPC.UpdatePresence((currentoption != null ? currentoption.name : "Unkown") + " To " + item.Name);
+    }
+
+    public async Task ShowOptionForm(Item item)
+    {
+        LogText = "Waiting for Input";
+        string itemType = item.Type.ToString();
+        itemType = itemType[0].ToString().ToUpper() + itemType.Substring(1).ToLower();
+        CurrentState = State.CHOOSE_OPTION;
+        DiscordRPC.UpdatePresence("Choosing Option for " + item.name + $" ({itemType})");
+    }
+
+    public async Task ShowUEFNOptionForm(ApiUEFNSkinObject item)
+    {
+        LogText = "Waiting for Input";
+
+        if(!cachedTabItems.ContainsKey("outfit"))
+        {
+            CurrentState = State.LOADING;
+            cachedTabItems.Add("outfit", await GetTabItems("outfit"));
+        }
+
+        DiscordRPC.UpdatePresence("Choosing Option for " + item.Name + $" (UEFN Skin)");
+
+        CurrentState = State.UEFN_CHOOSEOPTION;
+    }
+
+    public async Task SetOption(Item item)
+    {
+        currentoption = item;
+        LogText = "Waiting for Input";
+        CurrentState = State.SWAP_OPTION;
+        DiscordRPC.UpdatePresence(item.name + " To " + currentitem.name);
+    }
+
+    public async Task SetUEFNOption(Item item)
+    {
+        currentoption = item;
+        LogText = "Waiting for Input";
+        CurrentState = State.UEFN_SWAPFORM;
+        DiscordRPC.UpdatePresence(item.name + " To " + CurrentUefnitem.Name);
+    }
+
+    public async Task ShowUEFNTab()
+    {
+        //Should be fixed: await Utils.MessageBox("Ensure to not go into item shop or locker to not crash the game");
+        CurrentState = State.LOADING;
+        await CloseTabSelectionModal();
+        currentoption = null;
+        CurrentState = State.UEFN_SKINS;
+        DiscordRPC.UpdatePresence("Watching " + API.GetApi().Characters.Count + " UEFN Skins");
+    }
+
+    public async Task SkipToTab(int index)
+    {
+        _tabIndex = index;
+        await CloseTabSelectionModal();
+        await LoadTab();
+        string[] tabNames = new string[] { "Skins", "Backpacks", "Pickaxes", "Emotes" };
+        DiscordRPC.UpdatePresence("Watching " + _items.Count + " " + tabNames[_tabIndex]);
+    }
+
+
+    public Dictionary<string, List<Item>> cachedTabItems = new(); 
+
+    private int _tabIndex = 0;
+    public async Task LoadTab()
+    {
+        CurrentState = State.LOADING;
+        LogText = "Waiting for Input";
+        string[] types = new string[] { "outfit", "backpack", "pickaxe", "emote" };
+
+        if(cachedTabItems.ContainsKey(types[_tabIndex].ToLower()))
+        {
+            _items = cachedTabItems[types[_tabIndex].ToLower()];
+            currentoption = null;
+            CurrentState = State.COSMETICS;
+            return;
+        }
+
+        var list = await GetTabItems(types[_tabIndex].ToLower());
+
+        _items = list;
+        cachedTabItems.Add(types[_tabIndex].ToLower(), list);
+        currentoption = null;
+        CurrentState = State.COSMETICS;
+        StateHasChanged();
+    }
+
+    public async Task<List<Item>> GetTabItems(string tabType)
+    {
+        var list = new List<Item>();
+
+        var tabJson = JObject.Parse(await new System.Net.WebClient().DownloadStringTaskAsync("https://fortnite-api.com/v2/cosmetics/br/search/all?type=" + tabType));
+        foreach (dynamic item in tabJson["data"])
+        {
+            var rarity = item.rarity.value.ToString().ToLower();
+
+            if (item.introduction == null || item.introduction.chapter == null || item.introduction.season == null) continue;
+
+            var type = ItemType.UNKNOWN;
+
+            if (item.type.value.ToString().ToLower().Equals("outfit")) type = ItemType.SKIN;
+            if (item.type.value.ToString().ToLower().Equals("emote")) type = ItemType.EMOTE;
+            if (item.type.value.ToString().ToLower().Equals("pickaxe")) type = ItemType.PICKAXE;
+            if (item.type.value.ToString().ToLower().Equals("backpack")) type = ItemType.BACKPACK;
+
+            string series = "";
+
+            if (item.series != null) series = item.series.value;
+
+            list.Add(new()
+                {
+                    name = item.name,
+                    id = item.id,
+                    path = item.path.ToString(),
+                    definitionPath = item.definitionPath.ToString() ?? "",
+                    Type = type,
+                    series = series,
+                    rarcolor = Rarities.GetRarityColor(rarity),
+                    description = item.description,
+                    added = item.introduction.chapter + "|" + item.introduction.season,
+                    rarity = await Rarities.GetRarityImage(rarity),
+                    icon = item.images.smallIcon ?? "https://fortnite-api.com/images/cosmetics/br/cid_028_athena_commando_f/icon.png"
+                });
+        }
+
+        list = list.OrderBy(x => x.added).ToList();
+
+        return list;
+    }
+
+    public string LogText = "Waiting for Input";
+
+    public async Task ShowTabSelectionModal() => _showTabSelectionModal = true;
+    public async Task CloseTabSelectionModal() => _showTabSelectionModal = false;
+
+    public string keyBoxText = "";
+    public async Task ValidateKey()
+    {
+        string key = keyBoxText;
+        if(await Key.CheckKey(key))
+        {
+            CurrentState = State.LOADING;
+            Config.GetConfig().Key = key;
+            Config.Save();
+            StateHasChanged();
+            await Setup();
+        } else
+        {
+            Utils.MessageBox("Please enter a valid key");
+        }
+    }
+
+    public async Task ShowSettings()
+    {
+        CurrentState = State.SETTINGS;
+        DiscordRPC.UpdatePresence("Watching Settings");
+    }
+
+    public async Task OpenKeySite() => Utils.StartUrl(API.GetApi().Other.KeyLink);
+
+    public void UpdateUI() => InvokeAsync(() => StateHasChanged());
+
+    public Item GetActualChararacterFromLoadeditems(string id)
+    {
+        return _items.FirstOrDefault(x => x.id.ToLower().Equals(id.ToLower()));
+    }
+
+}
