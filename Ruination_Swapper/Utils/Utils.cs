@@ -1,4 +1,4 @@
-﻿using CUE4Parse.UE4.Assets;
+using CUE4Parse.UE4.Assets;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.IO.Objects;
 using CUE4Parse.UE4.Objects.UObject;
@@ -146,16 +146,25 @@ namespace WebviewAppShared.Utils
                 try
                 {
                     Logger.Log("Checking " + item.OptionID + " To " + item.ID);
+
+                    bool itemChanged = false;
+
                     foreach (KeyValuePair<string, byte[]> asset in item.Assets)
                     {
 
                         byte[] savedBytes = await prov.SaveAssetAsync(asset.Key);
 
-                        if (savedBytes.SequenceEqual(asset.Value))
+                        if (!savedBytes.SequenceEqual(asset.Value))
                         {
-                            updatedList.Add(item);
+                            itemChanged = true;
+                            break;
                         }
 
+                    }
+
+                    if(!itemChanged)
+                    {
+                        updatedList.Add(item);
                     }
                     
                 } catch(Exception e)
