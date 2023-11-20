@@ -1033,7 +1033,11 @@
         DiscordRPC.UpdatePresence("Watching Settings");
     }
 
-    public async Task ChangeKickableOptions() => Config.GetConfig().ShowKickableOptions = !Config.GetConfig().ShowKickableOptions;
+    public async Task ChangeKickableOptions()
+    {
+        Config.GetConfig().ShowKickableOptions = !Config.GetConfig().ShowKickableOptions;
+        Config.Save();
+    }
 
     public async Task ShowSwapForm(Item item)
     {

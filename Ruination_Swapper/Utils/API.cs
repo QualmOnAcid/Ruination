@@ -86,6 +86,8 @@ namespace WebviewAppShared.Utils
         public List<string> Materials = new();
         public string hidpath;
         public string Info;
+        public string PartModifierBlueprint = "";
+        public string IdleEffectNiagara = "";
     }
 
 }

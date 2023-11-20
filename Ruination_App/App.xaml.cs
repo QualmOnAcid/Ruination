@@ -23,8 +23,6 @@ namespace BlazorWpfApp
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Directory.CreateDirectory(Utils.AppDataFolder);
-            Config.Save();
             base.OnExit(e);
         }
 

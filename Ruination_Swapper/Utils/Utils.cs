@@ -1,4 +1,4 @@
-using CUE4Parse.UE4.Assets;
+﻿using CUE4Parse.UE4.Assets;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.IO.Objects;
 using CUE4Parse.UE4.Objects.UObject;
@@ -22,7 +22,7 @@ namespace WebviewAppShared.Utils
     public class Utils
     {
 
-        public static string USER_VERSION = "2.0.0";
+        public static string USER_VERSION = "2.0.1";
 
         public static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RuinationFN_Swapper\\";
         public static IJSObjectReference module;
@@ -124,6 +124,7 @@ namespace WebviewAppShared.Utils
                     };
 
                     Config.GetConfig().CachedItems.Add(cachedItem);
+                    Config.Save();
 
                 }
                 catch (Exception e) { 
@@ -176,7 +177,7 @@ namespace WebviewAppShared.Utils
             Logger.Log("Setting new List");
 
             Config.GetConfig().ConvertedItems = updatedList;
-
+            Config.Save();
         }
 
         public static async Task CheckForUpdate()
@@ -288,6 +289,7 @@ namespace WebviewAppShared.Utils
                 }
 
                 Config.GetConfig().ConvertedItems.Clear();
+                Config.Save();
 
                 if(showmsgbox) await MessageBox("Reverted all items");
 

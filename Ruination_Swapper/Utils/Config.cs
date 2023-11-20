@@ -37,12 +37,16 @@ namespace WebviewAppShared.Utils
 
         public static void Save()
         {
-            Logger.Log("Saving Config");
-            string serialized = JsonConvert.SerializeObject(_config);
-            serialized = Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized));
-            serialized = Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized));
-            File.WriteAllText(ConfigFilePath, serialized);
-            Logger.Log("Saved Config");
+            Directory.CreateDirectory(Utils.AppDataFolder);
+            if(_config != null)
+            {
+                Logger.Log("Saving Config");
+                string serialized = JsonConvert.SerializeObject(_config);
+                serialized = Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized));
+                serialized = Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized));
+                File.WriteAllText(ConfigFilePath, serialized);
+                Logger.Log("Saved Config");
+            }
         }
 
         public static ConfigObject GetConfig() => _config;

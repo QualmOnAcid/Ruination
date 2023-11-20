@@ -171,7 +171,7 @@ namespace CUE4Parse.UE4.Assets
                 // Export bundle entries
                 uassetAr.Position = summary.ExportBundleEntriesOffset;
                 exportBundleEntries = uassetAr.ReadArray<FExportBundleEntry>(Summary.ExportCount * 2);
-
+                
                 if (uassetAr.Game < EGame.GAME_UE5_3)
                 {
                     // Export bundle headers
@@ -250,7 +250,7 @@ namespace CUE4Parse.UE4.Assets
 
             this.OriginalCB = SwapUtils.CompressionBlock((uint)ExportData.CompressionBlock.Offset, ExportData.CompressionBlock.CompressedSize, ExportData.CompressionBlock.UncompressedSize, (uint)ExportData.partitionIndex, ExportData.CompressionBlock.CompressionMethodIndex).ToArray();
             this.OriginalLO = SwapUtils.CreateOffsetAndLength(ExportData.OffsetAndLengthEntry.Offset, ExportData.OffsetAndLengthEntry.Length);
-
+            
             if (this.NameMap.Length > 0)
             {
                 this.NameMapAsStrings = new string[this.NameMap.Length];
@@ -305,7 +305,7 @@ namespace CUE4Parse.UE4.Assets
             }
             else foreach (var entry in exportBundleEntries)
             {
-                ProcessEntry(entry, allExportDataOffset + (int) ExportMap[entry.LocalExportIndex].CookedSerialOffset, true);
+                    ProcessEntry(entry, allExportDataOffset + (int) ExportMap[entry.LocalExportIndex].CookedSerialOffset, true);
             }
 
             IsFullyLoaded = true;

@@ -83,6 +83,7 @@ namespace WebviewAppShared.Swapper
 
                 Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(currentoption.id.ToLower()));
                 Config.GetConfig().ConvertedItems.Add(convertedItem);
+                Config.Save();
 
                 Utils.Utils.MainWindow.LogText = "Converted";
                 Logger.Log("Swap finished");
@@ -138,6 +139,7 @@ namespace WebviewAppShared.Swapper
                 Logger.Log("Removing Converted Item");
 
                 Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(currentoption.id.ToLower()));
+                Config.Save();
 
                 Utils.Utils.MainWindow.LogText = "Reverted";
 

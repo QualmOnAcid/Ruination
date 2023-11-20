@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using CUE4Parse.FileProvider;
 using WebviewAppShared.Utils;
 using WebviewAppShared.Models;
+using BlazorWpfApp.CUE4Parse;
+using Microsoft.Extensions.FileProviders;
 
 namespace WebviewAppShared.Swapper
 {
@@ -48,11 +50,17 @@ namespace WebviewAppShared.Swapper
 
                     List<KeyValuePair<string, string>> otherReplaces = new();
 
-                    otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_MED_Sports_Fashion/Meshes/F_MED_Sports_Fashion_AnimBP.F_MED_Sports_Fashion_AnimBP_C", character.Animation));
+                    otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01_Skeleton_AnimBP.F_Med_Soldier_01_Skeleton_AnimBP_C", character.Animation));
                     otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Base/SK_M_Female_Base_Skeleton.SK_M_Female_Base_Skeleton", character.Skeleton));
-                    otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_MED_Sports_Fashion/Meshes/F_MED_Sports_Fashion.F_MED_Sports_Fashion", character.Mesh));
+                    otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01.F_Med_Soldier_01", character.Mesh));
 
-                    string replacement = "FortniteGame/Content/Athena/Heroes/Meshes/Bodies/CP_Body_Commando_F_SportsFashion_Winter";
+                    string idleEffectNiagaraReplace = !string.IsNullOrEmpty(character.IdleEffectNiagara) ? character.IdleEffectNiagara : "/Game/B.C";
+                    string partModifierBlueprintReplace = !string.IsNullOrEmpty(character.PartModifierBlueprint) ? character.PartModifierBlueprint : "/Game/B.C";
+
+                    otherReplaces.Add(new("/BRCosmetics/Effects/Fort_Effects/Effects/Characters/Athena_Parts/RenegadeRaider_Fire/NS_RenegadeRaider_Fire.NS_RenegadeRaider_Fire", idleEffectNiagaraReplace));
+                    otherReplaces.Add(new("/BRCosmetics/Athena/Cosmetics/Blueprints/Part_Modifiers/B_Athena_PartModifier_RenegadeRaider_Fire.B_Athena_PartModifier_RenegadeRaider_Fire_C", partModifierBlueprintReplace));
+
+                    string replacement = "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_RenegadeRaiderFire";
 
                     Logger.Log("Loading Replacment package");
 
@@ -154,7 +162,7 @@ namespace WebviewAppShared.Swapper
                     Utils.Utils.MainWindow.LogText ="Creating Body Part";
                     Utils.Utils.MainWindow.UpdateUI();
 
-                    var bytes = CreateBodyPartWithMaterials(prov, nameMapWithIndexes);
+                    var bytes = CreateBodyPartWithMaterials(prov, nameMapWithIndexes, replacement);
 
                     replacementPackage.PropertiesWithExportMap = bytes.Skip(replacementPackage.PropertiesExportMapOffset)
                         .Take(bytes.Length).ToArray();
@@ -233,13 +241,14 @@ namespace WebviewAppShared.Swapper
 
                     Utils.Utils.MainWindow.LogText ="Creating new Serializesize";
                     Utils.Utils.MainWindow.UpdateUI();
-
-                    ulong customSerializeSize = 99;
+                    
+                    ulong customSerializeSize = replacementPackage.ExportMap[1].CookedSerialSize;
 
                     if (nameMapWithIndexes.Count > 1)
                     {
                         for (int i = 0; i < nameMapWithIndexes.Count - 1; i++)
                         {
+                            //Just adding materials to the Asset - One Material Property = 26 Bytes
                             customSerializeSize += 26;
                         }
                     }
@@ -317,6 +326,7 @@ namespace WebviewAppShared.Swapper
 
                     Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(option.id.ToLower()));
                     Config.GetConfig().ConvertedItems.Add(convertedItem);
+                    Config.Save();
 
                     Utils.Utils.MainWindow.LogText ="Converted";
                     Utils.Utils.MainWindow.UpdateUI();
@@ -408,6 +418,7 @@ namespace WebviewAppShared.Swapper
                 }
 
                 Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(option.id.ToLower()));
+                Config.Save();
 
                 Utils.Utils.MainWindow.LogText ="Reverted";
                 Utils.Utils.MainWindow.UpdateUI();
@@ -451,7 +462,7 @@ namespace WebviewAppShared.Swapper
 
         }
 
-        public static byte[] CreateBodyPartWithMaterials(DefaultFileProvider fileProvider, List<KeyValuePair<int, int>> materialsWithNamemapIndex, string baseCharacterPart = "FortniteGame/Content/Athena/Heroes/Meshes/Bodies/CP_Body_Commando_F_SportsFashion_Winter")
+        public static byte[] CreateBodyPartWithMaterials(DefaultFileProvider fileProvider, List<KeyValuePair<int, int>> materialsWithNamemapIndex, string baseCharacterPart)
         {
             DefaultFileProvider provider = fileProvider;
             var obj = provider.LoadObject(baseCharacterPart);
