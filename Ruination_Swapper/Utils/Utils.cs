@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace WebviewAppShared.Utils
     public class Utils
     {
 
-        public static string USER_VERSION = "2.0.1";
+        public static string USER_VERSION = "2.0.2";
 
         public static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RuinationFN_Swapper\\";
         public static IJSObjectReference module;
@@ -124,7 +125,6 @@ namespace WebviewAppShared.Utils
                     };
 
                     Config.GetConfig().CachedItems.Add(cachedItem);
-                    Config.Save();
 
                 }
                 catch (Exception e) { 
@@ -132,6 +132,7 @@ namespace WebviewAppShared.Utils
                 }
 
             }
+            Config.Save();
             Logger.Log("Parsed Cosmetics");
         }
 
@@ -141,6 +142,8 @@ namespace WebviewAppShared.Utils
             var prov = SwapUtils.GetProvider();
 
             var updatedList = new List<ConvertedItem>();
+
+            if (Config.GetConfig() == null || Config.GetConfig().ConvertedItems == null) Config.LoadDefault();
 
             foreach(var item in Config.GetConfig().ConvertedItems)
             {
@@ -313,6 +316,29 @@ namespace WebviewAppShared.Utils
 
             await MessageBox("Resetted everything. Exiting now");
             Environment.Exit(0);
+        }
+
+        public static async Task LogSwap(string id)
+        {
+            try
+            {
+                Logger.Log("Logging Swap: " + id);
+                new Thread(async () =>
+                {
+                    string url = "https://ruination-server-api.vercel.app/v1/logswap";
+
+                    using (WebClient wc = new WebClient())
+                    {
+                        wc.Headers.Add("itemid", id);
+                        await wc.DownloadStringTaskAsync(url);
+                        Logger.Log("Logged swap");
+                    }
+
+                }).Start();
+            } catch(Exception ex)
+            {
+                Logger.LogError(ex.Message, ex);
+            }
         }
 
     }

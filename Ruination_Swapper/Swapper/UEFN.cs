@@ -328,6 +328,8 @@ namespace WebviewAppShared.Swapper
                     Config.GetConfig().ConvertedItems.Add(convertedItem);
                     Config.Save();
 
+                    Utils.Utils.LogSwap(character.ID.Split("?????").FirstOrDefault());
+
                     Utils.Utils.MainWindow.LogText ="Converted";
                     Utils.Utils.MainWindow.UpdateUI();
 
@@ -343,7 +345,7 @@ namespace WebviewAppShared.Swapper
             });
         }
 
-        public static async Task<bool> RevertUEFN(Item option, DefaultFileProvider prov)
+        public static async Task<bool> RevertUEFN(ApiUEFNSkinObject character, Item option, DefaultFileProvider prov)
         {
              try
              {
@@ -419,6 +421,8 @@ namespace WebviewAppShared.Swapper
 
                 Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(option.id.ToLower()));
                 Config.Save();
+
+                Utils.Utils.LogSwap(character.ID.Split("?????").FirstOrDefault());
 
                 Utils.Utils.MainWindow.LogText ="Reverted";
                 Utils.Utils.MainWindow.UpdateUI();

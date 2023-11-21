@@ -15,6 +15,20 @@ namespace WebviewAppShared.Utils
         public static void Init()
         {
             Directory.CreateDirectory(logFilePath);
+            if (Directory.GetFiles(logFilePath).Length > 15)
+            {
+                var files = Directory.GetFiles(logFilePath);
+                var fileInfos = new List<FileInfo>();
+                
+                for(int i = 0; i < files.Length; i++)
+                {
+                    fileInfos.Add(new FileInfo(files[i]));
+                }
+
+                fileInfos = fileInfos.OrderBy(x => x.LastWriteTime).ToList();
+
+                File.Delete(fileInfos[0].FullName);
+            }
             string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             logFilePath += $"Ruination_{timestamp}.log";
             logFileName = logFilePath;

@@ -20,7 +20,7 @@ namespace WebviewAppShared.Utils
             Logger.Log("Loading Config");
             try
             {
-                _config = new();
+                LoadDefault();
                 Directory.CreateDirectory(Utils.AppDataFolder);
                 if (!File.Exists(ConfigFilePath)) return;
                 string read = File.ReadAllText(ConfigFilePath);
@@ -29,10 +29,19 @@ namespace WebviewAppShared.Utils
                 _config = JsonConvert.DeserializeObject<ConfigObject>(read);
             } catch(Exception e)
             {
-                _config = new();
+                LoadDefault();
                 Logger.LogError(e.Message, e);
             }
             Logger.Log("Loaded Config");
+        }
+
+        public static void LoadDefault()
+        {
+            _config = new();
+            _config.CachedItems = new();
+            _config.Key = "";
+            _config.ConvertedItems = new();
+            _config.ShowKickableOptions = false;
         }
 
         public static void Save()
