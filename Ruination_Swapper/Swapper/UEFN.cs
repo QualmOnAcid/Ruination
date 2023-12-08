@@ -497,11 +497,8 @@ namespace WebviewAppShared.Swapper
 
             int materialOverrideFlags = 1;
 
-            foreach(var mat in materialsWithNamemapIndex)
-            {
-                materialOverrideFlags *= 2;
-                materialOverrideFlags++;
-            }
+            if (materialsWithNamemapIndex.Count > 0)
+                materialOverrideFlags = (int) Math.Pow(2, materialsWithNamemapIndex.Count) - 1;
 
             byte[] materialOverrideFlagsBytes = new byte[]
             {
