@@ -495,9 +495,17 @@ namespace WebviewAppShared.Swapper
 
             assetBytes.RemoveRange(materialOverrideFlagsProperty.Position, materialOverrideFlagsProperty.Size);
 
+            int materialOverrideFlags = 1;
+
+            foreach(var mat in materialsWithNamemapIndex)
+            {
+                materialOverrideFlags *= 2;
+                materialOverrideFlags++;
+            }
+
             byte[] materialOverrideFlagsBytes = new byte[]
             {
-                (byte) API.GetApi().AssetUtils.MaterialOverrideFlags
+                (byte) materialOverrideFlags
             };
 
             Array.Resize(ref materialOverrideFlagsBytes, materialOverrideFlagsProperty.Size);
