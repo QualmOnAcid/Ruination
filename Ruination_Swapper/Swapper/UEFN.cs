@@ -29,7 +29,14 @@ namespace WebviewAppShared.Swapper
                     var prov = fileProvider;
 
                     Logger.Log("Unusedfile Count: " + prov.UnusedFiles.Count);
-                    if (prov.UnusedFiles.Count == 0) return false;
+                    if (prov.UnusedFiles.Count == 0)
+                    {
+                        Logger.LogError("No Unusedfile was found.");
+                        await Utils.Utils.MessageBox("No unusedfile was found. Please verify Fortnite to fix this error.");
+                        Utils.Utils.MainWindow.LogText = "Waiting for Input";
+                        Utils.Utils.MainWindow.UpdateUI();
+                        return false;
+                    }
 
                     Utils.Utils.MainWindow.LogText = "Checking if UEFN already swapped";
                     Utils.Utils.MainWindow.UpdateUI();
@@ -145,42 +152,26 @@ namespace WebviewAppShared.Swapper
 
                     Logger.Log("Using slot: " + slot);
 
-                    Utils.Utils.MainWindow.LogText ="Finding Body Asset";
-                    Utils.Utils.MainWindow.UpdateUI();
-
-                    Logger.Log("Finding Body Asset");
-
-                    string fromBodyAsset = await SwapUtils.GetBodyAssetForCharacter(prov, option);
-
-                    if (fromBodyAsset == "")
-                        return false;
-
-                    Logger.Log("Using Body Asset: " + fromBodyAsset);
+                    bool isDefaultSwap = option.isDefault;
 
                     Logger.Log("Creating Body Part");
 
-                    Utils.Utils.MainWindow.LogText ="Creating Body Part";
+                    Utils.Utils.MainWindow.LogText = "Creating Body Part";
                     Utils.Utils.MainWindow.UpdateUI();
 
                     var bytes = CreateBodyPartWithMaterials(prov, nameMapWithIndexes, replacement);
 
                     replacementPackage.PropertiesWithExportMap = bytes.Skip(replacementPackage.PropertiesExportMapOffset)
                         .Take(bytes.Length).ToArray();
-                    bytes.Skip(replacementPackage.PropertiesExportMapOffset).Take(bytes.Length).ToArray();
 
-                    fromBodyAsset = fromBodyAsset.Split(".").FirstOrDefault();
-                    IoPackage ioPackage = (IoPackage)await prov.LoadPackageAsync(fromBodyAsset);
-
-                    var pathNameIndex = ioPackage.NameMapAsStrings.ToList().IndexOf(ioPackage.GetProtectedStrings()[1]);
-
-                    char[] invalidNameMapString = ioPackage.NameMapAsStrings[pathNameIndex].ToCharArray();
-
-                    for (int i = 0; i < invalidNameMapString.Length; i++)
+                    if(!isDefaultSwap)
                     {
-                        invalidNameMapString[i] = '1';
+                        if(await SwapUtils.GetBodyAssetForCharacter(prov, option) == "")
+                        {
+                            Logger.LogError("Could not find Body Asset");
+                            return false;
+                        }
                     }
-
-                    ioPackage.NameMapAsStrings[pathNameIndex] = invalidNameMapString.ToString();
 
                     Logger.Log("Loading Fallback Asset");
 
@@ -189,40 +180,6 @@ namespace WebviewAppShared.Swapper
                     string fallbackCharacter = "FortniteGame/Content/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Fallback";
 
                     IoPackage fallbackPackage = (IoPackage)await prov.LoadPackageAsync(fallbackCharacter);
-
-                    Logger.Log("Loading CID Asset");
-                    Utils.Utils.MainWindow.LogText ="Exporting CID Asset";
-                    Utils.Utils.MainWindow.UpdateUI();
-                    IoPackage cidPackage = (IoPackage)await prov.LoadPackageAsync(option.path);
-                    var cidObject = await prov.LoadObjectAsync(option.path);
-
-                    Dictionary<string, string> cidReplaces = new Dictionary<string, string>();
-
-                    Utils.Utils.MainWindow.LogText ="Creating CID Replaces";
-                    Utils.Utils.MainWindow.UpdateUI();
-
-                    Logger.Log("Creating CID Replaces");
-
-                    cidObject.TryGetValue(out UObject[] characterParts, "BaseCharacterParts");
-
-                    var cidAssets = SwapUtils.GetCIDCharacterPartsSwaps(characterParts);
-
-                    foreach (var item in cidAssets)
-                    {
-                        cidReplaces.Add(item.Value.Key.Split(".").FirstOrDefault(), item.Value.Value.Split(".").FirstOrDefault());
-                        cidReplaces.Add(item.Value.Key.Split(".").LastOrDefault(), item.Value.Value.Split(".").LastOrDefault());
-                    }
-
-                    foreach (var VARIABLE in cidReplaces)
-                    {
-
-                        if (cidPackage.NameMapAsStrings.Contains(VARIABLE.Key))
-                        {
-                            int offset = cidPackage.NameMapAsStrings.ToList().IndexOf(VARIABLE.Key);
-                            cidPackage.NameMapAsStrings[offset] = VARIABLE.Value;
-                        }
-
-                    }
 
                     Logger.Log("Downloading UEFN Files");
 
@@ -255,6 +212,10 @@ namespace WebviewAppShared.Swapper
 
                     Logger.Log("Created new Serializesize: " + customSerializeSize);
 
+                    Logger.Log("Loading Texture Swaps");
+                    Utils.Utils.MainWindow.LogText = "Loading Texture Swaps";
+                    Utils.Utils.MainWindow.UpdateUI();
+
                     Dictionary<string, byte[]> wroteAssets = new();
 
                     Utils.Utils.MainWindow.LogText ="Swapping Fallback Asset";
@@ -269,51 +230,212 @@ namespace WebviewAppShared.Swapper
                         return false;
                     }
 
-                    Logger.Log("Swapping Invalid Asset");
-
-                    Utils.Utils.MainWindow.LogText ="Swapping Invalid Asset";
-                    Utils.Utils.MainWindow.UpdateUI();
-
-                    var bodyPackageBytes = new Serializer(ioPackage).Serialize();
-
-                    Logger.Log("Swapping Body Asset");
-
-                    if (!await SwapUtils.SwapAsset(ioPackage, bodyPackageBytes))
-                        return false;
-
-                    Utils.Utils.MainWindow.LogText ="Swapping CID Asset";
-                    Utils.Utils.MainWindow.UpdateUI();
-
-                    Logger.Log("Swapping CID Asset");
-
-                    var cidPackageBytes = new Serializer(cidPackage).Serialize();
-
-                    if (!await SwapUtils.SwapAsset(cidPackage, cidPackageBytes))
-                        return false;
-
-                    Logger.Log("Loading HID Asset");
-
-                    var fromHidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
-                    var toHidPackage = (IoPackage)await prov.LoadPackageAsync(character.hidpath);
-
-                    if (!toHidPackage.ChangeProtectedStrings(fromHidPackage.GetProtectedStrings()))
+                    if(!isDefaultSwap)
                     {
-                        return false;
+                        Utils.Utils.MainWindow.LogText = "Finding Body Asset";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        Logger.Log("Finding Body Asset");
+
+                        string fromBodyAsset = await SwapUtils.GetBodyAssetForCharacter(prov, option);
+
+                        if (fromBodyAsset == "")
+                            return false;
+
+                        Logger.Log("Using Body Asset: " + fromBodyAsset);
+
+                        fromBodyAsset = fromBodyAsset.Split(".").FirstOrDefault();
+                        IoPackage ioPackage = (IoPackage)await prov.LoadPackageAsync(fromBodyAsset);
+
+                        var pathNameIndex = ioPackage.NameMapAsStrings.ToList().IndexOf(ioPackage.GetProtectedStrings()[1]);
+
+                        char[] invalidNameMapString = ioPackage.NameMapAsStrings[pathNameIndex].ToCharArray();
+
+                        for (int i = 0; i < invalidNameMapString.Length; i++)
+                        {
+                            invalidNameMapString[i] = '1';
+                        }
+
+                        ioPackage.NameMapAsStrings[pathNameIndex] = invalidNameMapString.ToString();
+
+                        Logger.Log("Loading CID Asset");
+                        Utils.Utils.MainWindow.LogText = "Exporting CID Asset";
+                        Utils.Utils.MainWindow.UpdateUI();
+                        IoPackage cidPackage = (IoPackage)await prov.LoadPackageAsync(option.path);
+                        var cidObject = await prov.LoadObjectAsync(option.path);
+
+                        Dictionary<string, string> cidReplaces = new Dictionary<string, string>();
+
+                        Utils.Utils.MainWindow.LogText = "Creating CID Replaces";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        Logger.Log("Creating CID Replaces");
+
+                        cidObject.TryGetValue(out UObject[] characterParts, "BaseCharacterParts");
+
+                        var cidAssets = SwapUtils.GetCIDCharacterPartsSwaps(characterParts);
+
+                        foreach (var item in cidAssets)
+                        {
+                            cidReplaces.Add(item.Value.Key.Split(".").FirstOrDefault(), item.Value.Value.Split(".").FirstOrDefault());
+                            cidReplaces.Add(item.Value.Key.Split(".").LastOrDefault(), item.Value.Value.Split(".").LastOrDefault());
+                        }
+
+                        foreach (var VARIABLE in cidReplaces)
+                        {
+
+                            if (cidPackage.NameMapAsStrings.Contains(VARIABLE.Key))
+                            {
+                                int offset = cidPackage.NameMapAsStrings.ToList().IndexOf(VARIABLE.Key);
+                                cidPackage.NameMapAsStrings[offset] = VARIABLE.Value;
+                            }
+
+                        }
+
+                        Logger.Log("Swapping Invalid Asset");
+
+                        Utils.Utils.MainWindow.LogText = "Swapping Invalid Asset";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        var bodyPackageBytes = new Serializer(ioPackage).Serialize();
+
+                        Logger.Log("Swapping Body Asset");
+
+                        if (!await SwapUtils.SwapAsset(ioPackage, bodyPackageBytes))
+                            return false;
+
+                        Utils.Utils.MainWindow.LogText = "Swapping CID Asset";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        Logger.Log("Swapping CID Asset");
+
+                        var cidPackageBytes = new Serializer(cidPackage).Serialize();
+
+                        if (!await SwapUtils.SwapAsset(cidPackage, cidPackageBytes))
+                            return false;
+
+                        Logger.Log("Loading HID Asset");
+
+                        var fromHidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
+                        var toHidPackage = (IoPackage)await prov.LoadPackageAsync(character.hidpath);
+
+                        if (!toHidPackage.ChangeProtectedStrings(fromHidPackage.GetProtectedStrings()))
+                        {
+                            return false;
+                        }
+
+                        toHidPackage.ChangePublicExportHash(fromHidPackage);
+
+                        var data = new Serializer(toHidPackage).Serialize();
+
+                        Logger.Log("Swapping HID Asset");
+
+                        if (!await SwapUtils.SwapAsset(fromHidPackage, data))
+                            return false;
+
+                        wroteAssets.Add(fromBodyAsset, bodyPackageBytes);
+                        wroteAssets.Add(option.path, cidPackageBytes);
+                        wroteAssets.Add(option.definitionPath, data);
+                    } else
+                    {
+
+                        Logger.Log("Swapping Default CPS");
+
+                        int defaultCPSwappedIndex = 0;
+                        foreach(var defaultCP in GetDefaultCPS())
+                        {
+                            defaultCPSwappedIndex++;
+                            Logger.Log("Swapping DefaultCP -> " + defaultCP);
+                            Utils.Utils.MainWindow.LogText = "Swapping Default Asset " + defaultCPSwappedIndex;
+                            Utils.Utils.MainWindow.UpdateUI();
+                            var defaultPackage = (IoPackage)await prov.LoadPackageAsync(defaultCP);
+
+                            string packageName = defaultPackage.GetProtectedStrings()[1];
+
+                            int namemapindex = defaultPackage.NameMapAsStrings.ToList().IndexOf(packageName);
+
+                            defaultPackage.NameMapAsStrings[namemapindex] = packageName.Replace("_", "?");
+
+                            var defaultPackageData = new Serializer(defaultPackage).Serialize();
+
+                            if (!await SwapUtils.SwapAsset(defaultPackage, defaultPackageData)) return false;
+
+                            wroteAssets.Add(defaultCP, defaultPackageData);
+                        }
+
                     }
 
-                    toHidPackage.ChangePublicExportHash(fromHidPackage);
-
-                    var data = new Serializer(toHidPackage).Serialize();
-
-                    Logger.Log("Swapping HID Asset");
-
-                    if (!await SwapUtils.SwapAsset(fromHidPackage, data))
-                        return false;
-
                     wroteAssets.Add(fallbackCharacter, fallbackPackageBytes);
-                    wroteAssets.Add(fromBodyAsset, bodyPackageBytes);
-                    wroteAssets.Add(option.path, cidPackageBytes);
-                    wroteAssets.Add(option.definitionPath, data);
+
+                    if (character.TextureSwaps != null && character.TextureSwaps.Count > 0)
+                    {
+                        //New FileProvider for inserted UEFN assets
+
+                        Logger.Log("Loading UEFN Provider");
+                        Utils.Utils.MainWindow.LogText = "Loading UEFN Provider";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        var uefnprovider = await SwapUtils.GetUEFNProvider(System.IO.Path.GetFileNameWithoutExtension(slot));
+
+                        Logger.Log("Loaded UEFN Provider with " + uefnprovider.Files.Count + " files");
+                        Utils.Utils.MainWindow.LogText = "Loaded UEFN Provider";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        int textureSwappedIndex = 0;
+
+                        foreach (var textureSwap in character.TextureSwaps)
+                        {
+                            Logger.Log("Swapping Texture: " + textureSwap.From + " -> " + textureSwap.To);
+                            textureSwappedIndex++;
+
+                            Utils.Utils.MainWindow.LogText = "Swapping Texture " + textureSwappedIndex;
+                            Utils.Utils.MainWindow.UpdateUI();
+
+                            var fromPack = (IoPackage)await prov.LoadPackageAsync(textureSwap.From);
+                            var toPack = (IoPackage)await uefnprovider.LoadPackageAsync(textureSwap.To);
+
+                            toPack.ChangeProtectedStrings(fromPack.GetProtectedStrings());
+                            toPack.ChangePublicExportHash(fromPack);
+
+                            var toPackData = new Serializer(toPack).Serialize();
+
+                            if (!await SwapUtils.SwapAsset(fromPack, toPackData)) return false;
+
+                            wroteAssets.Add("TEXTURESWAP_" + textureSwap.From, toPackData);
+                        }
+
+                        Logger.Log("Disposing UEFN Provider");
+
+                        Utils.Utils.MainWindow.LogText = "Disposing UEFN Provider";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        uefnprovider.Dispose();
+                        GC.Collect();
+
+                    }
+
+                    if(true)
+                    {
+                        Logger.Log("Swapping Crash Asset");
+
+                        string crashFrom = "/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemOnPawnPreview";
+                        string crashTo = "/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemCosmosPreview";
+
+                        var crashFrompackage = (IoPackage)await prov.LoadPackageAsync(crashFrom);
+                        var crashToPackage = (IoPackage)await prov.LoadPackageAsync(crashTo);
+
+                        crashToPackage.ChangeProtectedStrings(crashFrompackage.GetProtectedStrings());
+                        crashToPackage.ChangePublicExportHash(crashFrompackage);
+
+                        var crashPackageData = new Serializer(crashToPackage).Serialize();
+
+                        if (!await SwapUtils.SwapAsset(crashFrompackage, crashPackageData))
+                        {
+                            return false;
+                        }
+
+                        wroteAssets.Add(crashFrom, crashPackageData);
+                    }
 
                     var convertedItem = new ConvertedItem()
                     {
@@ -328,7 +450,7 @@ namespace WebviewAppShared.Swapper
                     Config.GetConfig().ConvertedItems.Add(convertedItem);
                     Config.Save();
 
-                    Utils.Utils.LogSwap(character.ID.Split("?????").FirstOrDefault());
+                    Utils.Utils.LogUEFNSwap(character.ID);
 
                     Utils.Utils.MainWindow.LogText ="Converted";
                     Utils.Utils.MainWindow.UpdateUI();
@@ -353,47 +475,77 @@ namespace WebviewAppShared.Swapper
                 Logger.Log("Loading Fallback Package");
                 IoPackage fallbackPackage = (IoPackage)await prov.LoadPackageAsync("FortniteGame/Content/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Fallback");
 
-                Utils.Utils.MainWindow.LogText ="Exporting CID Asset";
-                Utils.Utils.MainWindow.UpdateUI();
-
-                Logger.Log("Loading CID Package");
-
-                IoPackage cidPackage = (IoPackage)await prov.LoadPackageAsync(option.path);
-
-                Logger.Log("Reverting CID Package");
-
-                if (!await SwapUtils.RevertPackage(cidPackage))
+                if(!option.isDefault)
                 {
-                    return false;
+                    Utils.Utils.MainWindow.LogText = "Exporting CID Asset";
+                    Utils.Utils.MainWindow.UpdateUI();
+
+                    Logger.Log("Loading CID Package");
+
+                    IoPackage cidPackage = (IoPackage)await prov.LoadPackageAsync(option.path);
+
+                    Logger.Log("Reverting CID Package");
+
+                    if (!await SwapUtils.RevertPackage(cidPackage))
+                    {
+                        return false;
+                    }
+
+                    Logger.Log("Finding Body Asset");
+
+                    Utils.Utils.MainWindow.LogText = "Finding Body Asset";
+                    Utils.Utils.MainWindow.UpdateUI();
+
+                    string fromBodyAsset = await SwapUtils.GetBodyAssetForCharacter(prov, option);
+
+                    if (fromBodyAsset == "")
+                        return false;
+
+                    fromBodyAsset = fromBodyAsset.Split(".").FirstOrDefault();
+
+                    Logger.Log("Found Body Asset: " + fromBodyAsset);
+
+                    Utils.Utils.MainWindow.LogText = "Reverting Body Asset";
+                    Utils.Utils.MainWindow.UpdateUI();
+
+                    Logger.Log("Loading Body Package");
+
+                    IoPackage bodyPackage = (IoPackage)await prov.LoadPackageAsync(fromBodyAsset);
+
+                    Logger.Log("Reverting Body Package");
+
+                    if (!await SwapUtils.RevertPackage(bodyPackage))
+                    {
+                        return false;
+                    }
+
+                    Logger.Log("Loading HID Package");
+
+                    IoPackage hidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
+
+                    Utils.Utils.MainWindow.LogText = "Reverting HID Asset";
+                    Utils.Utils.MainWindow.UpdateUI();
+
+                    Logger.Log("Reverting HID Package");
+
+                    if (!await SwapUtils.RevertPackage(hidPackage))
+                    {
+                        return false;
+                    }
+                } else
+                {
+                    foreach(var defaultcp in GetDefaultCPS())
+                    {
+                        Logger.Log("Reverting -> " + defaultcp);
+                        IoPackage defaultcpPackage = (IoPackage)await prov.LoadPackageAsync(defaultcp);
+                        if (!await SwapUtils.RevertPackage(defaultcpPackage)) return false;
+                    }
                 }
 
-                Logger.Log("Finding Body Asset");
+                Logger.Log("Reverting Crash Package");
+                IoPackage crashPackage = (IoPackage)await prov.LoadPackageAsync("/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemOnPawnPreview");
 
-                Utils.Utils.MainWindow.LogText ="Finding Body Asset";
-                Utils.Utils.MainWindow.UpdateUI();
-
-                string fromBodyAsset = await SwapUtils.GetBodyAssetForCharacter(prov, option);
-
-                if (fromBodyAsset == "")
-                    return false;
-
-                fromBodyAsset = fromBodyAsset.Split(".").FirstOrDefault();
-
-                Logger.Log("Found Body Asset: " + fromBodyAsset);
-
-                Utils.Utils.MainWindow.LogText = "Reverting Body Asset";
-                Utils.Utils.MainWindow.UpdateUI();
-
-                Logger.Log("Loading Body Package");
-
-                IoPackage bodyPackage = (IoPackage)await prov.LoadPackageAsync(fromBodyAsset);
-
-                Logger.Log("Reverting Body Package");
-
-                if (!await SwapUtils.RevertPackage(bodyPackage))
-                {
-                    return false;
-                }
+                if (!await SwapUtils.RevertPackage(crashPackage)) return false;
 
                 Utils.Utils.MainWindow.LogText = "Reverting Fallback Asset";
                 Utils.Utils.MainWindow.UpdateUI();
@@ -405,24 +557,22 @@ namespace WebviewAppShared.Swapper
                     return false;
                 }
 
-                Logger.Log("Loading HID Package");
-
-                IoPackage hidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
-
-                Utils.Utils.MainWindow.LogText = "Reverting HID Asset";
-                Utils.Utils.MainWindow.UpdateUI();
-
-                Logger.Log("Reverting HID Package");
-
-                if (!await SwapUtils.RevertPackage(hidPackage))
+                if (character.TextureSwaps != null && character.TextureSwaps.Count > 0)
                 {
-                    return false;
+
+                    foreach(var item in character.TextureSwaps)
+                    {
+                        Logger.Log("Reverting Texture: " + item.From);
+                        var fromTexture = (IoPackage)await prov.LoadPackageAsync(item.From);
+                        if (!await SwapUtils.RevertPackage(fromTexture)) return false;
+                    }
+
                 }
 
                 Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(option.id.ToLower()));
                 Config.Save();
 
-                Utils.Utils.LogSwap(character.ID.Split("?????").FirstOrDefault());
+                Utils.Utils.LogUEFNSwap(character.ID);
 
                 Utils.Utils.MainWindow.LogText ="Reverted";
                 Utils.Utils.MainWindow.UpdateUI();
@@ -584,6 +734,21 @@ namespace WebviewAppShared.Swapper
                 //Returning true just to give user information
                 return true;
             }
+        }
+
+        private static List<string> GetDefaultCPS()
+        {
+            return new()
+            {
+                "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime",
+                "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_A",
+                "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_B",
+                "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_C",
+                "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_E",
+                "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_G",
+                "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime",
+                "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime_G"
+            };
         }
 
     }

@@ -122,7 +122,7 @@ namespace CUE4Parse.UE4.Objects.UObject
         {
             var header = Ar.Read<FSerializedNameHeader>();
 
-            var length = (int) header.Length;
+            var length = (int)header.Length;
             if (header.IsUtf16)
             {
                 if (Ar.Position % 2 == 1) Ar.Position++;
@@ -131,7 +131,7 @@ namespace CUE4Parse.UE4.Objects.UObject
                     var utf16Length = length * 2;
                     var nameData = stackalloc byte[utf16Length];
                     Ar.Serialize(nameData, utf16Length);
-                    return new FNameEntrySerialized(new string((char*) nameData, 0, length));
+                    return new FNameEntrySerialized(new string((char*)nameData, 0, length));
                 }
             }
 
@@ -139,7 +139,7 @@ namespace CUE4Parse.UE4.Objects.UObject
             {
                 var nameData = stackalloc byte[length];
                 Ar.Serialize(nameData, length);
-                return new FNameEntrySerialized(new string((sbyte*) nameData, 0, length));
+                return new FNameEntrySerialized(new string((sbyte*)nameData, 0, length));
             }
         }
     }

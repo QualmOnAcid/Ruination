@@ -21,7 +21,7 @@ namespace WebviewAppShared.Swapper
             this.IoPackage = IoPackage;
         }
 
-        public byte[] Serialize(ulong customSerialCookedSize = 0)
+        public byte[] Serialize(ulong customSerialCookedSize = 0, bool ignoreData = false)
         {
             Logger.Log("Serializing Package - " + IoPackage.Name);
             List<byte> serialization = new List<byte>();
@@ -88,25 +88,28 @@ namespace WebviewAppShared.Swapper
 
             int SINGLE_EXPORTMAP_SIZE = 72;
 
-            //Mainly for UEFN Swaps
-            if (customSerialCookedSize != 0)
+            if(!ignoreData)
             {
+                //Mainly for UEFN Swaps
+                if (customSerialCookedSize != 0)
+                {
 
-                int cookedSerialSizeOffset =
-                    IoPackage.zenSummary.ExportMapOffset + AssetLengthDifference + SINGLE_EXPORTMAP_SIZE + ulongsize; //ulongsize skips first property
-                    
-                serialization.RemoveRange(cookedSerialSizeOffset, ulongsize);
-                serialization.InsertRange(cookedSerialSizeOffset, ConvertToBytes(customSerialCookedSize));
-            }
-            else
-            {
-                int exportsMapEnding =
-                    IoPackage.zenSummary.ExportMapOffset + AssetLengthDifference + (SINGLE_EXPORTMAP_SIZE * IoPackage.ExportMap.Length);
+                    int cookedSerialSizeOffset =
+                        IoPackage.zenSummary.ExportMapOffset + AssetLengthDifference + SINGLE_EXPORTMAP_SIZE + ulongsize; //ulongsize skips first property
 
-                exportsMapEnding -= 16;
+                    serialization.RemoveRange(cookedSerialSizeOffset, ulongsize);
+                    serialization.InsertRange(cookedSerialSizeOffset, ConvertToBytes(customSerialCookedSize));
+                }
+                else
+                {
+                    int exportsMapEnding =
+                        IoPackage.zenSummary.ExportMapOffset + AssetLengthDifference + (SINGLE_EXPORTMAP_SIZE * IoPackage.ExportMap.Length);
 
-                serialization.RemoveRange(exportsMapEnding, ulongsize);
-                serialization.InsertRange(exportsMapEnding, ConvertToBytes(IoPackage.ExportMap.Last().PublicExportHash));
+                    exportsMapEnding -= 16;
+
+                    serialization.RemoveRange(exportsMapEnding, ulongsize);
+                    serialization.InsertRange(exportsMapEnding, ConvertToBytes(IoPackage.ExportMap.Last().PublicExportHash));
+                }
             }
 
             return serialization.ToArray();

@@ -31,8 +31,8 @@ namespace WebviewAppShared.Utils
 
             for (int i = 0; i < 7; i++)
             {
-                Logger.Log("Waiting for Discord RPC " + (i+1));
                 if (GetID() != 0) break;
+                Logger.Log("Waiting for Discord RPC " + (i + 1));
                 await Task.Delay(1 * 1000);
             }
         }

@@ -1,66 +1,111 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using CUE4Parse.FileProvider.Objects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CUE4Parse.Encryption.Aes;
+using CUE4Parse.UE4.Exceptions;
 using CUE4Parse.UE4.IO.Objects;
-using CUE4Parse.UE4.Objects.Core.Misc;
 using CUE4Parse.UE4.Readers;
-using CUE4Parse.UE4.Versions;
 using CUE4Parse.UE4.VirtualFileSystem;
+using CUE4Parse.Utils;
 
 namespace CUE4Parse.UE4.IO
 {
-    public class IoStoreOnDemandReader : AbstractAesVfsReader
+    public class IoStoreOnDemandReader : IoStoreReader
     {
-        public readonly FOnDemandTocHeader Header;
-        public readonly FTocMeta Meta;
-        public readonly FOnDemandTocContainerEntry[] Containers;
+        public readonly FOnDemandTocEntry[] Entries;
 
-        public override string MountPoint { get; protected set; }
-        public sealed override long Length { get; set; }
+        private readonly IoStoreOnDemandDownloader _downloader;
 
-        public override bool HasDirectoryIndex { get; }
-        public override FGuid EncryptionKeyGuid { get; }
-        public override bool IsEncrypted { get; }
-
-        public IoStoreOnDemandReader(string iochunktocPath, VersionContainer? versions = null)
-            : this(new FileInfo(iochunktocPath), versions) { }
-        public IoStoreOnDemandReader(FileInfo iochunktocFile, VersionContainer? versions = null)
-            : this(new FByteArchive(iochunktocFile.FullName, File.ReadAllBytes(iochunktocFile.FullName), versions)) { }
-
-        public IoStoreOnDemandReader(FArchive iochunktocStream) : base(iochunktocStream.Name, iochunktocStream.Versions)
+        public IoStoreOnDemandReader(FArchive tocStream, FOnDemandTocEntry[] entries, IoStoreOnDemandDownloader downloader)
+            : base(tocStream, it => new FByteArchive(it, Array.Empty<byte>(), tocStream.Versions))
         {
-            Length = iochunktocStream.Length;
-            Header = new FOnDemandTocHeader(iochunktocStream);
-
-            if (Header.Version >= EOnDemandTocVersion.Meta)
-                Meta = new FTocMeta(iochunktocStream);
-
-            Containers = iochunktocStream.ReadArray(() => new FOnDemandTocContainerEntry(iochunktocStream));
+            Entries = entries;
+            _downloader = downloader;
         }
 
         public override byte[] Extract(VfsEntry entry)
         {
-            throw new System.NotImplementedException();
+            if (!(entry is FIoStoreEntry ioEntry) || entry.Vfs != this) throw new ArgumentException($"Wrong io store reader, required {entry.Vfs.Path}, this is {Path}");
+            return Read(Entries[ioEntry.TocEntryIndex]);
         }
 
-        public override IReadOnlyDictionary<string, GameFile> Mount(bool caseInsensitive = false)
+        public byte[] Read(FIoChunkId chunkId)
         {
-            throw new System.NotImplementedException();
+            return Read(Entries.FirstOrDefault(entry => entry.ChunkId == chunkId));
         }
 
-        public override byte[] MountPointCheckBytes()
+        private byte[] Read(FOnDemandTocEntry? onDemandEntry)
         {
-            throw new System.NotImplementedException();
+            if (onDemandEntry == null) throw new ParserException("Can't read unknown on-demand entry");
+            if (TryResolve(onDemandEntry.ChunkId, out var offsetLength))
+            {
+                return Read(onDemandEntry.Hash.ToString().ToLower(), (long) offsetLength.Offset, (long) offsetLength.Length);
+            }
+            throw new KeyNotFoundException($"Couldn't find chunk {onDemandEntry.ChunkId} in IoStoreOnDemand {Name}");
         }
 
-        protected override byte[] ReadAndDecrypt(int length)
+        private byte[] Read(string hash, long offset, long length)
         {
-            throw new System.NotImplementedException();
+            var reader = _downloader.Download($"chunks/{hash[..2]}/{hash}.iochunk").GetAwaiter().GetResult();
+
+            var compressionBlockSize = TocResource.Header.CompressionBlockSize;
+            var dst = new byte[length];
+            var firstBlockIndex = (int) (offset / compressionBlockSize);
+            var lastBlockIndex = (int) (((offset + dst.Length).Align((int) compressionBlockSize) - 1) / compressionBlockSize);
+            var offsetInBlock = offset % compressionBlockSize;
+            var remainingSize = length;
+            var dstOffset = 0;
+
+            var compressedBuffer = Array.Empty<byte>();
+            var uncompressedBuffer = Array.Empty<byte>();
+
+            for (int blockIndex = firstBlockIndex; blockIndex <= lastBlockIndex; blockIndex++)
+            {
+                ref var compressionBlock = ref TocResource.CompressionBlocks[blockIndex];
+
+                var rawSize = compressionBlock.CompressedSize.Align(Aes.ALIGN);
+                if (compressedBuffer.Length < rawSize)
+                {
+                    //Console.WriteLine($"{chunkId}: block {blockIndex} CompressedBuffer size: {rawSize} - Had to create copy");
+                    compressedBuffer = new byte[rawSize];
+                }
+
+                var uncompressedSize = compressionBlock.UncompressedSize;
+                if (uncompressedBuffer.Length < uncompressedSize)
+                {
+                    //Console.WriteLine($"{chunkId}: block {blockIndex} UncompressedBuffer size: {uncompressedSize} - Had to create copy");
+                    uncompressedBuffer = new byte[uncompressedSize];
+                }
+
+                reader.Read(compressedBuffer, 0, (int) rawSize);
+                compressedBuffer = DecryptIfEncrypted(compressedBuffer, 0, (int) rawSize);
+
+                byte[] src;
+                if (compressionBlock.CompressionMethodIndex == 0)
+                {
+                    src = compressedBuffer;
+                }
+                else
+                {
+                    var compressionMethod = TocResource.CompressionMethods[compressionBlock.CompressionMethodIndex];
+                    Compression.Compression.Decompress(compressedBuffer, 0, (int) rawSize, uncompressedBuffer, 0, (int) uncompressedSize, compressionMethod);
+                    src = uncompressedBuffer;
+                }
+
+                var sizeInBlock = (int) Math.Min(compressionBlockSize - offsetInBlock, remainingSize);
+                Buffer.BlockCopy(src, (int) offsetInBlock, dst, dstOffset, sizeInBlock);
+                offsetInBlock = 0;
+                remainingSize -= sizeInBlock;
+                dstOffset += sizeInBlock;
+            }
+
+            return dst;
         }
 
         public override void Dispose()
         {
-            throw new System.NotImplementedException();
+            base.Dispose();
+            _downloader.Dispose();
         }
     }
 }

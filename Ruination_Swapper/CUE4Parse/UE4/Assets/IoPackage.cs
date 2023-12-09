@@ -31,7 +31,7 @@ namespace CUE4Parse.UE4.Assets
         public override FNameEntrySerialized[] NameMap { get; }
         public readonly ulong[]? ImportedPublicExportHashes;
         public readonly FPackageObjectIndex[] ImportMap;
-        public readonly FExportMapEntry[] ExportMap;
+        public FExportMapEntry[] ExportMap;
         public readonly FBulkDataMapEntry[] BulkDataMap;
 
         public readonly Lazy<IoPackage?[]> ImportedPackages;
@@ -137,6 +137,9 @@ namespace CUE4Parse.UE4.Assets
                     }
 
                     var bulkDataMapSize = uassetAr.Read<long>();
+
+                    BulkDataMap = uassetAr.ReadArray<FBulkDataMapEntry>((int) (bulkDataMapSize / FBulkDataMapEntry.Size));
+
                     int bulkEnd = (int)uassetAr.Position;
 
                     if (bulkStart != bulkEnd && bulkEnd > bulkStart)
@@ -147,7 +150,6 @@ namespace CUE4Parse.UE4.Assets
                         uassetAr.Position = bulkEnd;
                     }
 
-                    BulkDataMap = uassetAr.ReadArray<FBulkDataMapEntry>((int) (bulkDataMapSize / FBulkDataMapEntry.Size));
                 }
 
                 int remainingFileLength = ((int)uassetAr._baseArchive.Length - (int)uassetAr.Position);
@@ -290,7 +292,7 @@ namespace CUE4Parse.UE4.Assets
                 });
                 return (int) export.CookedSerialSize;
             }
-
+            
             if (exportBundleHeaders != null) // 4.26 - 5.2
             {
                 var currentExportDataOffset = allExportDataOffset;
@@ -305,7 +307,7 @@ namespace CUE4Parse.UE4.Assets
             }
             else foreach (var entry in exportBundleEntries)
             {
-                    ProcessEntry(entry, allExportDataOffset + (int) ExportMap[entry.LocalExportIndex].CookedSerialOffset, true);
+                ProcessEntry(entry, allExportDataOffset + (int) ExportMap[entry.LocalExportIndex].CookedSerialOffset, true);
             }
 
             IsFullyLoaded = true;
@@ -382,12 +384,27 @@ namespace CUE4Parse.UE4.Assets
             string pathToRemove = this.Name;
             string fileNameToRemove = Path.GetFileNameWithoutExtension(this.Name);
 
-            return new List<string>()
-            {
-                pathToRemove,
-                fileNameToRemove
-            };
+            var finalList = new List<string>();
 
+            if (this.NameMapAsStrings.Contains(pathToRemove))
+            {
+                finalList.Add(pathToRemove);
+            }
+            else if (this.NameMapAsStrings.Contains(pathToRemove + "_C"))
+            {
+                finalList.Add(pathToRemove + "_C");
+            }
+
+            if (this.NameMapAsStrings.Contains(fileNameToRemove))
+            {
+                finalList.Add(fileNameToRemove);
+            }
+            else if (this.NameMapAsStrings.Contains(fileNameToRemove + "_C"))
+            {
+                finalList.Add(fileNameToRemove + "_C");
+            }
+
+            return finalList;
         }
 
         public bool ChangeProtectedStrings(List<string> NewProtectedStrings)

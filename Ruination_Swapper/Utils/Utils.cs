@@ -16,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WebviewAppShared.Models;
 using WebviewAppShared.Shared;
+using WebviewAppShared.Swapper;
 using static WebviewAppShared.Shared.MainLayout;
 
 namespace WebviewAppShared.Utils
@@ -23,7 +24,8 @@ namespace WebviewAppShared.Utils
     public class Utils
     {
 
-        public static string USER_VERSION = "2.0.2";
+        public static string USER_VERSION = "2.0.6";
+        public static Dictionary<string, List<Item>> cachedTabItems = new();
 
         public static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RuinationFN_Swapper\\";
         public static IJSObjectReference module;
@@ -155,11 +157,13 @@ namespace WebviewAppShared.Utils
 
                     foreach (KeyValuePair<string, byte[]> asset in item.Assets)
                     {
+                        if (asset.Key.StartsWith("TEXTURESWAP_")) continue;
 
                         byte[] savedBytes = await prov.SaveAssetAsync(asset.Key);
 
                         if (!savedBytes.SequenceEqual(asset.Value))
                         {
+                            Logger.Log("ASSET HAS BEEN UNSWAPPED: " + asset.Key);
                             itemChanged = true;
                             break;
                         }
@@ -283,7 +287,8 @@ namespace WebviewAppShared.Utils
                         foreach (var asset in item.Assets)
                         {
                             Logger.Log("Reverting Asset " + asset.Key);
-                            await SwapUtils.RevertPackage((IoPackage)await prov.LoadPackageAsync(asset.Key));
+                            string assetkey = asset.Key.StartsWith("TEXTURESWAP_") ? asset.Key.Split("TEXTURESWAP_").LastOrDefault() : asset.Key;
+                            await SwapUtils.RevertPackage((IoPackage)await prov.LoadPackageAsync(assetkey));
                         }
                     } catch(Exception ex)
                     {
@@ -330,15 +335,58 @@ namespace WebviewAppShared.Utils
                     using (WebClient wc = new WebClient())
                     {
                         wc.Headers.Add("itemid", id);
+                        wc.Headers.Add("userid", DiscordRPC.GetID().ToString());
                         await wc.DownloadStringTaskAsync(url);
                         Logger.Log("Logged swap");
                     }
 
                 }).Start();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logger.LogError(ex.Message, ex);
             }
+        }
+
+        public static async Task LogUEFNSwap(string id)
+        {
+            try
+            {
+                Logger.Log("Logging Swap: " + id);
+                new Thread(async () =>
+                {
+                    string url = "https://ruination-server-api.vercel.app/v1/logswap/uefn";
+
+                    using (WebClient wc = new WebClient())
+                    {
+                        wc.Headers.Add("itemid", id);
+                        wc.Headers.Add("userid", DiscordRPC.GetID().ToString());
+                        await wc.DownloadStringTaskAsync(url);
+                        Logger.Log("Logged swap");
+                    }
+
+                }).Start();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.Message, ex);
+            }
+        }
+
+        public static async Task SwapDefaultData()
+        {
+            IoPackage defaultPack = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("FortniteGame/Content/Balance/DefaultGameDataCosmetics");
+
+            int index1 = defaultPack.NameMapAsStrings.ToList().IndexOf("/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Fallback");
+            int index2 = defaultPack.NameMapAsStrings.ToList().IndexOf("CP_Athena_Body_F_Fallback");
+
+            defaultPack.NameMapAsStrings[index1] = "/Game/Athena/Heroes/Meshes/Bodies/CP_028_Athena_Body";
+            defaultPack.NameMapAsStrings[index2] = "CP_028_Athena_Body";
+
+            await SwapUtils.SwapAsset(defaultPack, new Serializer(defaultPack).Serialize());
+
+            await Utils.MessageBox("aa");
+
         }
 
     }

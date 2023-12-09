@@ -323,7 +323,27 @@
                     } else if(CurrentState == State.UEFN_CHOOSEOPTION)
                     {
                         <div class="item-container" style="background-color: transparent; display: flex; height: 585px; gap: 3vh; flex-direction: row; flex-flow: row wrap; overflow: hidden scroll; bottom: 4.5vh;">
-                            @foreach (var item in cachedTabItems["outfit"])
+
+                            @if(true)
+                            {
+                                string ditemNameColor = "white";
+
+                                if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentUefnitem.ID.ToLower()) && x.OptionID.ToLower().Equals("defaultskinuefnoption") && x.Type == "uefn"))
+                                {
+                                    ditemNameColor = "#42f581";
+                                }
+
+                                <div class="itemm" @onclick="@(async() => await SetUEFNDefaultOption())">
+                                    <div class="itemImages">
+                                        <img src="@Rarities.GetRarityImage("common").Result" style="border: 4px solid @Rarities.GetRarityColor("common")" class="rarityImage">
+                                        <img src="https://fortnite-api.com/images/cosmetics/br/character_primeredux_f/icon.png" class="itemImage">
+                                    </div>
+                                    <p class="itemName" style="color: @ditemNameColor;">Default Skin</p>
+                                    <p class="itemDescription">@Utils.CutOffString("Swap with every Default Skin.", 31, true)</p>
+                                </div>
+                            }
+                            
+                            @foreach (var item in Utils.cachedTabItems["outfit"])
                             {
 
                                 string itemNameColor = "white";
@@ -1072,10 +1092,10 @@
     {
         LogText = "Waiting for Input";
 
-        if(!cachedTabItems.ContainsKey("outfit"))
+        if(!Utils.cachedTabItems.ContainsKey("outfit"))
         {
             CurrentState = State.LOADING;
-            cachedTabItems.Add("outfit", await GetTabItems("outfit"));
+            Utils.cachedTabItems.Add("outfit", await GetTabItems("outfit"));
         }
 
         DiscordRPC.UpdatePresence("Choosing Option for " + item.Name + $" (UEFN Skin)");
@@ -1099,9 +1119,27 @@
         DiscordRPC.UpdatePresence(item.name + " To " + CurrentUefnitem.Name);
     }
 
+    public async Task SetUEFNDefaultOption()
+    {
+        var item = new Item()
+        {
+            id = "defaultskinuefnoption",
+            name = "Default Skin",
+            description = "Swap with every Default Skin.",
+            icon = "https://fortnite-api.com/images/cosmetics/br/character_primeredux_f/icon.png",
+            rarity = await Rarities.GetRarityImage("common"),
+            rarcolor = Rarities.GetRarityColor("common"),
+            IsTransformCharacter = false,
+            isDefault = true
+        };
+        currentoption = item;
+        LogText = "Waiting for Input";
+        CurrentState = State.UEFN_SWAPFORM;
+        DiscordRPC.UpdatePresence(item.name + " To " + CurrentUefnitem.Name);
+    }
+
     public async Task ShowUEFNTab()
     {
-        //Should be fixed: await Utils.MessageBox("Ensure to not go into item shop or locker to not crash the game");
         CurrentState = State.LOADING;
         await CloseTabSelectionModal();
         currentoption = null;
@@ -1118,19 +1156,16 @@
         DiscordRPC.UpdatePresence("Watching " + _items.Count + " " + tabNames[_tabIndex]);
     }
 
-
-    public Dictionary<string, List<Item>> cachedTabItems = new(); 
-
     private int _tabIndex = 0;
     public async Task LoadTab()
-    {
+    {   
         CurrentState = State.LOADING;
         LogText = "Waiting for Input";
         string[] types = new string[] { "outfit", "backpack", "pickaxe", "emote" };
 
-        if(cachedTabItems.ContainsKey(types[_tabIndex].ToLower()))
+        if(Utils.cachedTabItems.ContainsKey(types[_tabIndex].ToLower()))
         {
-            _items = cachedTabItems[types[_tabIndex].ToLower()];
+            _items = Utils.cachedTabItems[types[_tabIndex].ToLower()];
             currentoption = null;
             CurrentState = State.COSMETICS;
             return;
@@ -1139,7 +1174,7 @@
         var list = await GetTabItems(types[_tabIndex].ToLower());
 
         _items = list;
-        cachedTabItems.Add(types[_tabIndex].ToLower(), list);
+        Utils.cachedTabItems.Add(types[_tabIndex].ToLower(), list);
         currentoption = null;
         CurrentState = State.COSMETICS;
         StateHasChanged();
@@ -1154,7 +1189,16 @@
         {
             var rarity = item.rarity.value.ToString().ToLower();
 
-            if (item.introduction == null || item.introduction.chapter == null || item.introduction.season == null) continue;
+            string introductiontext = "";
+
+            if (item.id.ToString() == "DefaultPickaxe")
+            {
+                introductiontext = "000000000";
+            } else
+            {
+                if (item.introduction == null || item.introduction.chapter == null || item.introduction.season == null) continue;
+                introductiontext = item.introduction.chapter + "|" + item.introduction.season;
+            }
 
             var type = ItemType.UNKNOWN;
 
@@ -1177,7 +1221,7 @@
                     series = series,
                     rarcolor = Rarities.GetRarityColor(rarity),
                     description = item.description,
-                    added = item.introduction.chapter + "|" + item.introduction.season,
+                    added = introductiontext,
                     rarity = await Rarities.GetRarityImage(rarity),
                     icon = item.images.smallIcon ?? "https://fortnite-api.com/images/cosmetics/br/cid_028_athena_commando_f/icon.png"
                 });

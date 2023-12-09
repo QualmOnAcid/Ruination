@@ -7,6 +7,7 @@ using CUE4Parse.FileProvider.Vfs;
 using CUE4Parse.UE4.Readers;
 using CUE4Parse.UE4.Versions;
 using CUE4Parse.Utils;
+using WebviewAppShared.Utils;
 
 namespace CUE4Parse.FileProvider
 {
@@ -35,8 +36,8 @@ namespace CUE4Parse.FileProvider
             if (!_workingDirectory.Exists)
                 throw new DirectoryNotFoundException("Given working directory must exist");
 
-            var availableFiles = new List<Dictionary<string, GameFile>> {IterateFiles(_workingDirectory, _searchOption)};
-            if (_extraDirectories is {Length: > 0})
+            var availableFiles = new List<Dictionary<string, GameFile>> { IterateFiles(_workingDirectory, _searchOption) };
+            if (_extraDirectories is { Length: > 0 })
             {
                 availableFiles.AddRange(_extraDirectories.Select(directory => IterateFiles(directory, _searchOption)));
             }
@@ -47,7 +48,24 @@ namespace CUE4Parse.FileProvider
             }
         }
 
-        private Dictionary<string, GameFile> IterateFiles(DirectoryInfo directory, SearchOption option)
+        public void Initialize(string singleFile)
+        {
+            if (!_workingDirectory.Exists)
+                throw new DirectoryNotFoundException("Given working directory must exist");
+
+            var availableFiles = new List<Dictionary<string, GameFile>> { IterateFiles(_workingDirectory, _searchOption, singleFile) };
+            if (_extraDirectories is { Length: > 0 })
+            {
+                availableFiles.AddRange(_extraDirectories.Select(directory => IterateFiles(directory, _searchOption, singleFile)));
+            }
+
+            foreach (var osFiles in availableFiles)
+            {
+                _files.AddFiles(osFiles);
+            }
+        }
+
+        private Dictionary<string, GameFile> IterateFiles(DirectoryInfo directory, SearchOption option, string filetoload = "")
         {
             var osFiles = new Dictionary<string, GameFile>();
             if (!directory.Exists) return osFiles;
@@ -70,9 +88,23 @@ namespace CUE4Parse.FileProvider
 
             foreach (var file in directory.EnumerateFiles("*.*", option))
             {
-                if (file.Name.ToLower().Contains("optional"))
+                if (!string.IsNullOrEmpty(filetoload) && !Path.GetFileNameWithoutExtension(file.Name).ToLower().Equals("global"))
                 {
-                    continue;
+
+                    if (!Path.GetFileNameWithoutExtension(file.Name).ToLower().Equals(filetoload.ToLower()))
+                    {
+                        continue;
+                    }
+
+                    Logger.Log("Loading file: " + file.Name);
+
+                }
+                else
+                {
+                    if (file.Name.ToLower().Contains("optional"))
+                    {
+                        continue;
+                    }
                 }
 
                 var upperExt = file.Extension.SubstringAfter('.').ToUpper();
@@ -101,10 +133,10 @@ namespace CUE4Parse.FileProvider
                 "utoc"
             };
 
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 11; i++)
             {
                 string targetFile = _workingDirectory.FullName + "\\pakchunk" + i + "optional-WindowsClient";
-                if(optionalFileExtensions.All(x => File.Exists(targetFile + "." + x)))
+                if (optionalFileExtensions.All(x => File.Exists(targetFile + "." + x)))
                 {
                     UnusedFiles.Add(targetFile);
                 }

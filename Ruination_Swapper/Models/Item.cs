@@ -20,5 +20,6 @@ namespace WebviewAppShared.Models
         public string rarcolor;
         public string series;
         public bool IsTransformCharacter = false;
+        public bool isDefault = false;
     }
 }

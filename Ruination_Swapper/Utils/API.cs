@@ -88,6 +88,13 @@ namespace WebviewAppShared.Utils
         public string Info;
         public string PartModifierBlueprint = "";
         public string IdleEffectNiagara = "";
+        public List<ApiUEFNSkinTextureSwapObject> TextureSwaps = new();
+    }
+
+    public class ApiUEFNSkinTextureSwapObject
+    {
+        public string From;
+        public string To;
     }
 
 }

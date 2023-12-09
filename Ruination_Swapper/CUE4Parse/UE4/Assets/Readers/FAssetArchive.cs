@@ -14,7 +14,7 @@ namespace CUE4Parse.UE4.Assets.Readers
     public class FAssetArchive : FArchive
     {
         private readonly Dictionary<PayloadType, Lazy<FAssetArchive?>> _payloads;
-        public readonly FArchive _baseArchive;
+        public FArchive _baseArchive;
 
         public readonly IPackage? Owner;
         public int AbsoluteOffset;

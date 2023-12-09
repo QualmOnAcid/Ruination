@@ -15,6 +15,9 @@ using BlazorWpfApp.CUE4Parse;
 using CUE4Parse.Encryption.Aes;
 using CUE4Parse.MappingsProvider;
 using CUE4Parse.UE4.Objects.Core.Misc;
+using WebviewAppShared.Swapper;
+using CUE4Parse.UE4.Readers;
+using System.Globalization;
 
 namespace WebviewAppShared.Utils
 {
@@ -59,6 +62,43 @@ namespace WebviewAppShared.Utils
             } catch(Exception ex) {
                 Logger.LogError(ex.Message, ex);
                 Environment.Exit(0);
+                return null;
+            }
+        }
+
+        public static async Task<DefaultFileProvider> GetUEFNProvider(string uefnfile)
+        {
+            try
+            {
+                CUtils.isExport = false;
+                Logger.Log("Loading Provider");
+                DefaultFileProvider provider = new DefaultFileProvider(Epicgames.GetPaksPath(),
+                    System.IO.SearchOption.TopDirectoryOnly, true, new(CUE4Parse.UE4.Versions.EGame.GAME_UE5_4));
+                Logger.Log("Initializing Provider");
+                provider.Initialize(uefnfile);
+                Logger.Log("Loading Mappings");
+                provider.MappingsContainer = new FileUsmapTypeMappingsProvider(Mappings.GetMappingsPath());
+                Logger.Log("Loading Keys");
+                JObject aesObject = JObject.Parse(await new System.Net.WebClient().DownloadStringTaskAsync("https://fortnitecentral.genxgames.gg/api/v1/aes"));
+                var keys = new List<KeyValuePair<FGuid, FAesKey>>();
+
+                string mainAes = aesObject["mainKey"].ToString();
+
+                keys.Add(new(new FGuid(), new FAesKey(mainAes)));
+
+                foreach (dynamic dyKey in aesObject["dynamicKeys"])
+                {
+                    keys.Add(new(new FGuid(dyKey.guid.ToString()), new FAesKey(dyKey.key.ToString())));
+                }
+
+                await provider.SubmitKeysAsync(keys);
+                Logger.Log("Loaded " + keys.Count + " Keys");
+                CUtils.isExport = true;
+                return provider;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex.Message, ex);
                 return null;
             }
         }
@@ -531,6 +571,58 @@ namespace WebviewAppShared.Utils
 
                 return assetStrings;
             });
+        }
+
+        public static IoPackage ChangeReplaces(List<KeyValuePair<string, string>> replaces, IoPackage package)
+        {
+
+            foreach(var item in replaces)
+            {
+                if(package.NameMapAsStrings.Contains(item.Key))
+                {
+                    int index = package.NameMapAsStrings.ToList().FindIndex(x => x == item.Key);
+                    package.NameMapAsStrings[index] = item.Value;
+                }
+            }
+
+            return package;
+
+        }
+
+        public static async Task SwapBlazeToLuckyBody()
+        {
+            string blazeBody = "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_RenegadeRaiderFire";
+
+            IoPackage blazePackage = (IoPackage) await SwapUtils.GetProvider().LoadPackageAsync(blazeBody);
+
+            List<KeyValuePair<string, string>> blazeReplaces = new();
+
+            blazeReplaces.Add(new("/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Renegade_Raider_Fire/Materials/MI_F_MED_Renegade_Raider_Fire_Body", "/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Lucy_Hero/Materials/F_MED_LuckyHero_Body"));
+            blazeReplaces.Add(new("MI_F_MED_Renegade_Raider_Fire_Body", "F_MED_LuckyHero_Body"));
+            blazeReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01_Skeleton_AnimBP", "/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Lucy_Hero/Meshes/F_MED_Lucky_Hero_AnimBp"));
+            blazeReplaces.Add(new("F_Med_Soldier_01_Skeleton_AnimBP_C", "F_MED_Lucky_Hero_AnimBp_C"));
+
+            blazePackage = ChangeReplaces(blazeReplaces, blazePackage);
+
+            await SwapUtils.SwapAsset(blazePackage, new Serializer(blazePackage).Serialize());
+
+            IoPackage fromMeshPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01");
+            IoPackage toMeshPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Lucy_Hero/Meshes/F_MED_Lucky_Hero");
+
+            toMeshPackage.ChangeProtectedStrings(fromMeshPackage.GetProtectedStrings());
+            toMeshPackage.ChangePublicExportHash(fromMeshPackage);
+
+            await SwapUtils.SwapAsset(fromMeshPackage, new Serializer(toMeshPackage).Serialize());
+
+            IoPackage fromSkeletonPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/BRCosmetics/Athena/Heroes/HID_784_Athena_Commando_F_RenegadeRaiderFire");
+            IoPackage toSkeletonPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/BRCosmetics/Athena/Heroes/HID_718_Athena_Commando_F_LuckyHero");
+
+            toSkeletonPackage.ChangeProtectedStrings(fromSkeletonPackage.GetProtectedStrings());
+            toSkeletonPackage.ChangePublicExportHash(fromSkeletonPackage);
+
+            await SwapUtils.SwapAsset(fromSkeletonPackage, new Serializer(toSkeletonPackage).Serialize());
+
+            await Utils.MessageBox("Finish Blaze swäp");
         }
 
     }
