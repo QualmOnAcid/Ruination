@@ -10,13 +10,14 @@ using WebviewAppShared.Utils;
 using WebviewAppShared.Models;
 using BlazorWpfApp.CUE4Parse;
 using Microsoft.Extensions.FileProviders;
+using CUE4Parse.UE4.Readers;
 
 namespace WebviewAppShared.Swapper
 {
     public class UEFN
     {
 
-        public static async Task<bool> ConvertUEFN(ApiUEFNSkinObject character, Item option, DefaultFileProvider fileProvider)
+        public static async Task<bool> ConvertUEFN(ApiUEFNSkinObject character, Item option, DefaultFileProvider fileProvider, bool downloadUefnFiles = true, bool isPlugin = false)
         {
 
             return await Task.Run(async () =>
@@ -181,17 +182,27 @@ namespace WebviewAppShared.Swapper
 
                     IoPackage fallbackPackage = (IoPackage)await prov.LoadPackageAsync(fallbackCharacter);
 
-                    Logger.Log("Downloading UEFN Files");
-
-                    Utils.Utils.MainWindow.LogText ="Downloading UEFN Files";
-                    Utils.Utils.MainWindow.UpdateUI();
-
-                    using (WebClient wc = new WebClient())
+                    if(downloadUefnFiles)
                     {
-                        await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.pak, slot + ".pak");
-                        await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.sig, slot + ".sig");
-                        await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.ucas, slot + ".ucas");
-                        await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.utoc, slot + ".utoc");
+                        Logger.Log("Downloading UEFN Files");
+
+                        Utils.Utils.MainWindow.LogText = "Downloading UEFN Files";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        using (WebClient wc = new WebClient())
+                        {
+                            await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.pak, slot + ".pak");
+                            await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.sig, slot + ".sig");
+                            await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.utoc, slot + ".utoc");
+
+                            wc.DownloadProgressChanged += (sender, e) =>
+                            {
+                                Utils.Utils.MainWindow.LogText = $"Downloading UEFN Files ({e.ProgressPercentage}%)";
+                                Utils.Utils.MainWindow.UpdateUI();
+                            };
+
+                            await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.ucas, slot + ".ucas");
+                        }
                     }
 
                     Logger.Log("Creating new Serializesize");
@@ -314,28 +325,32 @@ namespace WebviewAppShared.Swapper
                         if (!await SwapUtils.SwapAsset(cidPackage, cidPackageBytes))
                             return false;
 
-                        Logger.Log("Loading HID Asset");
-
-                        var fromHidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
-                        var toHidPackage = (IoPackage)await prov.LoadPackageAsync(character.hidpath);
-
-                        if (!toHidPackage.ChangeProtectedStrings(fromHidPackage.GetProtectedStrings()))
+                        if(character.hidpath != null)
                         {
-                            return false;
+                            Logger.Log("Loading HID Asset");
+
+                            var fromHidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
+                            var toHidPackage = (IoPackage)await prov.LoadPackageAsync(character.hidpath);
+
+                            if (!toHidPackage.ChangeProtectedStrings(fromHidPackage.GetProtectedStrings()))
+                            {
+                                return false;
+                            }
+
+                            toHidPackage.ChangePublicExportHash(fromHidPackage);
+
+                            var data = new Serializer(toHidPackage).Serialize();
+
+                            Logger.Log("Swapping HID Asset");
+
+                            if (!await SwapUtils.SwapAsset(fromHidPackage, data))
+                                return false;
+
+                            wroteAssets.Add(option.definitionPath, data);
                         }
-
-                        toHidPackage.ChangePublicExportHash(fromHidPackage);
-
-                        var data = new Serializer(toHidPackage).Serialize();
-
-                        Logger.Log("Swapping HID Asset");
-
-                        if (!await SwapUtils.SwapAsset(fromHidPackage, data))
-                            return false;
 
                         wroteAssets.Add(fromBodyAsset, bodyPackageBytes);
                         wroteAssets.Add(option.path, cidPackageBytes);
-                        wroteAssets.Add(option.definitionPath, data);
                     } else
                     {
 
@@ -443,6 +458,7 @@ namespace WebviewAppShared.Swapper
                         OptionID = option.id,
                         Type = "uefn",
                         Assets = wroteAssets,
+                        isPlugin = isPlugin,
                         Name = option.name + " To " + character.Name,
                     };
 
@@ -519,18 +535,21 @@ namespace WebviewAppShared.Swapper
                         return false;
                     }
 
-                    Logger.Log("Loading HID Package");
-
-                    IoPackage hidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
-
-                    Utils.Utils.MainWindow.LogText = "Reverting HID Asset";
-                    Utils.Utils.MainWindow.UpdateUI();
-
-                    Logger.Log("Reverting HID Package");
-
-                    if (!await SwapUtils.RevertPackage(hidPackage))
+                    if(character.hidpath != null)
                     {
-                        return false;
+                        Logger.Log("Loading HID Package");
+
+                        IoPackage hidPackage = (IoPackage)await prov.LoadPackageAsync(option.definitionPath);
+
+                        Utils.Utils.MainWindow.LogText = "Reverting HID Asset";
+                        Utils.Utils.MainWindow.UpdateUI();
+
+                        Logger.Log("Reverting HID Package");
+
+                        if (!await SwapUtils.RevertPackage(hidPackage))
+                        {
+                            return false;
+                        }
                     }
                 } else
                 {

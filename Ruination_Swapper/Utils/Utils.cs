@@ -24,7 +24,7 @@ namespace WebviewAppShared.Utils
     public class Utils
     {
 
-        public static string USER_VERSION = "2.0.6";
+        public static string USER_VERSION = "2.0.7";
         public static Dictionary<string, List<Item>> cachedTabItems = new();
 
         public static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RuinationFN_Swapper\\";
@@ -54,6 +54,11 @@ namespace WebviewAppShared.Utils
             string allItemsDownloaded = await new System.Net.WebClient().DownloadStringTaskAsync("https://fortnite-api.com/v2/cosmetics/br");
 
             JObject j = JObject.Parse(allItemsDownloaded);
+
+            int itemcount = j["data"].Count();
+
+            Utils.MainWindow.LoadingText = "Parsing Cosmetics (" + itemcount + ")";
+            Utils.MainWindow.UpdateUI();
 
             foreach (dynamic item in j["data"])
             {

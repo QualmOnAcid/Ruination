@@ -36,6 +36,8 @@ namespace WebviewAppShared.Utils
 
         public static string GetRarityColor(string rarity)
         {
+            rarity = rarity.ToLower();
+
             if (rarity == "uncommon") return "#88e339";
             if (rarity == "rare") return "#37d0ff";
             if (rarity == "epic") return "#ea5eff";
@@ -54,6 +56,25 @@ namespace WebviewAppShared.Utils
 
             return "#a6a2a2";
         }
+
+        public static List<string> GetRarities() => new List<string>()
+        {
+            "Common",
+            "Uncommon",
+            "Rare",
+            "Epic",
+            "Legendary",
+            "Dark",
+            "Frozen",
+            "Icon",
+            "Lava",
+            "Marvel",
+            "Shadow",
+            "GamingLegends",
+            "DC",
+            "Slurp",
+            "Starwars"
+        };
 
     }
 }

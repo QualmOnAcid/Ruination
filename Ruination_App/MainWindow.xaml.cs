@@ -19,6 +19,7 @@ namespace BlazorWpfApp
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddWpfBlazorWebView();
+            serviceCollection.AddBlazorWebViewDeveloperTools();
             Resources.Add("services", serviceCollection.BuildServiceProvider());
             Width = 1200;
             Height = 755;

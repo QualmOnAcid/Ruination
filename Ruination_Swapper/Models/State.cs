@@ -17,6 +17,12 @@ namespace WebviewAppShared.Models
         LOADING,
         SETTINGS,
         KEY,
+        PLUGINS,
+        CREATE_PLUGIN,
+        PLUGIN_VIEW,
+        PLUGIN_ADD,
+        PLUGIN_SWAPFORM,
+        PLUGIN_UEFNSKINSWAPFORM,
         UNKNOWN
     }
 }

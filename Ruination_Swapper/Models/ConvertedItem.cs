@@ -12,6 +12,7 @@ namespace WebviewAppShared.Models
         public string OptionID;
         public string Type;
         public string Name;
+        public bool isPlugin = false;
         public Dictionary<string, byte[]> Assets = new();
     }
 }

@@ -29,10 +29,14 @@ namespace WebviewAppShared.Utils
 
             Logger.Log ("Loaded Discord RPC");
 
-            for (int i = 0; i < 7; i++)
+            int waitime = 7;
+
+            for (int i = 0; i < waitime; i++)
             {
                 if (GetID() != 0) break;
                 Logger.Log("Waiting for Discord RPC " + (i + 1));
+                Utils.MainWindow.LoadingText = "Waiting for Discord RPC " + (waitime-i);
+                Utils.MainWindow.UpdateUI();
                 await Task.Delay(1 * 1000);
             }
         }

@@ -31,6 +31,7 @@
             <div class="loaderdiv" style="margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column;">
                 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
             </div>
+            <p style="margin: 0; padding: 0; color:white; font-weight: bold; font-family: Nunito; position: absolute; top: 55%; width: 100%; text-align: center;">@LoadingText</p>
         } else if(CurrentState == State.KEY)
         {
             <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
@@ -46,6 +47,7 @@
         else {
         <div>
                 <b class="cosmetics" @onclick="@(async() => await ShowTabSelectionModal())">Cosmetics</b>
+                <b class="plugins" @onclick="@(async() => await ShowPluginCreator())">Plugins</b>
                 <b class="settings" @onclick="@(async() => await ShowSettings())">Settings</b>
                 <b class="ruination">Ruination</b>
                 @if(false)
@@ -328,9 +330,18 @@
                             {
                                 string ditemNameColor = "white";
 
-                                if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentUefnitem.ID.ToLower()) && x.OptionID.ToLower().Equals("defaultskinuefnoption") && x.Type == "uefn"))
+                                if(CurrentPlugin != null && currentitem == null)
+                                {
+                                    if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentPlugin.ID.ToLower()) && x.OptionID.ToLower().Equals("defaultskinuefnoption") && x.Type == "uefn"))
+                                    {
+                                        ditemNameColor = "#42f581";
+                                    }
+                                } else
+                                {
+                                    if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentUefnitem.ID.ToLower()) && x.OptionID.ToLower().Equals("defaultskinuefnoption") && x.Type == "uefn"))
                                 {
                                     ditemNameColor = "#42f581";
+                                }
                                 }
 
                                 <div class="itemm" @onclick="@(async() => await SetUEFNDefaultOption())">
@@ -348,9 +359,18 @@
 
                                 string itemNameColor = "white";
 
-                                if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentUefnitem.ID.ToLower()) && x.OptionID.ToLower().Equals(item.id.ToLower()) && x.Type == "uefn"))
+                                if(CurrentPlugin != null && currentitem == null)
                                 {
-                                    itemNameColor = "#42f581";
+                                    if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentPlugin.ID.ToLower()) && x.OptionID.ToLower().Equals(item.id.ToLower()) && x.Type == "uefn"))
+                                    {
+                                        itemNameColor = "#42f581";
+                                    }
+                                } else
+                                {
+                                    if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(CurrentUefnitem.ID.ToLower()) && x.OptionID.ToLower().Equals(item.id.ToLower()) && x.Type == "uefn"))
+                                    {
+                                        itemNameColor = "#42f581";
+                                    }
                                 }
 
                                 <div class="itemm" @onclick="@(async() => await SetUEFNOption(item))">
@@ -406,6 +426,340 @@
 
                         </div>
 
+                    } else if(CurrentState == State.CREATE_PLUGIN)
+                    {
+                        <div class="plugincontainer">
+
+                            <div class="textprop">
+                                <p>Type</p>
+                                <select @bind=Plugins.PluginCreator._Plugin.Type>
+                                    <option value="uefnskin">UEFN Skin</option>
+                                    <option value="uefn">UEFN</option>
+                                    <option value="normal">Normal</option>
+                                </select>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Plugins.PluginCreator._Plugin.Type))
+                            {
+                                    <div class="textprop">
+                                    <p>ID - Please give this plugin a unique id</p>
+                                    <input type="text" @bind=Plugins.PluginCreator._Plugin.ID>
+                                </div>
+
+                                <div class="textprop">
+                                    <p>Name</p>
+                                    <input type="text" @bind=Plugins.PluginCreator._Plugin.Name>
+                                </div>
+
+                                <div class="textprop">
+                                    <p>Description</p>
+                                    <input type="text" @bind=Plugins.PluginCreator._Plugin.Description>
+                                </div>
+
+                                <div class="textprop">
+                                    <p>Icon URL</p>
+                                    <input type="text" @bind=Plugins.PluginCreator._Plugin.Icon>
+                                </div>
+
+                                <div class="textprop">
+                                    <p>Item Rarity</p>
+                                    <select @bind=Plugins.PluginCreator._Plugin.Rarity>
+                                        @foreach (var rarity in Rarities.GetRarities())
+                                        {
+                                            <option value="@rarity">@rarity</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="itemm" style="position: absolute; left: 50%; top: 41%;">
+                                    <div class="itemImages">
+                                        <img src="@Rarities.GetRarityImage(Plugins.PluginCreator._Plugin.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(Plugins.PluginCreator._Plugin.Rarity);" class="rarityImage">
+                                        @if(string.IsNullOrEmpty(Plugins.PluginCreator._Plugin.Icon))
+                                        {
+                                            <img src="https://media.valorant-api.com/competitivetiers/564d8e28-c226-3180-6285-e48a390db8b1/0/largeicon.png" class="itemImage">
+                                        } else
+                                        {
+                                            <img src="@Plugins.PluginCreator._Plugin.Icon" class="itemImage">
+                                        }
+                                    </div>
+                                    <p class="itemName">@Plugins.PluginCreator._Plugin.Name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(Plugins.PluginCreator._Plugin.Description, 31, true)</p>
+                                </div>
+
+                                @if(!Plugins.PluginCreator._Plugin.Type.Equals("uefnskin"))
+                                {
+                                    <p style="font-weight: bold; font-size: 20px; text-decoration: underline;">Option:</p>
+                                     <div class="textprop">
+                                    <p>Name</p>
+                                    <input type="text" @bind=Plugins.PluginCreator._Plugin.Option.Name>
+                                </div>
+
+                                <div class="textprop">
+                                    <p>Description</p>
+                                        <input type="text" @bind=Plugins.PluginCreator._Plugin.Option.Description>
+                                </div>
+
+                                <div class="textprop">
+                                    <p>Icon URL</p>
+                                        <input type="text" @bind=Plugins.PluginCreator._Plugin.Option.Icon>
+                                </div>
+
+                                <div class="textprop">
+                                    <p>Item Rarity</p>
+                                        <select @bind=Plugins.PluginCreator._Plugin.Option.Rarity>
+                                        @foreach (var rarity in Rarities.GetRarities())
+                                        {
+                                            <option value="@rarity">@rarity</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="itemm" style="position: absolute; left: 50%; top: 106%;">
+                                    <div class="itemImages">
+                                            <img src="@Rarities.GetRarityImage(Plugins.PluginCreator._Plugin.Option.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(Plugins.PluginCreator._Plugin.Option.Rarity);" class="rarityImage">
+                                            @if (string.IsNullOrEmpty(Plugins.PluginCreator._Plugin.Option.Icon))
+                                        {
+                                            <img src="https://media.valorant-api.com/competitivetiers/564d8e28-c226-3180-6285-e48a390db8b1/0/largeicon.png" class="itemImage">
+                                        } else
+                                        {
+                                                <img src="@Plugins.PluginCreator._Plugin.Option.Icon" class="itemImage">
+                                        }
+                                    </div>
+                                        <p class="itemName">@Plugins.PluginCreator._Plugin.Option.Name</p>
+                                        <p class="itemDescription">@Utils.CutOffString(Plugins.PluginCreator._Plugin.Option.Description, 31, true)</p>
+                                </div>
+                                }
+
+                                @if(!Plugins.PluginCreator._Plugin.Type.ToLower().Equals("normal"))
+                                {
+                                    <div class="textprop">
+                                        <p>UEFN Files</p>
+
+                                        <div class="downloadble">
+                                            <p>Pak</p>
+                                            <input type="text" @bind="Plugins.PluginCreator._Plugin.Files.pak" placeholder="https://www..">
+                                        </div>
+
+                                        <div class="downloadble">
+                                            <p>Sig</p>
+                                            <input type="text" @bind="Plugins.PluginCreator._Plugin.Files.sig" placeholder="https://www..">
+                                        </div>
+
+                                        <div class="downloadble">
+                                            <p>Ucas</p>
+                                            <input type="text" @bind="Plugins.PluginCreator._Plugin.Files.ucas" placeholder="https://www..">
+                                        </div>
+
+                                        <div class="downloadble">
+                                            <p>Utoc</p>
+                                            <input type="text" @bind="Plugins.PluginCreator._Plugin.Files.utoc" placeholder="https://www..">
+                                        </div>
+
+                                    </div>
+                                }
+
+                                @if(Plugins.PluginCreator._Plugin.Type.ToLower().Equals("uefnskin"))
+                                {
+                                    <div class="textprop">
+                                        <p>Mesh*</p>
+                                        <input type="text" @bind="Plugins.PluginCreator._Plugin.Skin.Mesh">
+                                    </div>
+                                    <div class="textprop">
+                                        <p>Skeleton*</p>
+                                        <input type="text" @bind="Plugins.PluginCreator._Plugin.Skin.Skeleton">
+                                    </div>
+                                    <div class="textprop">
+                                        <p>AnimBP*</p>
+                                        <input type="text" @bind="Plugins.PluginCreator._Plugin.Skin.Animation">
+                                    </div>
+                                    <div class="textprop">
+                                        <p>PartmodifierBlueprint</p>
+                                        <input type="text" @bind="Plugins.PluginCreator._Plugin.Skin.PartmodifierBlueprint">
+                                    </div>
+                                    <div class="textprop">
+                                        <p>Idle Effect Niagara</p>
+                                        <input type="text" @bind="Plugins.PluginCreator._Plugin.Skin.IdleEffectNiagara">
+                                    </div>
+
+                                    <div class="textprop">
+                                        <p>Materials</p>
+                                        @for(int i = 0; i < Plugins.PluginCreator.Materials.Count; i++)
+                                        {
+                                            var localvar = i;
+                                            <p @onclick="@(async() => await Plugins.PluginCreator.DeleteMaterial(localvar))" style="cursor: pointer;">[-] Remove Material @(localvar + 1)</p>
+                                            <input type="text" @bind=Plugins.PluginCreator.Materials[localvar]>
+                                        }
+                                        <p @onclick="@(async() => await Plugins.PluginCreator.AddMaterial())" style="cursor: pointer;">[+] Add Material</p>
+                                    </div>
+
+                        }
+
+                                <div class="textprop">
+                                    <p>Swaps</p>
+
+                                    <div class="swaps" id="pluginswaps">
+
+                                        @for(int i = 0; i < Plugins.PluginCreator.Assets.Count; i++)
+                                        {
+                                            var localvar = i;
+                                            <div class="swap" id="swap1">
+                                                <p style="cursor: pointer;" @onclick="@(async() => await Plugins.PluginCreator.DeleteAsset(localvar))">[-] Delete Asset @(localvar + 1)</p>
+                                                <p>Asset</p>
+                                                <input type="text" placeholder="/Game/" @bind=Plugins.PluginCreator.Assets[localvar].Asset>
+                                                <p>To Asset</p>
+                                                <input type="text" placeholder="/Game/" @bind=Plugins.PluginCreator.Assets[localvar].ToAsset>
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <p @onclick="@(async() => await Plugins.PluginCreator.AddAsset())" style="cursor: pointer;">[+] Add Asset</p>
+                                </div>
+
+                                <button @onclick="@(async() => await Plugins.PluginCreator.WriteCurrentPlugin())">Create Plugin</button>
+                            }
+
+                        </div>
+                    } else if(CurrentState == State.PLUGIN_VIEW)
+                    {
+                        <div class="item-container" style="background-color: transparent; display: flex; height: 585px; gap: 3vh; flex-direction: row; flex-flow: row wrap; overflow: hidden scroll; bottom: 4.5vh;">
+
+                            <div class="itemm" @onclick="@(async() => await ShowPluginAdd())">
+                                <div class="itemImages">
+                                    <img src="@Rarities.GetRarityImage("Common").Result" style="border: 4px solid @Rarities.GetRarityColor("Common");" class="rarityImage">
+                                    <img src="https://cdn.discordapp.com/attachments/1158823342028095571/1185918940157857823/plusicon.png" class="itemImage">
+                                </div>
+                                <p class="itemName">Add Plugin</p>
+                                <p class="itemDescription">@Utils.CutOffString("Add a Plugin from your files.", 31, true)</p>
+                            </div>
+
+                            <div class="itemm" @onclick="@(async() => await ShowPluginCreate())">
+                                <div class="itemImages">
+                                    <img src="@Rarities.GetRarityImage("Common").Result" style="border: 4px solid @Rarities.GetRarityColor("Common");" class="rarityImage">
+                                    <img src="https://cdn.discordapp.com/attachments/1136637018634453045/1187299005458296863/createicon.png" class="itemImage">
+                                </div>
+                                <p class="itemName">Create Plugin</p>
+                                <p class="itemDescription">@Utils.CutOffString("Create your own Plugin.", 31, true)</p>
+                            </div>
+
+                            @foreach(var plugin in Plugins.PluginUtils.GetInstalledPlugins())
+                            {
+
+                                string itemNameColor = "white";
+
+                                if (Config.GetConfig().ConvertedItems.Any(x => x.ID.ToLower().Equals(plugin.ID.ToLower()) && x.isPlugin))
+                                {
+                                    itemNameColor = "#42f581";
+                                }
+
+                                <div class="itemm" @onclick="@(async() => await ShowPluginForm(plugin))">
+                                    <div class="itemImages">
+                                        <img src="@Rarities.GetRarityImage(plugin.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(plugin.Rarity);" class="rarityImage">
+                                        <img src="@plugin.Icon" class="itemImage">
+                                    </div>
+                                    <p class="itemName" style="color: @itemNameColor;">@plugin.Name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(plugin.Description, 31, true)</p>
+                                </div>
+                            }
+
+                        </div>
+                    } else if(CurrentState == State.PLUGIN_ADD)
+                    {
+                        <InputFile multiple OnChange="@OnPluginDragDrop"></InputFile>
+                    } else if(CurrentState == State.PLUGIN_SWAPFORM)
+                    {
+                        <div class="swapform" style="display: flex; justify-content: center; align-items: center;">
+                            <div class="itemm" style="position: relative; left: -5%;">
+
+                                    <div class="itemImages">
+                                    <img src="@Rarities.GetRarityImage(CurrentPlugin.Option.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(CurrentPlugin.Option.Rarity);" class="rarityImage">
+                                        <img src="@CurrentPlugin.Option.Icon" class="itemImage">
+                                    </div>
+
+                                    <p class="itemName">@CurrentPlugin.Option.Name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(CurrentPlugin.Option.Description, 31, true)</p>
+                                
+                            </div>
+
+                            <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1136637018634453045/1170816694617395320/ArrowIcon.png?ex=655a6b04&is=6547f604&hm=164feec9d6247517009580646739ab174768d25e659aa191f5103787a805c721&">
+
+                            <div class="itemm" style="left: 5%; position: relative;">
+                                <div class="itemImages">
+                                    <img src="@Rarities.GetRarityImage(CurrentPlugin.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(CurrentPlugin.Rarity.ToLower());" class="rarityImage">
+                                    <img src="@CurrentPlugin.Icon" class="itemImage">
+                                </div>
+
+                                <p class="itemName">@CurrentPlugin.Name</p>
+                                <p class="itemDescription">@Utils.CutOffString(CurrentPlugin.Description, 31, true)</p>
+                            </div>
+
+                                <p style="position: absolute; font-size: 15px; top: 50%;">@LogText</p>
+
+                            <div class="swapButton" style="top:65%;" @onclick="@(async() => await Swapper.Plugin.ConvertPlugin(CurrentPlugin))">
+                                    <p style="font-size: 15px; position: relative;">Convert</p>
+                                </div>
+
+                                <div class="swapButton" style="top: 78%;" @onclick="@(async() => await Swapper.Plugin.RevertPlugin(CurrentPlugin))">
+                                    <p style="font-size: 15px; position: relative;">Revert</p>
+                                </div>
+                            
+
+                        </div>
+                    } else if(CurrentState == State.PLUGIN_UEFNSKINSWAPFORM)
+                    {
+                        <div class="swapform" style="display: flex; justify-content: center; align-items: center;">
+                            <div class="itemm" style="position: relative; left: -5%;" @onclick="(async() => await ShowUEFNOptionForm(null))">
+                                @if (currentoption == null)
+                                {
+                                    <div class="itemImages">
+                                        <img style="border: 4px solid #37d0ff;" src="https://cdn.discordapp.com/attachments/1136637018634453045/1170706244391157831/rare-212x.png?ex=655a0427&is=65478f27&hm=5b43e9b63ed53fc9b0267ccac0f4079f0f9389c36bab80fe9fbeb92206a7d2fc&" class="rarityImage">
+                                        <img src="https://media.valorant-api.com/competitivetiers/564d8e28-c226-3180-6285-e48a390db8b1/0/largeicon.png" class="itemImage">
+                                    </div>
+
+                                    <p class="itemName">Unknown - Click here</p>
+                                    <p class="itemDescription">Please select option</p>
+                                }
+                                else
+                                {
+                                    <div class="itemImages">
+                                        <img src="@currentoption.rarity" style="border: 4px solid @currentoption.rarcolor;" class="rarityImage">
+                                        <img src="@currentoption.icon" class="itemImage">
+                                    </div>
+
+                                    <p class="itemName">@currentoption.name</p>
+                                    <p class="itemDescription">@Utils.CutOffString(currentoption.description, 31, true)</p>
+                                }
+                            </div>
+
+                            <img style="width: 100px;" src="https://cdn.discordapp.com/attachments/1136637018634453045/1170816694617395320/ArrowIcon.png?ex=655a6b04&is=6547f604&hm=164feec9d6247517009580646739ab174768d25e659aa191f5103787a805c721&">
+
+                            <div class="itemm" style="left: 5%; position: relative;">
+                                <div class="itemImages">
+                                    <img src="@Rarities.GetRarityImage(CurrentPlugin.Rarity).Result" style="border: 4px solid @Rarities.GetRarityColor(CurrentPlugin.Rarity.ToLower());" class="rarityImage">
+                                    <img src="@CurrentPlugin.Icon" class="itemImage">
+                                </div>
+
+                                <p class="itemName">@CurrentPlugin.Name</p>
+                                <p class="itemDescription">@Utils.CutOffString(CurrentPlugin.Description, 31, true)</p>
+                            </div>
+
+                            @if (currentoption == null)
+                            {
+                                <p style="position: absolute; font-size: 15px; top: 50%;">Please select an option</p>
+                            }
+                            else
+                            {
+                                <p style="position: absolute; font-size: 15px; top: 50%;">@LogText</p>
+
+                                <div class="swapButton" style="top:65%;" @onclick="(async() => await Swapper.Plugin.ConvertUEFNSkinPlugin(CurrentPlugin, currentoption))">
+                                    <p style="font-size: 15px; position: relative;">Convert</p>
+                                </div>
+
+                                <div class="swapButton" style="top: 78%;" @onclick="(async() => await Swapper.Plugin.RevertUEFNSkinPlugin(CurrentPlugin, currentoption))">
+                                    <p style="font-size: 15px; position: relative;">Revert</p>
+                                </div>
+                            }
+
+                        </div>
                     }
 
                 </div>
@@ -476,6 +830,7 @@
 
     .cosmetics,
     .ruination,
+    .plugins,
     .settings {
         position: absolute;
         top: 29px;
@@ -507,8 +862,18 @@
         color: #2d5896;
     }
 
+    .plugins {
+         left: 960px;
+        transition: 0.3s ease all;
+        cursor: pointer;
+    }
+
+    .plugins:hover {
+        color: #2d5896;
+    }
+
     .cosmetics {
-        left: 930px;
+        left: 825px;
         cursor: pointer;
         transition: 0.3s ease all;
     }
@@ -999,6 +1364,74 @@
         transform: scale(1.1);
     }
 
+    .plugincontainer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        overflow: hidden scroll;
+    }
+
+    .textprop {
+        position: relative;
+        width: 100%;
+        height: auto;
+        background-color: transparent;
+    }
+
+        .textprop p {
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            text-decoration: underline;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-bottom: 5px;
+        }
+
+        .textprop input,
+        .textprop select {
+            box-sizing: border-box;
+            width: 40%;
+            background-color: var(--color-gray-200);
+            border-color: transparent;
+            color: white;
+        }
+
+        .textprop .downloadble {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+            .textprop .downloadble p {
+                margin-right: 10px;
+                text-decoration: none;
+            }
+
+            .textprop .downloadble input {
+                margin-top: 15px;
+            }
+
+        .textprop .swaps {
+            width: 100%;
+            height: auto;
+            background-color: transparent;
+        }
+
+            .textprop .swaps .swap {
+                width: 100%;
+                height: auto;
+            }
+
+                .textprop .swaps .swap p {
+                    text-decoration: none;
+                }
+
+                .textprop .swaps .swap input {
+                    margin-top: 15px;
+                    margin-left: 5px;
+                }
+
 </style>
 
 @code {
@@ -1013,6 +1446,8 @@
     public bool _showTabSelectionModal = false;
     public string searchBarText = "";
 
+    public string LoadingText = "Loading";
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender != null && firstRender)
@@ -1022,12 +1457,24 @@
             Utils.MainWindow = this;
             Utils.module = await JS.InvokeAsync<IJSObjectReference>("import", "/js/Main.js");
             Logger.Init();
+            LoadingText = "Loading Epicgames Paths";
+            UpdateUI();
             Epicgames.Load();
+            LoadingText = "Loading API";
+            UpdateUI();
             API.Load();
+            LoadingText = "Checking for Update";
+            UpdateUI();
             await Utils.CheckForUpdate();
+            LoadingText = "Loading Config";
+            UpdateUI();
             Config.Load();
+            LoadingText = "Waiting for Discord RPC";
+            UpdateUI();
             await DiscordRPC.Load();
             Logger.Log("Checking for Config Key");
+            LoadingText = "Validating Key";
+            UpdateUI();
             if(API.GetApi().PremiumUsers.Contains(DiscordRPC.GetID().ToString()) || await Key.CheckConfigKey())
             {
                 Logger.Log("Config Key valid");
@@ -1044,13 +1491,22 @@
 
     public async Task Setup()
     {
+        LoadingText = "Downloading Mappings";
+        UpdateUI();
         await Mappings.DownloadMappings();
+        LoadingText = "Loading Provider";
+        UpdateUI();
         await SwapUtils.LoadProvider();
+        LoadingText = "Checking Converted Items";
+        UpdateUI();
         await Utils.CheckForChangedConvertedItems();
+        LoadingText = "Parsing Cosmetics";
+        UpdateUI();
         await Utils.ParseAllCosmetics();
         CurrentState = State.SETTINGS;
         StateHasChanged();
         DiscordRPC.UpdatePresence("Watching Settings");
+        LoadingText = "";
     }
 
     public async Task ChangeKickableOptions()
@@ -1098,7 +1554,8 @@
             Utils.cachedTabItems.Add("outfit", await GetTabItems("outfit"));
         }
 
-        DiscordRPC.UpdatePresence("Choosing Option for " + item.Name + $" (UEFN Skin)");
+        if(item != null)
+            DiscordRPC.UpdatePresence("Choosing Option for " + item.Name + $" (UEFN Skin)");
 
         CurrentState = State.UEFN_CHOOSEOPTION;
     }
@@ -1115,8 +1572,12 @@
     {
         currentoption = item;
         LogText = "Waiting for Input";
-        CurrentState = State.UEFN_SWAPFORM;
-        DiscordRPC.UpdatePresence(item.name + " To " + CurrentUefnitem.Name);
+        if (CurrentPlugin != null && CurrentUefnitem == null)
+            CurrentState = State.PLUGIN_UEFNSKINSWAPFORM;
+        else
+            CurrentState = State.UEFN_SWAPFORM;
+        if(CurrentUefnitem != null)
+            DiscordRPC.UpdatePresence(item.name + " To " + CurrentUefnitem.Name);
     }
 
     public async Task SetUEFNDefaultOption()
@@ -1134,8 +1595,14 @@
         };
         currentoption = item;
         LogText = "Waiting for Input";
-        CurrentState = State.UEFN_SWAPFORM;
-        DiscordRPC.UpdatePresence(item.name + " To " + CurrentUefnitem.Name);
+
+        if(CurrentPlugin != null && CurrentUefnitem == null)
+            CurrentState = State.PLUGIN_UEFNSKINSWAPFORM;
+        else
+            CurrentState = State.UEFN_SWAPFORM;
+
+        if(CurrentUefnitem != null)
+            DiscordRPC.UpdatePresence(item.name + " To " + CurrentUefnitem.Name);
     }
 
     public async Task ShowUEFNTab()
@@ -1260,6 +1727,13 @@
         DiscordRPC.UpdatePresence("Watching Settings");
     }
 
+    public async Task ShowPluginCreator()
+    {
+        CurrentState = State.PLUGIN_VIEW;
+        DiscordRPC.UpdatePresence("Creating a Plugin");
+        UpdateUI();
+    }
+
     public async Task OpenKeySite() => Utils.StartUrl(API.GetApi().Other.KeyLink);
 
     public void UpdateUI() => InvokeAsync(() => StateHasChanged());
@@ -1267,6 +1741,52 @@
     public Item GetActualChararacterFromLoadeditems(string id)
     {
         return _items.FirstOrDefault(x => x.id.ToLower().Equals(id.ToLower()));
+    }
+
+    public async Task ShowPluginAdd()
+    {
+        CurrentState = State.PLUGIN_ADD;
+        StateHasChanged();
+    }
+
+    public async Task ShowPluginCreate()
+    {
+        CurrentState = State.CREATE_PLUGIN;
+        StateHasChanged();
+    }
+
+    public async Task OnPluginDragDrop(InputFileChangeEventArgs e)
+    {
+        foreach(var file in e.GetMultipleFiles())
+        {
+            using var stream = file.OpenReadStream();
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            File.WriteAllBytes(file.Name, ms.ToArray());
+            await  Plugins.PluginUtils.AddPlugin(file.Name);
+        }
+
+        CurrentState = State.PLUGIN_VIEW;
+        StateHasChanged();
+    }
+
+    public PluginModel CurrentPlugin;
+
+    public async Task ShowPluginForm(PluginModel plugin)
+    {
+        LogText = "Waiting for Input";
+        CurrentPlugin = plugin;
+        currentoption = null;
+        CurrentUefnitem = null;
+        if(plugin.Type.ToLower().Equals("uefnskin"))
+        {
+            CurrentState = State.PLUGIN_UEFNSKINSWAPFORM;
+            StateHasChanged();
+        } else
+        {
+            CurrentState = State.PLUGIN_SWAPFORM;
+            StateHasChanged();   
+        }
     }
 
 }

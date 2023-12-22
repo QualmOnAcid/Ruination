@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using CUE4Parse.FileProvider.Objects;
 using CUE4Parse.FileProvider.Vfs;
 using CUE4Parse.UE4.Readers;
@@ -144,5 +145,18 @@ namespace CUE4Parse.FileProvider
 
             return osFiles;
         }
+
+        public bool DoesAssetExist(string path)
+        {
+            try
+            {
+                this.SaveAsset(path);
+                return true;
+            } catch(Exception e)
+            {
+                return false;
+            }
+        }
+
     }
 }
