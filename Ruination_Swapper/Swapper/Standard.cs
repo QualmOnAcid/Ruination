@@ -85,7 +85,7 @@ namespace WebviewAppShared.Swapper
                 Config.GetConfig().ConvertedItems.Add(convertedItem);
                 Config.Save();
 
-                Utils.Utils.LogSwap(currentitem.id);
+                Utils.Utils.LogSwap(currentitem.id, true, currentoption.id);
 
                 Utils.Utils.MainWindow.LogText = "Converted";
                 Logger.Log("Swap finished");
@@ -130,7 +130,7 @@ namespace WebviewAppShared.Swapper
                     Logger.Log("Loading " + entry.Key);
                     var fromPack = (IoPackage)(await prov.LoadPackageAsync(entry.Key));
 
-                    if (!await SwapUtils.RevertPackage(fromPack))
+                    if (!await SwapUtils.RevertPackage(fromPack, entry.Key))
                     {
                         return false;
                     }
@@ -143,7 +143,7 @@ namespace WebviewAppShared.Swapper
                 Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(currentoption.id.ToLower()));
                 Config.Save();
 
-                Utils.Utils.LogSwap(currentitem.id);
+                Utils.Utils.LogSwap(currentitem.id, false, currentoption.id);
 
                 Utils.Utils.MainWindow.LogText = "Reverted";
 
@@ -161,4 +161,5 @@ namespace WebviewAppShared.Swapper
         }
 
     }
+
 }

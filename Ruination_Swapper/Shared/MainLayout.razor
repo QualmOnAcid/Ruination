@@ -416,8 +416,12 @@
                                 <p style="font-size: 15px; position: relative;">OPEN LOGS</p>
                             </div>
 
-                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await Utils.ResetEverything())">
-                                <p style="font-size: 15px; position: relative;">RESET EVERYTHING</p>
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await ShowFOVChanger())">
+                                <p style="font-size: 15px; position: relative;">FOV CHANGER</p>
+                            </div>
+
+                            <div class="swapButton" style="position: relative;" @onclick="@(async() => await ShowBackgroundChanger())">
+                                <p style="font-size: 15px; position: relative;">BACKGROUND CHANGER</p>
                             </div>
 
                             <div class="swapButton" style="position: relative;" @onclick="@(async() => await Utils.OpenDC())">
@@ -441,11 +445,6 @@
 
                             @if (!string.IsNullOrEmpty(Plugins.PluginCreator._Plugin.Type))
                             {
-                                    <div class="textprop">
-                                    <p>ID - Please give this plugin a unique id</p>
-                                    <input type="text" @bind=Plugins.PluginCreator._Plugin.ID>
-                                </div>
-
                                 <div class="textprop">
                                     <p>Name</p>
                                     <input type="text" @bind=Plugins.PluginCreator._Plugin.Name>
@@ -701,6 +700,10 @@
                                 <div class="swapButton" style="top: 78%;" @onclick="@(async() => await Swapper.Plugin.RevertPlugin(CurrentPlugin))">
                                     <p style="font-size: 15px; position: relative;">Revert</p>
                                 </div>
+
+                                <div class="swapButton" style="top: 90%;" @onclick="@(async() => await CurrentPlugin.Delete())">
+                                    <p style="font-size: 15px; position: relative;">Delete Plugin</p>
+                                </div>
                             
 
                         </div>
@@ -757,8 +760,33 @@
                                 <div class="swapButton" style="top: 78%;" @onclick="(async() => await Swapper.Plugin.RevertUEFNSkinPlugin(CurrentPlugin, currentoption))">
                                     <p style="font-size: 15px; position: relative;">Revert</p>
                                 </div>
+
+                                <div class="swapButton" style="top: 90%;" @onclick="@(async() => await CurrentPlugin.Delete())">
+                                    <p style="font-size: 15px; position: relative;">Delete Plugin</p>
+                                </div>
                             }
 
+                        </div>
+                    } else if(CurrentState == State.FOV)
+                    {
+                        <p style="text-decoration: underline; font-size: 30px;">FOV Changer</p>
+                        <input type="range" min="1" max="200" @bind=fovSlider class="slider"/>
+                        <p style="position: relative; top: 5%; font-size: larger; width: 40%; left: 25%;">@fovSlider</p>
+
+                        <div class="swapButton" style="position: relative; left: 13%; top: 4%;" @onclick="(async() => await FOV.SwapFOV(fovSlider))">
+                            <p style="font-size: 15px; position: relative;">Convert</p>
+                        </div>
+
+                        <div class="swapButton" style="position: relative; top: 6%; left: 13%;" @onclick="(async() => await FOV.RevertFov())">
+                            <p style="font-size: 15px; position: relative;">Revert</p>
+                        </div>
+                    } else if(CurrentState == State.BACKGROUND)
+                    {
+                        <p style="text-decoration: underline; font-size: 30px;">Background Changer</p>
+                        <InputFile OnChange="@LobbyBackgroundChange"></InputFile>
+
+                        <div class="swapButton" style="position: relative; top: 6%;" @onclick="(async() => await LobbyBackground.RevertLobbyBG())">
+                            <p style="font-size: 15px; position: relative;">Reset</p>
                         </div>
                     }
 
@@ -1432,6 +1460,30 @@
                     margin-left: 5px;
                 }
 
+        .slider:hover {
+            opacity: 1;
+        }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #3d77cd;
+        cursor: pointer;
+    }
+
+    .slider {
+        position: relative;
+        top: 5%;
+        width:50%;
+        outline: none;
+        border-radius: 5px;
+        background: #d3d3d3;
+        opacity: 0.7;
+    }
+
 </style>
 
 @code {
@@ -1448,6 +1500,8 @@
 
     public string LoadingText = "Loading";
 
+    public int fovSlider = 80;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender != null && firstRender)
@@ -1463,6 +1517,14 @@
             LoadingText = "Loading API";
             UpdateUI();
             API.Load();
+
+            if(API.GetApi().Other.Disabled)
+            {
+                await Utils.MessageBox(API.GetApi().Other.DisabledMessage);
+                Environment.Exit(0);
+                return;
+            }
+
             LoadingText = "Checking for Update";
             UpdateUI();
             await Utils.CheckForUpdate();
@@ -1770,6 +1832,24 @@
         StateHasChanged();
     }
 
+    public async Task LobbyBackgroundChange(InputFileChangeEventArgs e)
+    {
+        foreach(var file in e.GetMultipleFiles(1))
+        {
+            if(file.Size > 1024 * 10000)
+            {
+                Utils.MessageBox("File limit reached. 10MB is max");
+                return;
+            }
+            using var stream = file.OpenReadStream(maxAllowedSize: 1024 * 10000);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            File.WriteAllBytes("lobbybg.jpg", ms.ToArray());
+            await LobbyBackground.ConvertLobbyBG("lobbybg.jpg");
+            File.Delete("lobbybg.jpg");
+        }
+    }
+
     public PluginModel CurrentPlugin;
 
     public async Task ShowPluginForm(PluginModel plugin)
@@ -1787,6 +1867,20 @@
             CurrentState = State.PLUGIN_SWAPFORM;
             StateHasChanged();   
         }
+    }
+
+    public async Task ShowFOVChanger()
+    {
+        CurrentState = State.FOV;
+        StateHasChanged();
+        DiscordRPC.UpdatePresence("Watching FOV");
+    }
+
+    public async Task ShowBackgroundChanger()
+    {
+        CurrentState = State.BACKGROUND;
+        StateHasChanged();
+        DiscordRPC.UpdatePresence("Watching Background Changer");
     }
 
 }

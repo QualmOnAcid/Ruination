@@ -17,6 +17,7 @@ using CUE4Parse.UE4.Objects.UObject;
 using CUE4Parse.UE4.Readers;
 using CUE4Parse.UE4.Versions;
 using CUE4Parse.Utils;
+using Newtonsoft.Json;
 using Serilog;
 using WebviewAppShared.Utils;
 

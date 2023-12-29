@@ -11,6 +11,7 @@ using WebviewAppShared.Models;
 using BlazorWpfApp.CUE4Parse;
 using Microsoft.Extensions.FileProviders;
 using CUE4Parse.UE4.Readers;
+using Newtonsoft.Json;
 
 namespace WebviewAppShared.Swapper
 {
@@ -407,7 +408,10 @@ namespace WebviewAppShared.Swapper
                             Utils.Utils.MainWindow.UpdateUI();
 
                             var fromPack = (IoPackage)await prov.LoadPackageAsync(textureSwap.From);
-                            var toPack = (IoPackage)await uefnprovider.LoadPackageAsync(textureSwap.To);
+
+                            IoPackage toPack = uefnprovider.DoesAssetExist(textureSwap.To) ?
+                            (IoPackage)await uefnprovider.LoadPackageAsync(textureSwap.To) :
+                            (IoPackage)await prov.LoadPackageAsync(textureSwap.To);
 
                             toPack.ChangeProtectedStrings(fromPack.GetProtectedStrings());
                             toPack.ChangePublicExportHash(fromPack);
@@ -466,7 +470,7 @@ namespace WebviewAppShared.Swapper
                     Config.GetConfig().ConvertedItems.Add(convertedItem);
                     Config.Save();
 
-                    Utils.Utils.LogUEFNSwap(character.ID);
+                    Utils.Utils.LogUEFNSwap(character.ID, true, option.id);
 
                     Utils.Utils.MainWindow.LogText ="Converted";
                     Utils.Utils.MainWindow.UpdateUI();
@@ -502,7 +506,7 @@ namespace WebviewAppShared.Swapper
 
                     Logger.Log("Reverting CID Package");
 
-                    if (!await SwapUtils.RevertPackage(cidPackage))
+                    if (!await SwapUtils.RevertPackage(cidPackage, option.path))
                     {
                         return false;
                     }
@@ -530,7 +534,7 @@ namespace WebviewAppShared.Swapper
 
                     Logger.Log("Reverting Body Package");
 
-                    if (!await SwapUtils.RevertPackage(bodyPackage))
+                    if (!await SwapUtils.RevertPackage(bodyPackage, fromBodyAsset))
                     {
                         return false;
                     }
@@ -546,7 +550,7 @@ namespace WebviewAppShared.Swapper
 
                         Logger.Log("Reverting HID Package");
 
-                        if (!await SwapUtils.RevertPackage(hidPackage))
+                        if (!await SwapUtils.RevertPackage(hidPackage, option.definitionPath))
                         {
                             return false;
                         }
@@ -557,21 +561,21 @@ namespace WebviewAppShared.Swapper
                     {
                         Logger.Log("Reverting -> " + defaultcp);
                         IoPackage defaultcpPackage = (IoPackage)await prov.LoadPackageAsync(defaultcp);
-                        if (!await SwapUtils.RevertPackage(defaultcpPackage)) return false;
+                        if (!await SwapUtils.RevertPackage(defaultcpPackage, defaultcp)) return false;
                     }
                 }
 
                 Logger.Log("Reverting Crash Package");
                 IoPackage crashPackage = (IoPackage)await prov.LoadPackageAsync("/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemOnPawnPreview");
 
-                if (!await SwapUtils.RevertPackage(crashPackage)) return false;
+                if (!await SwapUtils.RevertPackage(crashPackage, "/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemOnPawnPreview")) return false;
 
                 Utils.Utils.MainWindow.LogText = "Reverting Fallback Asset";
                 Utils.Utils.MainWindow.UpdateUI();
 
                 Logger.Log("Reverting Fallback Package");
 
-                if (!await SwapUtils.RevertPackage(fallbackPackage))
+                if (!await SwapUtils.RevertPackage(fallbackPackage, "FortniteGame/Content/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Fallback"))
                 {
                     return false;
                 }
@@ -583,7 +587,7 @@ namespace WebviewAppShared.Swapper
                     {
                         Logger.Log("Reverting Texture: " + item.From);
                         var fromTexture = (IoPackage)await prov.LoadPackageAsync(item.From);
-                        if (!await SwapUtils.RevertPackage(fromTexture)) return false;
+                        if (!await SwapUtils.RevertPackage(fromTexture, "TEXTURESWAP_" + item.From)) return false;
                     }
 
                 }
@@ -591,7 +595,7 @@ namespace WebviewAppShared.Swapper
                 Config.GetConfig().ConvertedItems.RemoveAll(x => x.OptionID.ToLower().Equals(option.id.ToLower()));
                 Config.Save();
 
-                Utils.Utils.LogUEFNSwap(character.ID);
+                Utils.Utils.LogUEFNSwap(character.ID, false, option.id);
 
                 Utils.Utils.MainWindow.LogText ="Reverted";
                 Utils.Utils.MainWindow.UpdateUI();

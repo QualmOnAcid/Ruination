@@ -28,6 +28,7 @@ namespace WebviewAppShared.Plugins
                 {
                     string readfile = File.ReadAllText(file);
                     var pl = JsonConvert.DeserializeObject<PluginModel>(readfile);
+                    pl.FilePath = file;
                     plugins.Add(pl);
                 } catch(Exception ex)
                 {

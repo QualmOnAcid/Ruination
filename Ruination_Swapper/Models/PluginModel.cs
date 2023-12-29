@@ -23,6 +23,22 @@ namespace WebviewAppShared.Models
         public PluginUEFNFilesModel Files = new();
         public List<PluginAssetSwapModel> Swaps;
         public List<string> Materials;
+
+        public string FilePath = null;
+
+        public async Task Delete(bool switchTab = true)
+        {
+            if (this.FilePath == null) return;
+            if (!System.IO.File.Exists(this.FilePath)) return;
+
+            System.IO.File.Delete(this.FilePath);
+
+            if(switchTab)
+            {
+                Utils.Utils.MainWindow.CurrentState = State.PLUGIN_VIEW;
+                Utils.Utils.MainWindow.UpdateUI();
+            }
+        }
     }
 
     public class PluginAssetSwapModel

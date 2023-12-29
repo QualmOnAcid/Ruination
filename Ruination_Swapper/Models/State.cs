@@ -23,6 +23,8 @@ namespace WebviewAppShared.Models
         PLUGIN_ADD,
         PLUGIN_SWAPFORM,
         PLUGIN_UEFNSKINSWAPFORM,
+        FOV,
+        BACKGROUND,
         UNKNOWN
     }
 }

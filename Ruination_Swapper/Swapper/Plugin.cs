@@ -1,4 +1,5 @@
-﻿using CUE4Parse.UE4.Assets;
+﻿using CUE4Parse.FileProvider;
+using CUE4Parse.UE4.Assets;
 using CUE4Parse.Utils;
 using System;
 using System.Collections.Generic;
@@ -132,7 +133,7 @@ namespace WebviewAppShared.Swapper
 
                         var fromPackage = (IoPackage)await prov.LoadPackageAsync(swap.Asset);
 
-                        if (!await SwapUtils.RevertPackage(fromPackage)) return false;
+                        if (!await SwapUtils.RevertPackage(fromPackage, swap.Asset)) return false;
                     }
                 }
 
@@ -159,18 +160,6 @@ namespace WebviewAppShared.Swapper
             var prov = SwapUtils.GetProvider();
 
             var textureSwaps = new List<ApiUEFNSkinTextureSwapObject>();
-
-            if(Plugin.Swaps != null && Plugin.Swaps.Count > 0)
-            {
-                foreach(var swap in Plugin.Swaps)
-                {
-                    textureSwaps.Add(new()
-                    {
-                        From = swap.Asset,
-                        To = swap.ToAsset
-                    });
-                }
-            }
 
             if (prov.UnusedFiles.Count == 0)
             {
@@ -200,59 +189,32 @@ namespace WebviewAppShared.Swapper
                 await wc.DownloadFileTaskAsync(Plugin.Files.ucas, slot + ".ucas");
             }
 
+            Logger.Log("Loading UEFN Provider");
+            Utils.Utils.MainWindow.LogText = "Loading UEFN Provider";
+            Utils.Utils.MainWindow.UpdateUI();
+
+            var uefnprovider = await SwapUtils.GetUEFNProvider(System.IO.Path.GetFileNameWithoutExtension(slot));
+
             string meshPath = Plugin.Skin.Mesh;
 
             if(!prov.DoesAssetExist(meshPath))
             {
-                Logger.Log("Trying to find Mesh in uefn files");
-                Logger.Log("Loading UEFN Provider");
-
-                var uefnprovider = await SwapUtils.GetUEFNProvider(System.IO.Path.GetFileNameWithoutExtension(slot));
-
-                Logger.Log("Finding Asset");
-
-                foreach(var (assetpath, gamefile) in uefnprovider.Files)
-                {
-                    string asset = assetpath.ToLower();
-                    string gf = "fortnitegame/plugins/gamefeatures";
-                    if (asset.StartsWith(gf))
-                    {
-                        string assetwithoutstart = asset.Substring(gf.Length + 1);
-
-                        string contentpath = assetwithoutstart.SubstringAfter("/");
-
-                        string content = "content";
-
-                        if(contentpath.StartsWith(content))
-                        {
-                            contentpath = contentpath.Substring(content.Length).Split(".").FirstOrDefault();
-                            if(contentpath == meshPath.Split(".")[0].ToLower())
-                            {
-                                string originalfilepath = gamefile.PathWithoutExtension;
-
-                                string originalwithoutstart = originalfilepath.Substring(gf.Length + 1);
-
-                                string uefnid = "/" + originalwithoutstart.SubstringBefore("/");
-
-                                string cpath = originalwithoutstart.SubstringAfter("/");
-                                cpath = cpath.Substring(content.Length);
-
-                                string subpathstring = cpath.SubstringAfterLast("/");
-
-                                meshPath = uefnid + cpath + "." + subpathstring;
-
-                                Logger.Log("FOUND MESH: " + meshPath);
-
-                                break;
-
-                            }
-                        }
-                    }
-                }
-
-                uefnprovider.Dispose();
-
+                meshPath = TryFixPath(meshPath, uefnprovider);
             }
+
+            if (Plugin.Swaps != null && Plugin.Swaps.Count > 0)
+            {
+                foreach (var swap in Plugin.Swaps)
+                {
+                    textureSwaps.Add(new()
+                    {
+                        From = swap.Asset,
+                        To = prov.DoesAssetExist(swap.ToAsset) ? swap.ToAsset : TryFixPath(swap.ToAsset, uefnprovider).Split(".").FirstOrDefault()
+                    });
+                }
+            }
+
+            uefnprovider.Dispose();
 
             ApiUEFNSkinObject Character = new()
             {
@@ -274,6 +236,54 @@ namespace WebviewAppShared.Swapper
             };
 
             return await UEFN.ConvertUEFN(Character, option, prov, false, true);
+        }
+
+        private static string TryFixPath(string path, DefaultFileProvider prov)
+        {
+            Logger.Log("Trying to find path in uefn files for " + path);
+            Logger.Log("Loading UEFN Provider");
+
+            Logger.Log("Finding Asset");
+
+            foreach (var (assetpath, gamefile) in prov.Files)
+            {
+                string asset = assetpath.ToLower();
+                string gf = "fortnitegame/plugins/gamefeatures";
+                if (asset.StartsWith(gf))
+                {
+                    string assetwithoutstart = asset.Substring(gf.Length + 1);
+
+                    string contentpath = assetwithoutstart.SubstringAfter("/");
+
+                    string content = "content";
+
+                    if (contentpath.StartsWith(content))
+                    {
+                        contentpath = contentpath.Substring(content.Length).Split(".").FirstOrDefault();
+                        if (contentpath == path.Split(".")[0].ToLower())
+                        {
+                            string originalfilepath = gamefile.PathWithoutExtension;
+
+                            string originalwithoutstart = originalfilepath.Substring(gf.Length + 1);
+
+                            string uefnid = "/" + originalwithoutstart.SubstringBefore("/");
+
+                            string cpath = originalwithoutstart.SubstringAfter("/");
+                            cpath = cpath.Substring(content.Length);
+
+                            string subpathstring = cpath.SubstringAfterLast("/");
+
+                            path = uefnid + cpath + "." + subpathstring;
+
+                            Logger.Log("FOUND UEFN PATH: " + path);
+
+                            break;
+
+                        }
+                    }
+                }
+            }
+            return path;
         }
 
         public static async Task<bool> RevertUEFNSkinPlugin(PluginModel Plugin, Item option)

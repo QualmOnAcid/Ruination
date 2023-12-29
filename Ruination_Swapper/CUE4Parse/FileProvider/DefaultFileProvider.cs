@@ -134,6 +134,8 @@ namespace CUE4Parse.FileProvider
                 "utoc"
             };
 
+            UnusedFiles.Add(_workingDirectory.FullName + "\\" + API.GetApi().UEFNFiles.FileToUse);
+
             for (int i = 0; i < 11; i++)
             {
                 string targetFile = _workingDirectory.FullName + "\\pakchunk" + i + "optional-WindowsClient";

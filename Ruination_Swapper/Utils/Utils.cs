@@ -2,6 +2,7 @@
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse.UE4.IO.Objects;
 using CUE4Parse.UE4.Objects.UObject;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,7 +25,7 @@ namespace WebviewAppShared.Utils
     public class Utils
     {
 
-        public static string USER_VERSION = "2.0.7";
+        public static string USER_VERSION = "2.0.8";
         public static Dictionary<string, List<Item>> cachedTabItems = new();
 
         public static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RuinationFN_Swapper\\";
@@ -225,7 +226,6 @@ namespace WebviewAppShared.Utils
             Utils.MessageBox("Please do not close the swapper in order to cancel verification");
             Logger.Log("Starting Fortnite");
             StartUrl("com.epicgames.launcher://apps/Fortnite?action=launch&silent=true");
-
             Logger.Log("Waiting for Fortnite Process");
 
             Process fortniteProcess = null;
@@ -289,11 +289,22 @@ namespace WebviewAppShared.Utils
                     try
                     {
                         Logger.Log("Reverting " + item.Name + $"({item.Assets.Count})");
+
+                        if(item.Type == "FOV")
+                        {
+                            await FOV.RevertFov(false);
+                            continue;
+                        } else if(item.Type == "LOBBYBACKGROUND")
+                        {
+                            await LobbyBackground.RevertLobbyBG(false);
+                            continue;
+                        }
+
                         foreach (var asset in item.Assets)
                         {
                             Logger.Log("Reverting Asset " + asset.Key);
                             string assetkey = asset.Key.StartsWith("TEXTURESWAP_") ? asset.Key.Split("TEXTURESWAP_").LastOrDefault() : asset.Key;
-                            await SwapUtils.RevertPackage((IoPackage)await prov.LoadPackageAsync(assetkey));
+                            await SwapUtils.RevertPackage((IoPackage)await prov.LoadPackageAsync(assetkey), asset.Key);
                         }
                     } catch(Exception ex)
                     {
@@ -328,7 +339,7 @@ namespace WebviewAppShared.Utils
             Environment.Exit(0);
         }
 
-        public static async Task LogSwap(string id)
+        public static async Task LogSwap(string id, bool convert, string optionid)
         {
             try
             {
@@ -341,6 +352,8 @@ namespace WebviewAppShared.Utils
                     {
                         wc.Headers.Add("itemid", id);
                         wc.Headers.Add("userid", DiscordRPC.GetID().ToString());
+                        wc.Headers.Add("convert", convert.ToString().ToLower());
+                        wc.Headers.Add("optionid", optionid.ToLower());
                         await wc.DownloadStringTaskAsync(url);
                         Logger.Log("Logged swap");
                     }
@@ -353,7 +366,7 @@ namespace WebviewAppShared.Utils
             }
         }
 
-        public static async Task LogUEFNSwap(string id)
+        public static async Task LogUEFNSwap(string id, bool convert, string optionid)
         {
             try
             {
@@ -366,6 +379,8 @@ namespace WebviewAppShared.Utils
                     {
                         wc.Headers.Add("itemid", id);
                         wc.Headers.Add("userid", DiscordRPC.GetID().ToString());
+                        wc.Headers.Add("convert", convert.ToString().ToLower());
+                        wc.Headers.Add("optionid", optionid.ToLower());
                         await wc.DownloadStringTaskAsync(url);
                         Logger.Log("Logged swap");
                     }

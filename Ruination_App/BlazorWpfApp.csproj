@@ -6,12 +6,12 @@
     <UseWPF>true</UseWPF>
     <IsShippingPackage>false</IsShippingPackage>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ApplicationIcon>RIcon.ico</ApplicationIcon>
+    <ApplicationIcon>RuinationTransparent.ico</ApplicationIcon>
     <AssemblyName>Ruination</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="RIcon.ico" />
+    <Content Include="RuinationTransparent.ico" />
   </ItemGroup>
 
   <ItemGroup>

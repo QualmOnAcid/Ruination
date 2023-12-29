@@ -412,29 +412,10 @@ namespace WebviewAppShared.Utils
             }
         }
 
-        public static async Task<bool> RevertPackage(IoPackage fromPack)
+        public static async Task<bool> RevertPackage(IoPackage fromPack, string path, bool secondRun = false)
         {
             try
             {
-                /*fromPack.LoadAlreadySwapped();
-
-                var offsetAndLengthEntry = fromPack.GetOriginalLengthOffset();
-                var compBlock = fromPack.GetOriginalCompressionBlock();
-
-                using (FileStream fileStream =
-                       new FileStream(fromPack.ExportData.UtocFile, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-                {
-
-                    fileStream.Seek(fromPack.ExportData.UtocCBlockOffset, SeekOrigin.Begin);
-
-                    fileStream.Write(compBlock, 0, 12);
-
-                    fileStream.Seek(fromPack.ExportData.UtocLOOffset, SeekOrigin.Begin);
-                    fileStream.Write(offsetAndLengthEntry, 0, 10);
-
-                    fileStream.Close();
-                }*/
-
                 string FolderPath = Utils.AppDataFolder + "\\RevertData\\" + Epicgames.GetInstalledFortniteVersion() + "\\" + fromPack
            .Name.Replace("/", "");
 
@@ -463,8 +444,15 @@ namespace WebviewAppShared.Utils
                     fileStream.Seek(fromPack.ExportData.UtocLOOffset, SeekOrigin.Begin);
                     var offsetAndLengthEntry = File.ReadAllBytes(FolderPath + "\\OffsetAndLength.uasset");
                     fileStream.Write(offsetAndLengthEntry, 0, 10);
-
                     fileStream.Close();
+                }
+
+                //Idk why but Textures need to be reverted 2 times to actually be reverted
+                if(path.StartsWith("TEXTURESWAP_") && !secondRun)
+                {
+                    Logger.Log("RERUNNING");
+                    string newpath = path.Split("TEXTURESWAP_").LastOrDefault();
+                    return await RevertPackage((IoPackage)await SwapUtils.GetProvider().LoadPackageAsync(newpath), path, true);
                 }
 
                 return true;
@@ -496,7 +484,7 @@ namespace WebviewAppShared.Utils
 
             if (!File.Exists(FolderPath + "\\OffsetAndLength.uasset"))
             {
-                var offsetAndLength = CreateOffsetAndLength(ioPackage.ExportData.OffsetAndLengthEntry.Offset,
+                  var offsetAndLength = CreateOffsetAndLength(ioPackage.ExportData.OffsetAndLengthEntry.Offset,
                     ioPackage.ExportData.OffsetAndLengthEntry.Length);
 
                 File.WriteAllBytes(FolderPath + "\\OffsetAndLength.uasset", offsetAndLength);
@@ -587,42 +575,6 @@ namespace WebviewAppShared.Utils
 
             return package;
 
-        }
-
-        public static async Task SwapBlazeToLuckyBody()
-        {
-            string blazeBody = "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_RenegadeRaiderFire";
-
-            IoPackage blazePackage = (IoPackage) await SwapUtils.GetProvider().LoadPackageAsync(blazeBody);
-
-            List<KeyValuePair<string, string>> blazeReplaces = new();
-
-            blazeReplaces.Add(new("/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Renegade_Raider_Fire/Materials/MI_F_MED_Renegade_Raider_Fire_Body", "/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Lucy_Hero/Materials/F_MED_LuckyHero_Body"));
-            blazeReplaces.Add(new("MI_F_MED_Renegade_Raider_Fire_Body", "F_MED_LuckyHero_Body"));
-            blazeReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01_Skeleton_AnimBP", "/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Lucy_Hero/Meshes/F_MED_Lucky_Hero_AnimBp"));
-            blazeReplaces.Add(new("F_Med_Soldier_01_Skeleton_AnimBP_C", "F_MED_Lucky_Hero_AnimBp_C"));
-
-            blazePackage = ChangeReplaces(blazeReplaces, blazePackage);
-
-            await SwapUtils.SwapAsset(blazePackage, new Serializer(blazePackage).Serialize());
-
-            IoPackage fromMeshPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01");
-            IoPackage toMeshPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Lucy_Hero/Meshes/F_MED_Lucky_Hero");
-
-            toMeshPackage.ChangeProtectedStrings(fromMeshPackage.GetProtectedStrings());
-            toMeshPackage.ChangePublicExportHash(fromMeshPackage);
-
-            await SwapUtils.SwapAsset(fromMeshPackage, new Serializer(toMeshPackage).Serialize());
-
-            IoPackage fromSkeletonPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/BRCosmetics/Athena/Heroes/HID_784_Athena_Commando_F_RenegadeRaiderFire");
-            IoPackage toSkeletonPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("/BRCosmetics/Athena/Heroes/HID_718_Athena_Commando_F_LuckyHero");
-
-            toSkeletonPackage.ChangeProtectedStrings(fromSkeletonPackage.GetProtectedStrings());
-            toSkeletonPackage.ChangePublicExportHash(fromSkeletonPackage);
-
-            await SwapUtils.SwapAsset(fromSkeletonPackage, new Serializer(toSkeletonPackage).Serialize());
-
-            await Utils.MessageBox("Finish Blaze swäp");
         }
 
     }

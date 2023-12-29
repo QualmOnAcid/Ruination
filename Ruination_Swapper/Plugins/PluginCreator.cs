@@ -56,7 +56,7 @@ namespace WebviewAppShared.Plugins
                 Description = _Plugin.Description,
                 Icon = _Plugin.Icon,
                 Rarity = _Plugin.Rarity,
-                ID = _Plugin.ID,
+                ID = GenerateRandomID(),
                 Type = Type
             };
 
@@ -110,6 +110,18 @@ namespace WebviewAppShared.Plugins
 
             Utils.Utils.MainWindow.CurrentState = State.PLUGIN_VIEW;
             Utils.Utils.MainWindow.UpdateUI();
+        }
+
+        private static string GenerateRandomID(int length = 32)
+        {
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
+            string s = "";
+
+            for (int i = 0; i < length; i++)
+                s += chars[new Random().Next(chars.Length)];
+
+            return s;
         }
 
     }

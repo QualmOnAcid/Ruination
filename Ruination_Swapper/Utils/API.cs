@@ -48,6 +48,8 @@ namespace WebviewAppShared.Utils
         public string DownloadLink;
         public string MappingsUrl;
         public string Discord;
+        public bool Disabled = true;
+        public string DisabledMessage = "Swapper is under maintenance.";
     }
 
     public class ApiAssetUtilsObject
@@ -61,6 +63,7 @@ namespace WebviewAppShared.Utils
         public string sig;
         public string ucas;
         public string utoc;
+        public string FileToUse;
     }
 
     public class ApiTransformCharacterObject
