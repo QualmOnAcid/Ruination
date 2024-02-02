@@ -45,6 +45,14 @@ namespace WebviewAppShared.Models
     {
         public string Asset;
         public string ToAsset;
+        public List<PluginAssetSwapSwapModel> Swaps = null;
+    }
+
+    public class PluginAssetSwapSwapModel
+    {
+        public string Search;
+        public string Replace;
+        public string Type;
     }
 
     public class PluginUEFNFilesModel

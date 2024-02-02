@@ -113,7 +113,15 @@ namespace CUE4Parse.FileProvider
                 // Only load containers if .uproject file is not found
                 if (uproject == null && upperExt is "PAK" or "UTOC")
                 {
-                    RegisterVfs(file.FullName, new Stream[] { file.OpenRead() }, it => new FStreamArchive(it, File.OpenRead(it), Versions));
+                    if (upperExt == "UTOC")
+                    {
+                        string backupedutoc = BackupUtoc(file.FullName);
+                        RegisterVfs(backupedutoc);
+                    }
+                    else
+                    {
+                        RegisterVfs(file.FullName, new Stream[] { file.OpenRead() }, it => new FStreamArchive(it, File.OpenRead(it), Versions));
+                    }
                     continue;
                 }
 
@@ -146,6 +154,23 @@ namespace CUE4Parse.FileProvider
             }
 
             return osFiles;
+        }
+
+        private string BackupUtoc(string file)
+        {
+            string backupfolder = WebviewAppShared.Utils.Utils.AppDataFolder + "\\Backups\\";
+
+            Directory.CreateDirectory(backupfolder);
+
+            string targetFileName = backupfolder + "\\" + Path.GetFileName(file);
+
+            if (File.Exists(targetFileName))
+            {
+                return targetFileName;
+            }
+
+            File.Copy(file, targetFileName);
+            return targetFileName;
         }
 
         public bool DoesAssetExist(string path)

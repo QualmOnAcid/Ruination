@@ -26,7 +26,7 @@ namespace CUE4Parse.Compression
         private const string WARFRAME_ORIGIN_HOST = "https://origin.warframe.com";
         private const string WARFRAME_INDEX_PATH = "/origin/50F7040A/index.txt.lzma";
         private const string WARFRAME_INDEX_URL = WARFRAME_ORIGIN_HOST + WARFRAME_INDEX_PATH;
-        public const string OODLE_DLL_NAME = "oo2core_9_win64.dll";
+        public const string OODLE_DLL_NAME = @"oo2core_9_win64.dll";
 
         public static OodleDecompress DecompressFunc;
 
@@ -44,6 +44,7 @@ namespace CUE4Parse.Compression
         public static unsafe void Decompress(byte[] compressed, int compressedOffset, int compressedSize,
                                              byte[] uncompressed, int uncompressedOffset, int uncompressedSize, FArchive? reader = null)
         {
+            LoadOodleDll();
             if (DecompressFunc == OodleLZ_Decompress)
                 LoadOodleDll();
 

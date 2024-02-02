@@ -382,8 +382,8 @@ namespace CUE4Parse.UE4.Assets
 
         public List<string> GetProtectedStrings()
         {
-            string pathToRemove = this.Name;
-            string fileNameToRemove = Path.GetFileNameWithoutExtension(this.Name);
+            string pathToRemove = GetCaseInsenstiveString(this.Name);
+            string fileNameToRemove = GetCaseInsenstiveString(Path.GetFileNameWithoutExtension(this.Name));
 
             var finalList = new List<string>();
 
@@ -406,6 +406,22 @@ namespace CUE4Parse.UE4.Assets
             }
 
             return finalList;
+        }
+
+        public string GetCaseInsenstiveString(string caseName)
+        {
+            string output = caseName;
+
+            foreach(var item in NameMapAsStrings)
+            {
+                if(item.ToLower().Equals(caseName.ToLower()))
+                {
+                    output = item;
+                    break;
+                }
+            }
+
+            return output;
         }
 
         public bool ChangeProtectedStrings(List<string> NewProtectedStrings)

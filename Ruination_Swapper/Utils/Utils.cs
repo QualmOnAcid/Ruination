@@ -9,9 +9,14 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +30,7 @@ namespace WebviewAppShared.Utils
     public class Utils
     {
 
-        public static string USER_VERSION = "2.0.8";
+        public static string USER_VERSION = "2.0.12";
         public static Dictionary<string, List<Item>> cachedTabItems = new();
 
         public static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RuinationFN_Swapper\\";
@@ -52,16 +57,25 @@ namespace WebviewAppShared.Utils
         public static async Task ParseAllCosmetics()
         {
             Logger.Log("Downloading All Cosmetics");
-            string allItemsDownloaded = await new System.Net.WebClient().DownloadStringTaskAsync("https://fortnite-api.com/v2/cosmetics/br");
 
-            JObject j = JObject.Parse(allItemsDownloaded);
+            ParsingCosmeticsObj j;
 
-            int itemcount = j["data"].Count();
+            using(var httpclient = new HttpClient())
+            {
+                string allItemsDownloaded = File.ReadAllText("items");
 
-            Utils.MainWindow.LoadingText = "Parsing Cosmetics (" + itemcount + ")";
-            Utils.MainWindow.UpdateUI();
+                Utils.MainWindow.LoadingText = "Applying Json";
+                Utils.MainWindow.UpdateUI();
 
-            foreach (dynamic item in j["data"])
+                j = JsonConvert.DeserializeObject<ParsingCosmeticsObj>(allItemsDownloaded);
+
+                int itemcount = j.data.Count();
+
+                Utils.MainWindow.LoadingText = "Parsing Cosmetics (" + itemcount + ")";
+                Utils.MainWindow.UpdateUI();
+            }
+
+            foreach (var item in j.data)
             {
                 string type = "";
                 try
@@ -136,7 +150,6 @@ namespace WebviewAppShared.Utils
 
                 }
                 catch (Exception e) { 
-                    Logger.LogError(e.Message, e);
                 }
 
             }
@@ -223,9 +236,12 @@ namespace WebviewAppShared.Utils
 
         public static async Task StartFortnite()
         {
-            Utils.MessageBox("Please do not close the swapper in order to cancel verification");
+            //Utils.MessageBox("Please do not close the swapper in order to cancel verification");
             Logger.Log("Starting Fortnite");
             StartUrl("com.epicgames.launcher://apps/Fortnite?action=launch&silent=true");
+            return;
+
+            //This should be done by the RuinationChecker Dependency
             Logger.Log("Waiting for Fortnite Process");
 
             Process fortniteProcess = null;
@@ -274,48 +290,30 @@ namespace WebviewAppShared.Utils
         {
             try
             {
-                if (Config.GetConfig().ConvertedItems.Count == 0)
-                {
-                    MessageBox("You have no items converted.");
-                    return;
-                }
-
-                var prov = SwapUtils.GetProvider();
+               var prov = SwapUtils.GetProvider();
 
                 Logger.Log("Reverting all - " + Config.GetConfig().ConvertedItems.Count + " Items");
+                await LobbyBackground.RevertLobbyBG(false);
 
-                foreach (var item in Config.GetConfig().ConvertedItems)
+                string backupfolder = WebviewAppShared.Utils.Utils.AppDataFolder + "\\Backups\\";
+                Directory.CreateDirectory(backupfolder);
+
+                foreach (var file in Directory.GetFiles(backupfolder))
                 {
-                    try
-                    {
-                        Logger.Log("Reverting " + item.Name + $"({item.Assets.Count})");
+                    string targetFile = Epicgames.GetPaksPath() + "\\" + Path.GetFileName(file);
 
-                        if(item.Type == "FOV")
-                        {
-                            await FOV.RevertFov(false);
-                            continue;
-                        } else if(item.Type == "LOBBYBACKGROUND")
-                        {
-                            await LobbyBackground.RevertLobbyBG(false);
-                            continue;
-                        }
+                    if (Path.GetFileNameWithoutExtension(targetFile) == Path.GetFileNameWithoutExtension(API.GetApi().UEFNFiles.FileToUse))
+                        continue;
 
-                        foreach (var asset in item.Assets)
-                        {
-                            Logger.Log("Reverting Asset " + asset.Key);
-                            string assetkey = asset.Key.StartsWith("TEXTURESWAP_") ? asset.Key.Split("TEXTURESWAP_").LastOrDefault() : asset.Key;
-                            await SwapUtils.RevertPackage((IoPackage)await prov.LoadPackageAsync(assetkey), asset.Key);
-                        }
-                    } catch(Exception ex)
-                    {
-                        Logger.LogError(ex.Message, ex);
-                    }
+                    Logger.Log("Restoring " + targetFile);
+                    File.Copy(file, targetFile, true);
                 }
 
                 Config.GetConfig().ConvertedItems.Clear();
                 Config.Save();
 
-                if(showmsgbox) await MessageBox("Reverted all items");
+                if(showmsgbox) 
+                    await MessageBox("Reverted all items");
 
             } catch(Exception e)
             {
@@ -393,20 +391,298 @@ namespace WebviewAppShared.Utils
             }
         }
 
-        public static async Task SwapDefaultData()
+        public static async Task CheckRuinationUtils()
         {
-            IoPackage defaultPack = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("FortniteGame/Content/Balance/DefaultGameDataCosmetics");
+            try
+            {
+                Logger.Log("Checking for Ruination Utils");
 
-            int index1 = defaultPack.NameMapAsStrings.ToList().IndexOf("/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Fallback");
-            int index2 = defaultPack.NameMapAsStrings.ToList().IndexOf("CP_Athena_Body_F_Fallback");
+                var startupFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
 
-            defaultPack.NameMapAsStrings[index1] = "/Game/Athena/Heroes/Meshes/Bodies/CP_028_Athena_Body";
-            defaultPack.NameMapAsStrings[index2] = "CP_028_Athena_Body";
+                bool startupFolderExists = Directory.Exists(startupFolder);
 
-            await SwapUtils.SwapAsset(defaultPack, new Serializer(defaultPack).Serialize());
+                if (!startupFolderExists)
+                {
+                    Logger.Log("Startup folder doesn't exist??: " + startupFolder);
+                }
 
-            await Utils.MessageBox("aa");
+                var versionFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RuinationCheckerVersion";
 
+                if (!Directory.Exists(versionFolder))
+                    Directory.CreateDirectory(versionFolder);
+
+                if (Process.GetProcessesByName(API.GetApi().RuinationUtils.Processname).Length > 0)
+                {
+                    Logger.Log("Ruination Utils are running");
+                    Logger.Log("Checking Installed Ruination Utils Version");
+
+                    MainWindow.LoadingText = "Checking Installed Ruination Utils Version";
+                    MainWindow.UpdateUI();
+
+                    if (File.Exists(versionFolder + "\\RuinationVersion.txt"))
+                    {
+                        string installedVersion = File.ReadAllText(versionFolder + "\\RuinationVersion.txt");
+
+                        if (installedVersion == API.GetApi().RuinationUtils.Version)
+                        {
+                            Logger.Log("Latest Version of RuinationUtils are installed");
+                            return;
+                        }
+
+                        Logger.Log("Outdated Version of RuinationUtils are installed. Deleting..");
+                    }
+                }
+                else
+                {
+                    Logger.Log("Ruination Utils are NOT running. Downloading Ruination Utils");
+                }
+
+                foreach (var proc in Process.GetProcessesByName(API.GetApi().RuinationUtils.Processname))
+                {
+                    try
+                    {
+                        proc.Kill();
+                    }
+                    catch { }
+                }
+
+                Logger.Log("Ruination Utils need to be installed.");
+
+                Logger.Log("Downloading Ruination Utils");
+
+                MainWindow.LoadingText = "Downloading Ruination Utils";
+                MainWindow.UpdateUI();
+
+                using (WebClient wc = new WebClient())
+                {
+                    wc.DownloadProgressChanged += (sender, e) =>
+                    {
+                        MainWindow.LoadingText = $"Downloading Ruination Utils ({e.ProgressPercentage}%)";
+                        MainWindow.UpdateUI();
+                    };
+
+                    wc.DownloadFileCompleted += async delegate
+                    {
+                        Logger.Log("Unzipping file");
+                        MainWindow.LoadingText = "Unzipping file";
+                        MainWindow.UpdateUI();
+
+                        Logger.Log("RuinationUtils: " + File.Exists("RuinationUtils.zip"));
+                        Logger.Log("CurrentDir: " + Directory.GetCurrentDirectory());
+
+                        var gf = new FileInfo(Directory.GetCurrentDirectory() + "\\RuinationUtils.zip");
+
+                        ZipFile.ExtractToDirectory(gf.FullName, Directory.GetCurrentDirectory(), true);
+
+                        string appPath = startupFolder + "\\" + API.GetApi().RuinationUtils.Filename;
+
+                        if (startupFolderExists)
+                        {
+                            Logger.Log("Startupfolder: " + startupFolder);
+
+                            if (!Directory.Exists(startupFolder)) return;
+
+                            if (File.Exists(startupFolder + "\\" + API.GetApi().RuinationUtils.Filename))
+                                File.Delete(startupFolder + "\\" + API.GetApi().RuinationUtils.Filename);
+
+                            File.Move(API.GetApi().RuinationUtils.Filename, startupFolder + "\\" + API.GetApi().RuinationUtils.Filename, true);
+                        } else
+                        {
+                            appPath = Directory.GetCurrentDirectory() + "\\" + API.GetApi().RuinationUtils.Filename;
+                        }
+
+                        File.Delete("RuinationUtils.zip");
+
+                        File.WriteAllText(versionFolder + "\\RuinationVersion.txt", API.GetApi().RuinationUtils.Version);
+
+                        ProcessStartInfo processStartInfo = new()
+                        {
+                            FileName = appPath,
+                            UseShellExecute = true,
+                            CreateNoWindow = true,
+                        };
+
+                        if (startupFolderExists)
+                            processStartInfo.WorkingDirectory = startupFolder;
+                        else
+                            processStartInfo.WorkingDirectory = Directory.GetCurrentDirectory();
+
+                        Process.Start(processStartInfo);
+
+                        Logger.Log("Waiting for Process");
+
+                        MainWindow.LoadingText = "Waiting for Process";
+                        MainWindow.UpdateUI();
+
+                        while (Process.GetProcessesByName(API.GetApi().RuinationUtils.Processname).Length == 0)
+                            await Task.Delay(500);
+
+                        Logger.Log("Found Process");
+                    };
+
+                    await wc.DownloadFileTaskAsync(API.GetApi().RuinationUtils.Url, "RuinationUtils.zip");
+                }
+            } catch(Exception e)
+            {
+                Logger.LogError(e.Message, e);
+            }
+        }
+
+        public static bool CanReadFile(string path)
+        {
+            try
+            {
+                using(FileStream fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    return true;
+                }
+            } catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static async Task b()
+        {
+            IoPackage pack = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WeepingWoodsFestive");
+            var bytes = await SwapUtils.GetProvider().SaveAssetAsync("FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WeepingWoodsFestive");
+            UObject idk = await SwapUtils.GetProvider().LoadObjectAsync("FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WeepingWoodsFestive");
+            UObject toidk = await SwapUtils.GetProvider().LoadObjectAsync("FortniteGame/Content/Athena/Items/Cosmetics/Characters/CID_028_Athena_Commando_F");
+
+            var nameprop = idk.Properties.First(x => x.Name == "DisplayName");
+            var toprop = toidk.Properties.First(x => x.Name == "DisplayName");
+
+            List<byte> dada = new List<byte>(bytes);
+
+            dada.RemoveRange(nameprop.Position, nameprop.Size);
+            dada.InsertRange(nameprop.Position, toprop._data);
+
+            int ulongsize = sizeof(ulong);
+
+            int SINGLE_EXPORTMAP_SIZE = 72;
+
+            int cookedSerialSizeOffset =
+                        pack.zenSummary.ExportMapOffset + ulongsize;
+
+            Logger.Log("seriaksize: " + cookedSerialSizeOffset);
+
+            dada.RemoveRange(cookedSerialSizeOffset, ulongsize);
+            dada.InsertRange(cookedSerialSizeOffset, ConvertToBytes((ulong)537));
+            Logger.Log("SERIALSIZE: " + pack.ExportMap[0].CookedSerialSize);
+            await SwapUtils.SwapAsset(pack, dada.ToArray());
+            pack = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WeepingWoodsFestive");
+
+            Logger.Log("SERIALSIZE: " + pack.ExportMap[0].CookedSerialSize);
+
+            MessageBox("aa");
+        }
+
+        public static byte[] ConvertToBytes<T>(T value)
+        {
+            byte[] array = new byte[Marshal.SizeOf(value)];
+            Unsafe.WriteUnaligned(ref array[0], value);
+            return array;
+        }
+
+        public static int FindOffset(byte[] source, byte[] data)
+        {
+            for (int i = 0; i <= source.Length - data.Length; i++)
+            {
+                bool found = true;
+
+                for (int j = 0; j < data.Length; j++)
+                {
+                    if (source[i + j] != data[j])
+                    {
+                        found = false;
+                        break;
+                    }
+                }
+
+                if (found)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public static byte[] StrToByteArray(string str)
+        {
+            Dictionary<string, byte> hexindex = new Dictionary<string, byte>();
+            for (int i = 0; i <= 255; i++)
+                hexindex.Add(i.ToString("X2"), (byte)i);
+
+            List<byte> hexres = new List<byte>();
+            for (int i = 0; i < str.Length; i += 2)
+                hexres.Add(hexindex[str.Substring(i, 2)]);
+
+            return hexres.ToArray();
+        }
+
+        public static void CheckForBackupChanges(string pakDir)
+        {
+            try
+            {
+                Logger.Log("Checking Backups");
+                string backupFolder = Utils.AppDataFolder + "\\Backups\\";
+
+                bool invalid = false;
+
+                foreach (var file in new DirectoryInfo(pakDir).GetFiles())
+                {
+                    if (Path.GetExtension(file.FullName).ToLower() == ".utoc" && !Path.GetFileNameWithoutExtension(file.FullName).Contains("optional"))
+                    {
+                        string backupPath = backupFolder + "\\" + Path.GetFileNameWithoutExtension(file.FullName) + ".utoc";
+
+                        if (!File.Exists(backupPath))
+                        {
+                            invalid = true;
+                            break;
+                        }
+
+                        if (new FileInfo(file.FullName).Length != new FileInfo(backupPath).Length)
+                        {
+                            invalid = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (invalid && Directory.Exists(backupFolder))
+                {
+                    Logger.Log("BACKUPS INVALID");
+                    Directory.Delete(backupFolder, true);
+                }
+            } catch(Exception e)
+            {
+                Logger.LogError(e.Message, e);
+            }
+        }
+
+        public static void DeleteOldBackups()
+        {
+            try
+            {
+                Logger.Log("Deleting Old Backups");
+                string backupFolder = Utils.AppDataFolder + "\\Backups\\28.10\\";
+                string newBackupFolder = Utils.AppDataFolder + "\\Backups\\";
+
+                if (!Directory.Exists(backupFolder))
+                {
+                    return;
+                }
+
+                foreach (var file in Directory.GetFiles(backupFolder))
+                {
+                    Logger.Log("Moving Backup: " + file);
+                    File.Move(file, newBackupFolder + "\\" + Path.GetFileName(file));
+                }
+            } catch(Exception ex)
+            {
+                Logger.LogError(ex.Message, ex);
+            }
         }
 
     }

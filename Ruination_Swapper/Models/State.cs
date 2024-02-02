@@ -25,6 +25,10 @@ namespace WebviewAppShared.Models
         PLUGIN_UEFNSKINSWAPFORM,
         FOV,
         BACKGROUND,
+        BUNDLES,
+        BUNDLE_VIEW,
+        PAKS_SELECTOR,
+        TELL_TOVEIFY,
         UNKNOWN
     }
 }

@@ -54,14 +54,16 @@ namespace CUE4Parse.UE4.IO
             Length = tocStream.Length;
             TocResource = new FIoStoreTocResource(tocStream, readOptions);
 
+            string basepath = WebviewAppShared.Utils.Epicgames.GetPaksPath() +
+                "\\" + System.IO.Path.GetFileNameWithoutExtension(tocStream.Name);
+
             List<FArchive> containerStreams;
             if (TocResource.Header.PartitionCount <= 1)
             {
                 containerStreams = new List<FArchive>(1);
                 try
                 {
-                    ContainerStreamNames.Add(tocStream.Name.SubstringBeforeLast('.') + ".ucas");
-                    //containerStreams.Add(openContainerStreamFunc(tocStream.Name.SubstringBeforeLast('.') + ".ucas"));
+                    ContainerStreamNames.Add(basepath + ".ucas");
                 }
                 catch (Exception e)
                 {
@@ -71,14 +73,13 @@ namespace CUE4Parse.UE4.IO
             else
             {
                 containerStreams = new List<FArchive>((int) TocResource.Header.PartitionCount);
-                var environmentPath = tocStream.Name.SubstringBeforeLast('.');
+                var environmentPath = basepath;
                 for (int i = 0; i < TocResource.Header.PartitionCount; i++)
                 {
                     try
                     {
                         var path = i > 0 ? string.Concat(environmentPath, "_s", i, ".ucas") : string.Concat(environmentPath, ".ucas");
                         ContainerStreamNames.Add(path);
-                        //containerStreams.Add(openContainerStreamFunc(path));
                     }
                     catch (Exception e)
                     {
@@ -220,24 +221,6 @@ namespace CUE4Parse.UE4.IO
             for (int blockIndex = firstBlockIndex; blockIndex <= lastBlockIndex; blockIndex++)
             {
                 ref var compressionBlock = ref TocResource.CompressionBlocks[blockIndex];
-
-                //Update comp block in case of swapping
-
-                var utocPos = this.TocResource.CompressionBlockPositions[blockIndex];
-
-                var cbbytes = new byte[12];
-
-                using (FileStream fs = new FileStream(this.TocResource.Filename, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    fs.Seek(utocPos, SeekOrigin.Begin);
-                    fs.Read(cbbytes, 0, 12);
-                }
-
-                var loarchive = new FByteArchive("", cbbytes);
-
-                compressionBlock = new FIoStoreTocCompressedBlockEntry(loarchive);
-
-                //----
 
                 var rawSize = compressionBlock.CompressedSize.Align(Aes.ALIGN);
                 if (compressedBuffer.Length < rawSize)

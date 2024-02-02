@@ -33,6 +33,11 @@ namespace WebviewAppShared.Utils
             try
             {
                 CUtils.isExport = false;
+
+                JObject aesObject = JObject.Parse(await new System.Net.WebClient().DownloadStringTaskAsync("https://fortnitecentral.genxgames.gg/api/v1/aes"));
+
+                Epicgames.SetAPIFortniteVersion(aesObject["version"].ToString());
+
                 Logger.Log("Loading Provider");
                 DefaultFileProvider provider = new DefaultFileProvider(Epicgames.GetPaksPath(),
                     System.IO.SearchOption.TopDirectoryOnly, true, new(CUE4Parse.UE4.Versions.EGame.GAME_UE5_4));
@@ -42,7 +47,6 @@ namespace WebviewAppShared.Utils
                 Logger.Log("Loading Mappings");
                 provider.MappingsContainer = new FileUsmapTypeMappingsProvider(Mappings.GetMappingsPath());
                 Logger.Log("Loading Keys");
-                JObject aesObject = JObject.Parse(await new System.Net.WebClient().DownloadStringTaskAsync("https://fortnitecentral.genxgames.gg/api/v1/aes"));
                 var keys = new List<KeyValuePair<FGuid, FAesKey>>();
 
                 string mainAes = aesObject["mainKey"].ToString();
@@ -54,9 +58,13 @@ namespace WebviewAppShared.Utils
                     keys.Add(new(new FGuid(dyKey.guid.ToString()), new FAesKey(dyKey.key.ToString())));
                 }
 
+                if (string.IsNullOrEmpty(Epicgames.GetInstalledFortniteVersion()) || string.IsNullOrWhiteSpace(Epicgames.GetInstalledFortniteVersion()))
+                    Epicgames.SetInstalledFortniteVersion(aesObject["version"].ToString());
+
                 await provider.SubmitKeysAsync(keys);
                 Logger.Log("Loaded " + keys.Count + " Keys");
                 CUtils.isExport = true;
+
                 fileProvider = provider;
                 return GetProvider();
             } catch(Exception ex) {
@@ -347,16 +355,9 @@ namespace WebviewAppShared.Utils
         {
             try
             {
-                //Ucas
-                SaveRevertData(fromPack);
-                //Last partition because no space in others
-
                 long UcasFileLength = new FileInfo(fromPack.ExportData.UcasFile).Length;
 
-                var alreadySwapped = fromPack.LoadAlreadySwapped();
-
-                var originalCB = fromPack.GetOriginalCompressionBlock();
-                var originalLO = fromPack.GetOriginalLengthOffset();
+                Logger.Log("Writing Ucas " + fromPack.ExportData.UcasFile);
 
                 byte[] buffer = data;
                 using (FileStream fileStream =
@@ -373,8 +374,12 @@ namespace WebviewAppShared.Utils
                 var oldEntry = fromPack.ExportData.OffsetAndLengthEntry;
                 var offset = oldEntry.Offset;
 
+                string utocfile = Epicgames.GetPaksPath() + "\\" + Path.GetFileName(fromPack.ExportData.UtocFile);
+
+                Logger.Log("Writing Utoc " + utocfile);
+
                 using (FileStream fileStream =
-                       new FileStream(fromPack.ExportData.UtocFile, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                       new FileStream(utocfile, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
                 {
 
                     fileStream.Seek(fromPack.ExportData.UtocCBlockOffset, SeekOrigin.Begin);
@@ -390,20 +395,6 @@ namespace WebviewAppShared.Utils
                     fileStream.Close();
                 }
 
-                //Write Revertable Data
-                List<byte> revertableBuffer = Encoding.UTF8.GetBytes("RUINATIONSWAPPERREVERTABLE").ToList();
-
-                revertableBuffer.AddRange(originalCB);
-                revertableBuffer.AddRange(originalLO);
-
-                using (FileStream fileStream =
-                       new FileStream(fromPack.ExportData.UcasFile, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-                {
-                    fileStream.Seek(UcasFileLength + buffer.Length, SeekOrigin.Begin);
-                    fileStream.Write(revertableBuffer.ToArray(), 0, revertableBuffer.ToArray().Length);
-                    fileStream.Close();
-                }
-
                 return true;
             }
             catch (Exception e)
@@ -412,54 +403,82 @@ namespace WebviewAppShared.Utils
             }
         }
 
-        public static async Task<bool> RevertPackage(IoPackage fromPack, string path, bool secondRun = false)
+        public static async Task<bool> RevertPackage(IoPackage pack)
         {
             try
             {
-                string FolderPath = Utils.AppDataFolder + "\\RevertData\\" + Epicgames.GetInstalledFortniteVersion() + "\\" + fromPack
-           .Name.Replace("/", "");
+                Logger.Log("Getting Compression Block");
+                var compBlock = GetBytesAtPosition(pack.ExportData.UtocFile,
+                    pack.ExportData.UtocCBlockOffset, 12);
 
-                if (!Directory.Exists(FolderPath))
+                Logger.Log("Getting OffsetAndLength");
+                var offsetAndLength = GetBytesAtPosition(pack.ExportData.UtocFile,
+                    pack.ExportData.UtocLOOffset, 10);
+
+                string utocfile = Epicgames.GetPaksPath() + "\\" + Path.GetFileName(pack.ExportData.UtocFile);
+
+                Logger.Log("Writing Compression Block");
+                WriteBytesAtPosition(utocfile, pack.ExportData.UtocCBlockOffset, compBlock);
+
+                Logger.Log("Writing Offset And Length");
+                WriteBytesAtPosition(utocfile, pack.ExportData.UtocLOOffset, offsetAndLength);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e.Message, e);
+                return false;
+            }
+        }
+
+        public static async Task<bool> RevertConvertedItem(ConvertedItem item)
+        {
+            try
+            {
+                Logger.Log("Reverting " + item.Name);
+
+                foreach (var asset in item.Assets)
                 {
-                    Utils.MessageBox("There was an error while reverting.");
-                    return false;
+                    Logger.Log("Exporting " + asset.Key);
+                    IoPackage pack = (IoPackage)await GetProvider().LoadPackageAsync(asset.Key);
+
+                    if (!await RevertPackage(pack))
+                        return false;
                 }
 
-                if (!File.Exists(FolderPath + "\\Compressionblock.uasset") ||
-                    !File.Exists(FolderPath + "\\OffsetAndLength.uasset"))
-                {
-                    Utils.MessageBox("There was an error while reverting.");
-                    return false;
-                }
-
-                using (FileStream fileStream =
-                       new FileStream(fromPack.ExportData.UtocFile, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-                {
-
-                    fileStream.Seek(fromPack.ExportData.UtocCBlockOffset, SeekOrigin.Begin);
-                    var compBlock = File.ReadAllBytes(FolderPath + "\\Compressionblock.uasset");
-
-                    fileStream.Write(compBlock, 0, 12);
-
-                    fileStream.Seek(fromPack.ExportData.UtocLOOffset, SeekOrigin.Begin);
-                    var offsetAndLengthEntry = File.ReadAllBytes(FolderPath + "\\OffsetAndLength.uasset");
-                    fileStream.Write(offsetAndLengthEntry, 0, 10);
-                    fileStream.Close();
-                }
-
-                //Idk why but Textures need to be reverted 2 times to actually be reverted
-                if(path.StartsWith("TEXTURESWAP_") && !secondRun)
-                {
-                    Logger.Log("RERUNNING");
-                    string newpath = path.Split("TEXTURESWAP_").LastOrDefault();
-                    return await RevertPackage((IoPackage)await SwapUtils.GetProvider().LoadPackageAsync(newpath), path, true);
-                }
+                Logger.Log("Reverted Item");
 
                 return true;
             }
             catch (Exception e)
             {
+                Logger.LogError(e.Message, e);
                 return false;
+            }
+
+        }
+
+        public static byte[] GetBytesAtPosition(string file, long offset, int length)
+        {
+            var bytes = new byte[length];
+
+            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                fs.Seek(offset, SeekOrigin.Begin);
+                fs.Read(bytes, 0, (int)length);
+            }
+
+            return bytes;
+        }
+
+        private static void WriteBytesAtPosition(string file, long offset, byte[] buffer)
+        {
+            using (FileStream fileStream =
+                       new FileStream(file, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            {
+                fileStream.Seek(offset, SeekOrigin.Begin);
+                fileStream.Write(buffer, 0, buffer.Length);
+                fileStream.Close();
             }
         }
 

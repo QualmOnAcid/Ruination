@@ -43,27 +43,7 @@ namespace CUE4Parse.UE4.IO.Objects
             get => (IoStoreReader)Vfs;
         }
 
-        public override byte[] Read()
-        {
-            var utocPos = pos;
-
-            var lobytes = new byte[10];
-
-            using (FileStream fs = new FileStream(utocFilename, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                fs.Seek(utocPos, SeekOrigin.Begin);
-                fs.Read(lobytes, 0, 10);
-            }
-
-            var loarchive = new FByteArchive("", lobytes);
-
-            var actualLO = new FIoOffsetAndLength(loarchive);
-
-            this.Size = (long)actualLO.Length;
-            this.Offset = (long)actualLO.Offset;
-
-            return Vfs.Extract(this);
-        }
+        public override byte[] Read() => Vfs.Extract(this);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override FArchive CreateReader() => new FByteArchive(Path, Read(), Vfs.Versions);

@@ -12,6 +12,8 @@ using BlazorWpfApp.CUE4Parse;
 using Microsoft.Extensions.FileProviders;
 using CUE4Parse.UE4.Readers;
 using Newtonsoft.Json;
+using CUE4Parse.Utils;
+using System.IO;
 
 namespace WebviewAppShared.Swapper
 {
@@ -43,11 +45,12 @@ namespace WebviewAppShared.Swapper
                     Utils.Utils.MainWindow.LogText = "Checking if UEFN already swapped";
                     Utils.Utils.MainWindow.UpdateUI();
 
-                    if(await IsUEFNAlreadySwapped())
+                    if (await IsUEFNAlreadySwapped())
                     {
                         Logger.LogError("UEFN is already Swapped");
-                        await Utils.Utils.MessageBox("Looks like you already have a UEFN skin converted. Please revert it first");
-                        Utils.Utils.MainWindow.LogText = "Waiting for Input";
+                        var swappedUefn = Config.GetConfig().ConvertedItems.First(x => x.Type == "uefn");
+                        WebviewAppShared.Utils.Utils.MessageBox("Look like you already have a UEFN skin converted. Please revert it first:\n\n" + swappedUefn.Name);
+                        Utils.Utils.MainWindow.LogText = "Checking if UEFN already swapped";
                         Utils.Utils.MainWindow.UpdateUI();
                         return false;
                     }
@@ -60,16 +63,31 @@ namespace WebviewAppShared.Swapper
                     List<KeyValuePair<string, string>> otherReplaces = new();
 
                     otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01_Skeleton_AnimBP.F_Med_Soldier_01_Skeleton_AnimBP_C", character.Animation));
+                    otherReplaces.Add(new("/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Eternity_Elite/Meshes/F_MED_Eternity_Elite_AnimBP.F_MED_Eternity_Elite_AnimBP_C", character.Animation));
                     otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Base/SK_M_Female_Base_Skeleton.SK_M_Female_Base_Skeleton", character.Skeleton));
                     otherReplaces.Add(new("/Game/Characters/Player/Female/Medium/Bodies/F_Med_Soldier_01/Meshes/F_Med_Soldier_01.F_Med_Soldier_01", character.Mesh));
+                    otherReplaces.Add(new("/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Eternity_Elite/Meshes/F_MED_Eternity_Elite.F_MED_Eternity_Elite", character.Mesh));
 
                     string idleEffectNiagaraReplace = !string.IsNullOrEmpty(character.IdleEffectNiagara) ? character.IdleEffectNiagara : "/Game/B.C";
                     string partModifierBlueprintReplace = !string.IsNullOrEmpty(character.PartModifierBlueprint) ? character.PartModifierBlueprint : "/Game/B.C";
+                    string IdleFXSocket = !string.IsNullOrEmpty(character.IdleFXSocket) ? character.IdleFXSocket : "root";
 
                     otherReplaces.Add(new("/BRCosmetics/Effects/Fort_Effects/Effects/Characters/Athena_Parts/RenegadeRaider_Fire/NS_RenegadeRaider_Fire.NS_RenegadeRaider_Fire", idleEffectNiagaraReplace));
                     otherReplaces.Add(new("/BRCosmetics/Athena/Cosmetics/Blueprints/Part_Modifiers/B_Athena_PartModifier_RenegadeRaider_Fire.B_Athena_PartModifier_RenegadeRaider_Fire_C", partModifierBlueprintReplace));
+                    otherReplaces.Add(new("root", IdleFXSocket));
+
+                    otherReplaces.Add(new("/BRCosmetics/Characters/Player/Female/Medium/Bodies/F_MED_Eternity_Elite/FX/NS_Eternity_Body.NS_Eternity_Body", idleEffectNiagaraReplace));
+                    otherReplaces.Add(new("/Game/Athena/Cosmetics/Blueprints/B_Athena_PartModifier_Generic.B_Athena_PartModifier_Generic_C", partModifierBlueprintReplace));
+                    otherReplaces.Add(new("/BRCosmetics/Effects/Fort_Effects/Effects/Characters/Athena_Parts/Gingy/P_Gingy_BurntBody.P_Gingy_BurntBody", idleEffectNiagaraReplace));
 
                     string replacement = "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_RenegadeRaiderFire";
+                    if (character.Materials.Count == 0)
+                        replacement = "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Body_Commando_F_Eternity_Elite";
+
+                    if (character.UseIdleEffectPackage)
+                    {
+                        replacement = "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_commando_Gingerbread_F";
+                    }
 
                     Logger.Log("Loading Replacment package");
 
@@ -95,8 +113,8 @@ namespace WebviewAppShared.Swapper
                     foreach (var mat in character.Materials)
                     {
                         int nameMapSize = replacementPackage.NameMapAsStrings.Length;
-                        string first = mat.Split(".").FirstOrDefault();
-                        string second = mat.Split(".").LastOrDefault();
+                        string first = mat.SubstringBeforeLast(".");
+                        string second = mat.SubstringBeforeLast(".").SubstringAfterLast("/");
 
                         var nameMapAsList = replacementPackage.NameMapAsStrings.ToList();
                         nameMapAsList.Add(first);
@@ -195,6 +213,11 @@ namespace WebviewAppShared.Swapper
                             await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.pak, slot + ".pak");
                             await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.sig, slot + ".sig");
                             await wc.DownloadFileTaskAsync(API.GetApi().UEFNFiles.utoc, slot + ".utoc");
+
+                            //Move file for uefnprovider to load it
+                            string backupfolder = WebviewAppShared.Utils.Utils.AppDataFolder + "\\Backups\\";
+                            string backuppath = backupfolder + Path.GetFileName(slot + ".utoc");
+                            File.Copy(slot + ".utoc", backuppath, true);
 
                             wc.DownloadProgressChanged += (sender, e) =>
                             {
@@ -416,6 +439,68 @@ namespace WebviewAppShared.Swapper
                             toPack.ChangeProtectedStrings(fromPack.GetProtectedStrings());
                             toPack.ChangePublicExportHash(fromPack);
 
+                            if (textureSwap.Swaps != null && textureSwap.Swaps.Count > 0)
+                            {
+
+                                //Format strings with aa.bb
+
+                                for (int i = 0; i < textureSwap.Swaps.Count; i++)
+                                {
+                                    if (!textureSwap.Swaps[i].Type.ToLower().Equals("string")) continue;
+
+                                    string search = textureSwap.Swaps[i].Search;
+                                    string replace = textureSwap.Swaps[i].Replace;
+
+                                    if (!search.Contains(".") || !replace.Contains(".")) continue;
+
+                                    string s1 = search.Split(".").FirstOrDefault();
+                                    string s2 = search.Split(".").LastOrDefault();
+
+                                    string r1 = replace.Split(".").FirstOrDefault();
+                                    string r2 = replace.Split(".").LastOrDefault();
+
+                                    textureSwap.Swaps[i].Search = s1;
+                                    textureSwap.Swaps[i].Replace = r1;
+
+                                    textureSwap.Swaps.Add(new()
+                                    {
+                                        Type = "string",
+                                        Search = s2,
+                                        Replace = r2
+                                    });
+                                }
+
+                                foreach (var s in textureSwap.Swaps)
+                                {
+                                    try
+                                    {
+                                        if (s.Type.ToLower().Equals("string"))
+                                        {
+
+                                            if (toPack.NameMapAsStrings.ToList().Contains(s.Search))
+                                            {
+                                                int index = toPack.NameMapAsStrings.ToList().IndexOf(s.Search);
+
+                                                toPack.NameMapAsStrings[index] = s.Replace;
+
+                                                Logger.Log($"Replaced String {s.Search} to {s.Replace}");
+
+                                            }
+                                            else
+                                            {
+                                                Logger.Log($"WARNING: String {s.Search} was not found in package");
+                                            }
+
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Logger.LogError(e.Message, e);
+                                    }
+                                }
+
+                            }
+
                             var toPackData = new Serializer(toPack).Serialize();
 
                             if (!await SwapUtils.SwapAsset(fromPack, toPackData)) return false;
@@ -431,29 +516,6 @@ namespace WebviewAppShared.Swapper
                         uefnprovider.Dispose();
                         GC.Collect();
 
-                    }
-
-                    if(true)
-                    {
-                        Logger.Log("Swapping Crash Asset");
-
-                        string crashFrom = "/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemOnPawnPreview";
-                        string crashTo = "/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemCosmosPreview";
-
-                        var crashFrompackage = (IoPackage)await prov.LoadPackageAsync(crashFrom);
-                        var crashToPackage = (IoPackage)await prov.LoadPackageAsync(crashTo);
-
-                        crashToPackage.ChangeProtectedStrings(crashFrompackage.GetProtectedStrings());
-                        crashToPackage.ChangePublicExportHash(crashFrompackage);
-
-                        var crashPackageData = new Serializer(crashToPackage).Serialize();
-
-                        if (!await SwapUtils.SwapAsset(crashFrompackage, crashPackageData))
-                        {
-                            return false;
-                        }
-
-                        wroteAssets.Add(crashFrom, crashPackageData);
                     }
 
                     var convertedItem = new ConvertedItem()
@@ -506,7 +568,7 @@ namespace WebviewAppShared.Swapper
 
                     Logger.Log("Reverting CID Package");
 
-                    if (!await SwapUtils.RevertPackage(cidPackage, option.path))
+                    if (!await SwapUtils.RevertPackage(cidPackage))
                     {
                         return false;
                     }
@@ -534,7 +596,7 @@ namespace WebviewAppShared.Swapper
 
                     Logger.Log("Reverting Body Package");
 
-                    if (!await SwapUtils.RevertPackage(bodyPackage, fromBodyAsset))
+                    if (!await SwapUtils.RevertPackage(bodyPackage))
                     {
                         return false;
                     }
@@ -550,7 +612,7 @@ namespace WebviewAppShared.Swapper
 
                         Logger.Log("Reverting HID Package");
 
-                        if (!await SwapUtils.RevertPackage(hidPackage, option.definitionPath))
+                        if (!await SwapUtils.RevertPackage(hidPackage))
                         {
                             return false;
                         }
@@ -561,21 +623,16 @@ namespace WebviewAppShared.Swapper
                     {
                         Logger.Log("Reverting -> " + defaultcp);
                         IoPackage defaultcpPackage = (IoPackage)await prov.LoadPackageAsync(defaultcp);
-                        if (!await SwapUtils.RevertPackage(defaultcpPackage, defaultcp)) return false;
+                        if (!await SwapUtils.RevertPackage(defaultcpPackage)) return false;
                     }
                 }
-
-                Logger.Log("Reverting Crash Package");
-                IoPackage crashPackage = (IoPackage)await prov.LoadPackageAsync("/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemOnPawnPreview");
-
-                if (!await SwapUtils.RevertPackage(crashPackage, "/Game/Environments/FrontEnd/Blueprints/ItemPreview/ItemOnPawnPreview")) return false;
 
                 Utils.Utils.MainWindow.LogText = "Reverting Fallback Asset";
                 Utils.Utils.MainWindow.UpdateUI();
 
                 Logger.Log("Reverting Fallback Package");
 
-                if (!await SwapUtils.RevertPackage(fallbackPackage, "FortniteGame/Content/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Fallback"))
+                if (!await SwapUtils.RevertPackage(fallbackPackage))
                 {
                     return false;
                 }
@@ -587,7 +644,7 @@ namespace WebviewAppShared.Swapper
                     {
                         Logger.Log("Reverting Texture: " + item.From);
                         var fromTexture = (IoPackage)await prov.LoadPackageAsync(item.From);
-                        if (!await SwapUtils.RevertPackage(fromTexture, "TEXTURESWAP_" + item.From)) return false;
+                        if (!await SwapUtils.RevertPackage(fromTexture)) return false;
                     }
 
                 }
@@ -746,12 +803,7 @@ namespace WebviewAppShared.Swapper
         {
             try
             {
-
-                var provider = SwapUtils.GetProvider();
-
-                IoPackage fallbackPackage = (IoPackage)await provider.LoadPackageAsync("FortniteGame/Content/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Fallback");
-
-                return fallbackPackage.LoadAlreadySwapped();
+                return Config.GetConfig().ConvertedItems.Any(x => x.Type == "uefn");
             } catch(Exception e)
             {
                 //Returning true just to give user information

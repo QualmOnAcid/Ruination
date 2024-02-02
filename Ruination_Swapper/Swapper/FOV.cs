@@ -75,7 +75,7 @@ namespace WebviewAppShared.Swapper
 
                 var fovPackage = (IoPackage)await SwapUtils.GetProvider().LoadPackageAsync("FortniteGame/Content/Blueprints/Camera/Athena/Athena_PlayerCameraModeBase");
 
-                if (!await SwapUtils.RevertPackage(fovPackage, "FortniteGame/Content/Blueprints/Camera/Athena/Athena_PlayerCameraModeBase"))
+                if (!await SwapUtils.RevertPackage(fovPackage))
                     return false;
 
                 if(showMsgbox)

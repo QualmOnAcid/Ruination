@@ -20,6 +20,7 @@ namespace CUE4Parse.UE4.Assets.Objects
         public FGuid? PropertyGuid;
         public FPropertyTagType? Tag;
         public int Position;
+        public byte[] _data;
 
         public FPropertyTag(FAssetArchive Ar, PropertyInfo info, ReadType type)
         {
@@ -41,6 +42,12 @@ namespace CUE4Parse.UE4.Assets.Objects
             }
             Position = (int) pos;
             Size = (int) (Ar.Position - pos);
+
+            var afterpos = Ar.Position;
+
+            Ar.Position = Position;
+            _data = Ar.ReadBytes(Size);
+            Ar.Position = afterpos;
         }
 
         public FPropertyTag(FAssetArchive Ar, bool readData)

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebviewAppShared.Models;
 
 namespace WebviewAppShared.Utils
 {
@@ -34,11 +35,12 @@ namespace WebviewAppShared.Utils
     public class ApiObject
     {
         public ApiOtherObject Other;
-        public ApiAssetUtilsObject AssetUtils;
+        public ApiRuinationUtilsObject RuinationUtils;
         public ApiUEFNFilesObject UEFNFiles;
         public List<ApiTransformCharacterObject> TransformCharacters = new();
         public List<ApiUEFNSkinObject> Characters = new();
         public List<string> PremiumUsers = new();
+        public List<ApiBundleObject> Bundles = new();
     }
 
     public class ApiOtherObject
@@ -52,9 +54,12 @@ namespace WebviewAppShared.Utils
         public string DisabledMessage = "Swapper is under maintenance.";
     }
 
-    public class ApiAssetUtilsObject
+    public class ApiRuinationUtilsObject
     {
-        public int MaterialOverrideFlags;
+        public string Url;
+        public string Filename;
+        public string Processname;
+        public string Version;
     }
 
     public class ApiUEFNFilesObject
@@ -84,6 +89,7 @@ namespace WebviewAppShared.Utils
         public string Mesh;
         public string Skeleton;
         public string Animation;
+        public string IdleFXSocket;
         public string Icon;
         public string Rarity;
         public List<string> Materials = new();
@@ -92,12 +98,29 @@ namespace WebviewAppShared.Utils
         public string PartModifierBlueprint = "";
         public string IdleEffectNiagara = "";
         public List<ApiUEFNSkinTextureSwapObject> TextureSwaps = new();
+        public bool UseIdleEffectPackage = false;
     }
 
     public class ApiUEFNSkinTextureSwapObject
     {
         public string From;
         public string To;
+        public List<PluginAssetSwapSwapModel> Swaps = new();
+    }
+
+    public class ApiBundleObject
+    {
+        public string Name;
+        public string ID;
+        public string Icon;
+        public List<ApiBundleItemObject> Items = new();
+    }
+
+    public class ApiBundleItemObject
+    {
+        public string Name;
+        public string ID;
+        public string Type;
     }
 
 }
