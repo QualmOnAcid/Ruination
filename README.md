@@ -1,6 +1,6 @@
 # Ruination Swapper
 
-Fortnite Skinchanger
+Ruination is a Fortnite Skinchanger.
 
 ## Description
 
