@@ -15,7 +15,7 @@
                 },
                 {
                     "Name": "Galaxy Scout",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_337_athena_commando_f_celestial/icon.png",
+                    "Icon": "https://media.discordapp.net/attachments/1202038558886461440/1207076552659968010/latest.png?ex=65e78f24&is=65d51a24&hm=8639b2fec9944c0310b686c23eaa8eb1b701f0172fdc09571263fe5db24028a8&format=webp&quality=lossless&width=640&height=640%22%2C&",
                     "PluginURL": "https://cdn.discordapp.com/attachments/1210192326186635266/1210768449618579476/skin.json?ex=65ebc2fd&is=65d94dfd&hm=73729ad71d1d54c3cebf557718f830c9c583d5583f3c055c7ffd7cee4acf665b&"
                 },
                 {
@@ -26,7 +26,7 @@
                 {
                     "Name": "Mary Jane Watson",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_358_athena_commando_f_lurk/icon.png",
-                    "PluginURL": "https://cdn.discordapp.com/attachments/1210724769352257608/1210724769960427600/Mary_Jane.json?ex=65eb9a4f&is=65d9254f&hm=3e0886ebb78100812de9976810c0fafc469824fc4f729e01087af8296d3710ad&"
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210724769352257608/1210724769683738685/image.png?ex=65eb9a4f&is=65d9254f&hm=259bdb39f68edd0fad2564c0c8f7d8bc105ee2ef6ac109e10b5189cd4d6d24a2&"
                 },
                 {
                     "Name": "Dark Phoenix",
@@ -77,7 +77,12 @@
                     "Name": "The Weekend (White)",
                     "Icon": "https://media.discordapp.net/attachments/1202038558886461440/1209252701284868159/360.png?ex=65e63f56&is=65d3ca56&hm=8dca1a318db15f54f98976da689ba35406f9a726baeed765705fc3c776d2bc64&=&format=webp&quality=lossless&width=450&height=450",
                     "PluginURL": "https://cdn.discordapp.com/attachments/1209294047621947434/1209940389751169074/1708386233_1708379367_The_Weeknd_White_.json?ex=65e8bfcc&is=65d64acc&hm=57aae4d2de6d02cce139cf24e4c746353a08fd8aa2e62ff4cc011581b8adf553&"
-                }
+                },
+                {
+                    "Name": "Mary Jane Watson",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_358_athena_commando_f_lurk/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mary Jane.json"                
+                },    
             ]
         }
     ]
