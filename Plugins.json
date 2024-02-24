@@ -17,6 +17,66 @@
                     "Name": "Galaxy Scout",
                     "Icon": "https://media.discordapp.net/attachments/1202038558886461440/1207076552659968010/latest.png?ex=65e78f24&is=65d51a24&hm=8639b2fec9944c0310b686c23eaa8eb1b701f0172fdc09571263fe5db24028a8&format=webp&quality=lossless&width=640&height=640%22%2C&",
                     "PluginURL": "https://cdn.discordapp.com/attachments/1210192326186635266/1210768449618579476/skin.json?ex=65ebc2fd&is=65d94dfd&hm=73729ad71d1d54c3cebf557718f830c9c583d5583f3c055c7ffd7cee4acf665b&"
+                },
+                {
+                    "Name": "Sayara",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_378_athena_commando_f_bacteria_8jygu/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210727016916193290/1210727017314779136/Sayara.json?ex=65eb9c67&is=65d92767&hm=42941573b40e902f1ca1f8a1870a23b1eb493e1691fb03231964c4e287775337&"
+                },
+                {
+                    "Name": "Mary Jane Watson",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_358_athena_commando_f_lurk/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210724769352257608/1210724769683738685/image.png?ex=65eb9a4f&is=65d9254f&hm=259bdb39f68edd0fad2564c0c8f7d8bc105ee2ef6ac109e10b5189cd4d6d24a2&"
+                },
+                {
+                    "Name": "Dark Phoenix",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_231_athena_commando_f_ashes_tkgk9/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210722343962415186/1210722344457216101/Dark_Phoenix.json?ex=65eb980d&is=65d9230d&hm=187dc9bf690f6496e335af2c8a383bbb48993cd0d1ffd7f0adf8dad4aff1485b&"
+                },
+                {
+                    "Name": "Rogue",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_341_athena_commando_f_gimmick_rb41v/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210710431476486164/1210710431878873208/Rogue.json?ex=65eb8cf4&is=65d917f4&hm=45d87cb09274d65eb57559fe865614ee3e698243d76b890438a3c4889c72ccc9&"
+                },
+                {
+                    "Name": "Silver Surfer",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_847_athena_commando_m_soy_2as3c/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1207096745201504266/1210669469026881606/1707859630_Silver_Sulfer_.json?ex=65eb66ce&is=65d8f1ce&hm=70f484a07907f2ee084969520e524afcb401a1dfae2b2e74b906d79a27b0608b&"
+                },
+                {
+                    "Name": "Highwire",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_vitalpsych/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210400784114782310/1210435524653744128/1708660128_Highwire.json?ex=65ea8ced&is=65d817ed&hm=76c7120719205d1de16e2c04bc656fb879c63059800c4f180d03ab3bd3e2af69&"
+                },
+                {
+                    "Name": "Highwire (Leader)",
+                    "Icon": "https://media.discordapp.net/attachments/1202038558886461440/1210401056723566602/latest.png?ex=65ea6cd4&is=65d7f7d4&hm=383eeee5e750017a6618d4b3638b6af8723bfc1a848c7a0856fb172688afa5b7&=&format=webp&quality=lossless&width=640&height=640",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210403650778824834/1210436156911517806/1708660133_Highwire_Leader.json?ex=65ea8d84&is=65d81884&hm=7e34028e37ba9feb413035086299b56dbef82b01e820fdd5cbde63eba24ad098&"
+                },
+                {
+                    "Name": "Clara",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_balletassassin/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210396354195759205/1210396354577436693/Clara.json?ex=65ea6873&is=65d7f373&hm=9ffb90cdb4435ecdc101ea49f1c89680531814c6983d4f95330d20e5509767c1&"
+                },
+                {
+                    "Name": "Camille",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_mouse/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210384471006773248/1210384471489257522/Camille.json?ex=65ea5d61&is=65d7e861&hm=5a4bf7bf82d7bbc8cefcfe1bc9d0cadf7bb455ee5d5b291e660a0f3e56ec3dbe&"
+                },
+                {
+                    "Name": "Doom Slayer",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_redpepper/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201738045154672661/1209940545317904464/1708456495_1706586860_Doom_Slayer_.json?ex=65e8bff1&is=65d64af1&hm=a1bcaa11084f4587d0669218c28a172d94d55afe4f6c3da47c5a2bba9d5da30f&"
+                },
+                {
+                    "Name": "Holiday Striker",
+                    "Icon": "https://media.discordapp.net/attachments/1202038558886461440/1209255777794138163/latest.png?ex=65e64234&is=65d3cd34&hm=30616e4fdb72eea013704116c464785fe07a689ad1a8e417a8d2b07efcd2a1dd&=&format=webp&quality=lossless&width=640&height=640",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1209294203113316402/1209940438425927740/1708386319_1708379630_Holly_Striker_.json?ex=65e8bfd8&is=65d64ad8&hm=7a0a44801dfe180b8ff9c912457157e7e1278e7f9e67fe7723cd78f9872781f4&"
+                },
+                {
+                    "Name": "The Weekend (White)",
+                    "Icon": "https://media.discordapp.net/attachments/1202038558886461440/1209252701284868159/360.png?ex=65e63f56&is=65d3ca56&hm=8dca1a318db15f54f98976da689ba35406f9a726baeed765705fc3c776d2bc64&=&format=webp&quality=lossless&width=450&height=450",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1209294047621947434/1209940389751169074/1708386233_1708379367_The_Weeknd_White_.json?ex=65e8bfcc&is=65d64acc&hm=57aae4d2de6d02cce139cf24e4c746353a08fd8aa2e62ff4cc011581b8adf553&"
                 }
             ]
         }
