@@ -7,6 +7,11 @@
                     "Name": "Spacefarer Ariana Grande",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_227_athena_commando_f_bistroastronaut_jjlk5/icon.png",
                     "PluginURL": "https://cdn.discordapp.com/attachments/1200894057560420512/1210752696236245023/1708735197_Spacefarer_Ariana_Grande.json?ex=65ebb451&is=65d93f51&hm=901060d3ffd8743da7b7ed89685e33d3c5631be83c167e51bdb38f07d8cbc5d5&"
+                },
+                {
+                    "Name": "Starfire",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_474_athena_commando_f_astral/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210718743488110643/1210718744062595112/1708727984_Starfire.json?ex=65eb94b2&is=65d91fb2&hm=22501d2a639fb49fdee9eb99d2db910c22341370d005ad4b05df9e21026ed8f1&"
                 }
             ]
         }
