@@ -81,8 +81,33 @@
                 {
                     "Name": "Mary Jane Watson",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_358_athena_commando_f_lurk/icon.png",
-                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mary Jane.json"                
-                }
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mary Jane.json"                  
+                },    
+                {
+                    "Name": "Mina Ashido",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_recordscratch/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mina Ashido.json"                  
+                }, 
+                {
+                    "Name": "Designer Tsuki",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_fauxvenom/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Designer Tsuki.json"                  
+                },               
+                {
+                    "Name": "ISO",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_732_athena_commando_f_stars/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/ISO.json"                  
+                },               
+                {
+                    "Name": "Ravina",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_903_athena_commando_f_frankie/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Ravina.json"                  
+                },               
+                {
+                    "Name": "John Wick (3rd Style)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_416_athena_commando_m_assassinsuit/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/John Wick (3rd Style).json"                  
+                },               
             ]
         }
     ]
