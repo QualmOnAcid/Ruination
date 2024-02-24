@@ -76,33 +76,278 @@
                 {
                     "Name": "Mary Jane Watson",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_358_athena_commando_f_lurk/icon.png",
-                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mary Jane.json"                  
-                },    
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mary Jane.json"
+                },
                 {
                     "Name": "Mina Ashido",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/character_recordscratch/icon.png",
-                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mina Ashido.json"                  
-                }, 
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Mina Ashido.json"
+                },
                 {
                     "Name": "Designer Tsuki",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/character_fauxvenom/icon.png",
-                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Designer Tsuki.json"                  
-                },               
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Designer Tsuki.json"
+                },
                 {
                     "Name": "ISO",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_732_athena_commando_f_stars/icon.png",
-                    "PluginURL": "https://cdn.discordapp.com/attachments/1210192326186635266/1210895287015575614/1708770118_1708231268_1706906349_ISO_.json?ex=65ec391d&is=65d9c41d&hm=3a6eb74716d5e24ceaf9b63ec0f479198768b66fce70aea36a6325972d1ef1d6&"                  
-                },               
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210192326186635266/1210895287015575614/1708770118_1708231268_1706906349_ISO_.json?ex=65ec391d&is=65d9c41d&hm=3a6eb74716d5e24ceaf9b63ec0f479198768b66fce70aea36a6325972d1ef1d6&"
+                },
                 {
                     "Name": "Ravina",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_903_athena_commando_f_frankie/icon.png",
-                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Ravina.json"                  
-                },               
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Ravina.json"
+                },
                 {
                     "Name": "John Wick (3rd Style)",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_416_athena_commando_m_assassinsuit/icon.png",
-                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/John Wick (3rd Style).json"                  
-                }            
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/John Wick (3rd Style).json"
+                },
+                {
+                    "Name": "Chani",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_215_athena_commando_f_sunrisecastle_48tiz/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210693664209244190/1210693664754372674/Chani.json?ex=65eb7d57&is=65d90857&hm=89777287a72b113d7d46e894bf3d7b60b6e63930874e581f2a74afa0cb8f00f3&"
+                },
+                {
+                    "Name": "Frankenstein's Bride",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_232_athena_commando_f_critterstreak_yilhr/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1209380212543070249/1209939375127924847/1708401222_Frankensteins_Bride_.json?ex=65e8beda&is=65d649da&hm=911928379eb63b8ecc1ae73f8334a0d5a0f1004a8af03202f38b630fbbd43b25&"
+                },
+                {
+                    "Name": "Travis Scot (T-3500)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_703_athena_commando_m_cyclone/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1209337003154481192/1209939228474081351/1708398337_Travis_Scot_Robot_Style_.json?ex=65e8beb7&is=65d649b7&hm=7c520de6bbfe44672b036e4683b0c53277db116010fda50c68857d274d51b4eb&"
+                },
+                {
+                    "Name": "Serenade",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_miragehike/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1208352211084513330/1209939061528076359/1708162574_Serenade_.json?ex=65e8be8f&is=65d6498f&hm=b7be7cbec5a2aa617fe18780a3a8fa91a68300cde926f1819f52aee74ea76d86&"
+                },
+                {
+                    "Name": "Mariana",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_822_athena_commando_f_angler/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1208347759401238569/1209939008487030844/1708162279_Mariana_.json?ex=65e8be83&is=65d64983&hm=c146f2bdb3b71b0ac508bb1c519313144853f58662dc4712c3ccd9d124f4e7d6&"
+                },
+                {
+                    "Name": "Midnight Mariposa",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/loadingscreen_agentsherbert/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1209244429630836827/1209938825875554354/1708161357_Mariposa_Midnight_.json?ex=65e8be57&is=65d64957&hm=95434e8915ebf43b5abe2f27b62126f925468b6c1ccd89cd31e8640424371755&"
+                },
+                {
+                    "Name": "Hangfire",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_tacticmushroom_d/icon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1208353720589623306/1209938768551878666/1708160540_Hangfire_.json?ex=65e8be49&is=65d64949&hm=5f51049e552aecf81d7d2a13d26ea90bf91e0384bae9925d2eec982cd6a22d7e&"
+                },
+                {
+                    "Name": "Ciri",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_highbeam/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1207092522979954718/1209937351132848129/1707859217_Ciri_.json?ex=65e8bcf8&is=65d647f8&hm=1802ff632b58ba98b66b2b5af4e620735e80fc66cd9507f96584c6bdea6858e4&"
+                },
+                {
+                    "Name": "Sabina",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_428_athena_commando_f_pinkwidow/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1207090742644973588/1209937293931057193/1707858671_Sabina_.json?ex=65e8bcea&is=65d647ea&hm=6460221fbdca6bd03e5b262bfc7f06c5a9fda6e752c82d859948fc2e2e82b86a&"
+                },
+                {
+                    "Name": "Singularity Upgrade (2nd Style)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_469_athena_commando_f_battlesuit/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1205309929825771530/1209937104034078830/1707436724_Singularity_Upgrade_2nd_syle_.json?ex=65e8bcbd&is=65d647bd&hm=9ec1d10204a2f458ff40cb393fb2c27a8cdfa749d7306617ce2fde73ee60f21e&"
+                },
+                {
+                    "Name": "Comet",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_brightion/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1206475455369183252/1209937218995490916/1707714808_Comet_.json?ex=65e8bcd8&is=65d647d8&hm=270be6cb370b9b7af18eece02be74aa9c972a2a5574c674a38c1c4352e7f0dfc&"
+                },
+                {
+                    "Name": "Singularity ",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_469_athena_commando_f_battlesuit/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1205310154070036530/1209937149944668192/1707437195_Singularity_Full_.json?ex=65e8bcc8&is=65d647c8&hm=18e6a4570aea6a06f64640f67d27fd8c8e48d358bafce859981e5fa9dbddc7ad&"
+                },
+                {
+                    "Name": "Fishstick (VR)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_315_athena_commando_m_teriyakifish/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1205309615684853780/1209936956893429770/1707435758_Fishsitck_VR_.json?ex=65e8bc9a&is=65d6479a&hm=9711f1d165d43112e7fe8803a3e9a9e71e5c88ff995bbb77c42c6e94503a5359&"
+                },
+                {
+                    "Name": "Airie",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_lastvoicesteel/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1204258217610313758/1209936833874759700/1707185449_Airie_.json?ex=65e8bc7c&is=65d6477c&hm=906974019ee865f74d81b7439b8eed1902669d987aaeb4d1a4a42ac4b28d2128&"
+                },
+                {
+                    "Name": "Heart-Stopper",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_957_athena_commando_f_ponytail/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1204258343573790810/1209936735715196968/1707185228_Heart_Stropper_.json?ex=65e8bc65&is=65d64765&hm=9e83472d89b2bbdec2298d9ab8cd3d95d0c3691fba917adc7428da73db5e180f&"
+                },
+                {
+                    "Name": "Joni The Red",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_silencer/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1204306545714925628/1209936661098791013/1707184702_Joni_The_Red_.json?ex=65e8bc53&is=65d64753&hm=a8d2b34cf8b99b5ef7235b8f42eaf682051b08cd7e3a527a1c46bc3a6d88d73e&"
+                },
+                {
+                    "Name": "Deadeye",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_600_athena_commando_m_skeletonhunter/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1204192928348774400/1209936603087380590/1707171152_Dead_Eye__.json?ex=65e8bc45&is=65d64745&hm=1e4ed85056667eeee67265d7bb0351f6edc44625b31faea33bd22fd847a20179&"
+                },
+                {
+                    "Name": "Reflex",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_259_athena_commando_m_streetops/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1204144172202856499/1209936544664911932/1707160302_Reflex_.json?ex=65e8bc37&is=65d64737&hm=15efbcdeb653dfc3052685a69a2c19ce4f6511a42aa24382acf38de164791f19&"
+                },
+                {
+                    "Name": "Stealth Reflex",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_386_athena_commando_m_streetopsstealth/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1204145073252732939/1209936506538557500/1707160302_Stealth_Reflex.json?ex=65e8bc2e&is=65d6472e&hm=8c97bf976e939e234dd9c18b907cde4aaa98fc50886e12c624e0d95f10a3ca5b&"
+                },
+                {
+                    "Name": "Patrick Mahomes (Gladiator)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_470_athena_commando_m_apexwild/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203934692059914322/1209936372983660544/1707109648_Patrick_Mahomes_Gladiator_.json?ex=65e8bc0e&is=65d6470e&hm=dbec24af182dbc4217891cc1d0738720580ae87b613150dd6dd4007e75f3e2b5&"
+                },
+                {
+                    "Name": "Patrick Mahomes (Saucy)",
+                    "Icon": "https://static.wikia.nocookie.net/fortnite/images/c/c7/Mahomes_Saucy_Style_-_Outfit_-_Fortnite.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203935799851356240/1209936333833896077/1707109361_Mahomes_Saucy_Style_.json?ex=65e8bc05&is=65d64705&hm=7dbc222a6f7d99852851df5e2e5a453ecce8629e1eb9c6120633ffd582b1306b&"
+                },
+                {
+                    "Name": "Arachne Couture",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_893_athena_commando_f_blackwidowjacket/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203826870332952586/1209936230708678719/1707084087_Arachne_Couture_.json?ex=65e8bbec&is=65d646ec&hm=d1ea10fe32664e3f086cdbded0e172a3093f8193a207c150c181e54302902a37&"
+                },
+                {
+                    "Name": "Arachne",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_249_athena_commando_f_blackwidow/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203754435575025694/1209936174521516042/1707067573_Arachne_.json?ex=65e8bbdf&is=65d646df&hm=b0f28f5ade1eecb1bd31820b8b41950a5fb7845a004a10307d67ef7e21b009ef&"
+                },
+                {
+                    "Name": "Black Widow Snow Suit",
+                    "Icon": "https://static.wikia.nocookie.net/fortnite/images/d/d2/Black_Widow_%28Snow_Suit%29_-_Outfit_-_Fortnite.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203754286622965790/1209936101427519518/1707067132_Black_Widow_Snow_Suit_.json?ex=65e8bbce&is=65d646ce&hm=0d400195f4ecb4cf0f21141bc3bf78556bcd161400ea573ea8165972f5c42c8e&"
+                },
+                {
+                    "Name": "Black Adam",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_sahara/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203753971169099858/1209936060256100362/1707066610_Black_Adam_POWERING_UP_.json?ex=65e8bbc4&is=65d646c4&hm=e0df94d72e1c2d220a25696e7a01f3988a748c4afd3e35aeeea223162c3a779e&"
+                },
+                {
+                    "Name": "The Joker",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_922_athena_commando_m_parcelprank/variants/parts/stage3.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203425208694870077/1209935997228294154/1706988971_Joker__.json?ex=65e8bbb5&is=65d646b5&hm=a889a436e0f099f28c14015d00978947a8e1c3cde6c8d184dfaafd925d51b058&"
+                },
+                {
+                    "Name": "Nalia",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_314_athena_commando_f_nightcapsule_tak2p/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202838954773188678/1209935910251008102/1706849143_Nalia_.json?ex=65e8bba0&is=65d646a0&hm=55a277d5d1120982d0fc4ac5a70fbaee7c82d917e5511c9ab67f4439c08d2dc6&"
+                },
+                {
+                    "Name": "Donatello",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_qualitycreek/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202832488381292614/1209935850884964412/1706846893_Donatello_.json?ex=65e8bb92&is=65d64692&hm=be4459a56dddba86870e1c3423eea1c16027d74360b929de7d3ead9aa986594a&"
+                },
+                {
+                    "Name": "Wonder Woman",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_187_athena_commando_f_monarch/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202814264604102666/1209935721436286976/1706841743_Wonder_Woman_.json?ex=65e8bb73&is=65d64673&hm=9896a7838404e4931527dd46080a86b6f94dafdde375e21d24796cd6a1a2b764&"
+                },
+                {
+                    "Name": "Poison Ivy",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_921_athena_commando_f_parcelpetal/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202796890026942504/1209935655447175208/1706820793_Posion_Ivy_.json?ex=65e8bb63&is=65d64663&hm=8641db5b15f283ff6c93bd83d1c2576ce4f615b58f9ea088d1021b036c7186ac&"
+                },
+                {
+                    "Name": "Tony Stark",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_843_athena_commando_m_hightowertomato_casual/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202702743899480165/1209935566041518100/1706816533_Tony_Stark_.json?ex=65e8bb4e&is=65d6464e&hm=7e70b1a99b23c2d6b30438cd2400aa69a648ea0baf9c003cc1179d012c4ba4f2&"
+                },
+                {
+                    "Name": "Darth Maul",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_cirrusvine/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202438895883657246/1209935505416785970/1706752549_Darth_Maul_.json?ex=65e8bb40&is=65d64640&hm=db85cebcb62713be5e7e2454bbae4adcd9965dc881d841ef1a08ea3bc463e930&"
+                },
+                {
+                    "Name": "Megumi Fushiguro",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_vectorspark/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202426155911749662/1209935443341352970/1706751112_Megumi_Fushiguro_.json?ex=65e8bb31&is=65d64631&hm=fb82ca30b0daa4694b019d5cfdbf31488e25614cbdf41fc1b2f5432db4897779&"
+                },
+                {
+                    "Name": "Nobara Kugisaki",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_roostermelt/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202414480135557130/1209935382720946176/1706748311_Nobara_Kugisaki_.json?ex=65e8bb22&is=65d64622&hm=92da06665e11dea738ae7da37a9047e6818150a13cddb5fd3c4b27d25dc973fb&"
+                },
+                {
+                    "Name": "Yuji Itadori",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_birdnest/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202413630155391036/1209935324076179596/1706748101_Yuji_Itadori_.json?ex=65e8bb14&is=65d64614&hm=3025e946967a13765fc7762952531303390ddb4c992d62595e8e3695e0ec5edb&"
+                },
+                {
+                    "Name": "Streetwear Yuji Itadori",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_birdnestnavy/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202412611422126101/1209935279171960872/1706747660_Streetwear_Yuji_Itador_.json?ex=65e8bb0a&is=65d6460a&hm=57338dfdad7d2bb03cb589592270b5442664c700415d700efd9411c3c4c6ec45&"
+                },
+                {
+                    "Name": "SGT. Drake",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_mallardvantage/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1203699239784423445/1209933994842398840/1706746282_Sgt.Drake_.json?ex=65e8b9d7&is=65d644d7&hm=1d57f2db2559751bfd16a4913cad6da1536993d1615511bfff085afc5f721f57&"
+                },
+                {
+                    "Name": "Budge",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_cosmicsquatter/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202398364021293196/1209933916874477568/1706743396_Budge_.json?ex=65e8b9c5&is=65d644c5&hm=bb2ec69c8eecfb7734c64675c2c41f96c88b04729d0525f32263c462112ae55a&"
+                },
+                {
+                    "Name": "Tex Flamingo",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_flamingocountry/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1202395705336008815/1209933574392782868/1706743149_Tex_Flamingo_.json?ex=65e8b973&is=65d64473&hm=44dcfa490e3928bd64ee22a627286d4ff688b091a82b33293b24496cfc1a0e3c&"
+                },
+                {
+                    "Name": "Boardwalk Ruby",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_135_athena_commando_f_streetfashionsummer/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201791891901775963/1209933476791324692/1706599123_Boardwalk_Ruby_.json?ex=65e8b95c&is=65d6445c&hm=5f28f5df85b93198292893ca4a9a647ad10b99659600b3e6c74cba63135e0ae5&"
+                },
+                {
+                    "Name": "Captain Hypatia (Armored)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_scarletbionic/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201778005576519700/1209933360076685322/1706592913_Captain_Hypatia_Armored_.json?ex=65e8b940&is=65d64440&hm=cf22421b3d030653abf5854c8a4e4f77bdcc6e7778a99c302681b258262a23f5&"
+                },
+                {
+                    "Name": "Agent Jones",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_989_athena_commando_m_progressivejonesy/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201724704382259211/1209933280628056084/1706583675_Agent_Jhonnes_.json?ex=65e8b92d&is=65d6442d&hm=bd0dcd45cb45e107a68682c8c92adedcd904de42a0c19b75c2e34003ea821fe1&"
+                },
+                {
+                    "Name": "Chaos Agent (Goopy)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_598_athena_commando_m_mastermind/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201445149776031785/1209933204061167646/1706515982_Chaos_Agent_Goopy_.json?ex=65e8b91b&is=65d6441b&hm=fe3ee07c5313fb5f6ff7855abf65bcfd6cd6429ebfbb7579106832dda4e0e336&"
+                },
+                {
+                    "Name": "Toshinori Yagi",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_emeraldglasstransform/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201385556106551396/1209932975014281256/1706502547_All_Might_.json?ex=65e8b8e4&is=65d643e4&hm=e851ee09d6e83ab7dcf9b8f229550f9084244703cb9206b179d241ee52959e3b&"
+                },
+                {
+                    "Name": "Deadpool",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_705_athena_commando_m_donut/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201370054940434442/1209932903375577171/1706499075_Deadpool_.json?ex=65e8b8d3&is=65d643d3&hm=e6e9a05b8a042ba78dde54a5d7a390f913418121faab4253cbf85a1924c98257&"
+                },
+                {
+                    "Name": "Scarlet Witch",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_399_athena_commando_f_ultralight/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201584659885215744/1209932838305013822/1706479590_Scarlet_Witch_.json?ex=65e8b8c4&is=65d643c4&hm=4f49f9a2e5537afb91012a7e9549a9b845c6a05e673a41f308e3d8158273f932&"
+                },
+                {
+                    "Name": "Razor",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_604_athena_commando_f_razor/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201239007217061998/1209932639075831868/1706467814_Razor_.json?ex=65e8b894&is=65d64394&hm=281fb6b26ea13bcc139ecd09e6831553342258115b759b509ce5a00888632761&"
+                },
+                {
+                    "Name": "Sakura (Gym)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_385_athena_commando_f_rumble/variants/parts/stage2.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1201078818287398975/1209932269683343420/1706410405_Sakura_Gym___1.json?ex=65e8b83c&is=65d6433c&hm=62ed7df1f6f0ca113e2247cb0b1c40bef81a0afb4d6b4a6156a762672d502bfd&"
+                },
+                {
+                    "Name": "Sakura",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_385_athena_commando_f_rumble/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1200964571704328283/1209572591967412234/1708454175_1706384689_Sakuraa__2.json?ex=65e76942&is=65d4f442&hm=ce0cc4cb4b4750314cdc6a808638e0377dd1ffda5c9ffdaaf531083327d2bf37&"
+                }
             ]
         }
     ]
