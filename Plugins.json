@@ -347,11 +347,6 @@
                     "Name": "Sakura",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_385_athena_commando_f_rumble/smallicon.png",
                     "PluginURL": "https://cdn.discordapp.com/attachments/1200964571704328283/1209572591967412234/1708454175_1706384689_Sakuraa__2.json?ex=65e76942&is=65d4f442&hm=ce0cc4cb4b4750314cdc6a808638e0377dd1ffda5c9ffdaaf531083327d2bf37&"
-                },
-                {
-                    "Name": "Lok-Bot",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_102_athena_commando_m_assemblel/icon.png",
-                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Lok-bot.json"
                 }
             ]
         }
