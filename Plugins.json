@@ -367,7 +367,12 @@
                     "Name": "PJ",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/character_waywardrebel/icon.png",
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/PJ.json"
-                }                           
+                },
+                {
+                    "Name": "Katt",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_spacefeline/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Katt.json"
+                }                                        
             ]
         }
     ]
