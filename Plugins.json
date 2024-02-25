@@ -362,7 +362,12 @@
                     "Name": "Loserfruit",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_764_athena_commando_f_loofah/icon.png",
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Loserfruit.json"
-                } 
+                }, 
+                {
+                    "Name": "PJ",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_waywardrebel/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/PJ.json"
+                }                           
             ]
         }
     ]
