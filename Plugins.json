@@ -372,7 +372,12 @@
                     "Name": "Katt",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/character_spacefeline/icon.png",
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/Katt.json"
-                }                                        
+                },
+                {
+                    "Name": "Rio Grande",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_497_athena_commando_f_wildwest/icon.png",
+                    "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/RioGrande.json"
+                }                
             ]
         }
     ]
