@@ -392,6 +392,11 @@
                     "Name": "Special Forces",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_020_athena_commando_m/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/special%20forces.json"
+                },
+                {
+                    "Name": "Tilted Teknique",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_483_athena_commando_f_graffitiremix/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Tilted%20Teknique.json"
                 }  
             ]
         }
