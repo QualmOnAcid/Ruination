@@ -382,7 +382,17 @@
                     "Name": "Rio Grande",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_497_athena_commando_f_wildwest/icon.png",
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/RioGrande.json"
-                }                
+                },          
+                {
+                    "Name": "Sash Sergeant",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_072_athena_commando_m_scout/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sash%20Sergeant.json"
+                },
+                {
+                    "Name": "Special Forces",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_020_athena_commando_m/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/special%20forces.json"
+                }  
             ]
         }
     ]
