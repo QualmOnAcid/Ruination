@@ -392,6 +392,16 @@
                     "Name": "Special Forces",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_020_athena_commando_m/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/special%20forces.json"
+                },
+                {
+                    "Name": "Tilted Teknique",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_483_athena_commando_f_graffitiremix/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Tilted%20Teknique.json"
+                },         
+                {
+                    "Name": "Renegade+BlackShield",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1212415409115103314/Preview.png?ex=65f1c0d7&is=65df4bd7&hm=509ce814d75f48e74c543acd0c556eafb2dc17cfb61def00ef4237132bfd4a29&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/renegade+blackshield.json"
                 }  
             ]
         }
