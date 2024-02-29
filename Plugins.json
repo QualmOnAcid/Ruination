@@ -398,6 +398,11 @@
                     "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1212813945128361984/Preview.png?ex=65f33401&is=65e0bf01&hm=32849fa9fd542729256a609eff012aa9d5dbf1720c6faefce5fdeec7fe35c86a&",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/blackknight+blackshield.json"
                 },  
+               {
+                    "Name": "Maximilian",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_223_athena_commando_m_dieselpunk/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Maximilian.json"
+                },  
                 {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
