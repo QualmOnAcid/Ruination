@@ -382,17 +382,12 @@
                     "Name": "Rio Grande",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_497_athena_commando_f_wildwest/icon.png",
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/RioGrande.json"
-                },          
-                {
-                    "Name": "Sash Sergeant",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_072_athena_commando_m_scout/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sash%20Sergeant.json"
                 },
                 {
-                    "Name": "Special Forces",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_020_athena_commando_m/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/special%20forces.json"
-                },
+                    "Name": "DreamFlower",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_193_athena_commando_f_hippie/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/dreamflower.json"
+                },     
                 {
                     "Name": "Tilted Teknique",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_483_athena_commando_f_graffitiremix/icon.png",
