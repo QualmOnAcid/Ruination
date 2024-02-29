@@ -382,22 +382,37 @@
                     "Name": "Rio Grande",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_497_athena_commando_f_wildwest/icon.png",
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/RioGrande.json"
-                },          
-                {
-                    "Name": "Sash Sergeant",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_072_athena_commando_m_scout/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sash%20Sergeant.json"
                 },
                 {
-                    "Name": "Special Forces",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_020_athena_commando_m/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/special%20forces.json"
-                },
+                    "Name": "DreamFlower",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_193_athena_commando_f_hippie/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/dreamflower.json"
+                },     
                 {
                     "Name": "Tilted Teknique",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_483_athena_commando_f_graffitiremix/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Tilted%20Teknique.json"
-                },         
+                },   
+                {
+                    "Name": "Black Knight + Black Shield",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1212813945128361984/Preview.png?ex=65f33401&is=65e0bf01&hm=32849fa9fd542729256a609eff012aa9d5dbf1720c6faefce5fdeec7fe35c86a&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/blackknight+blackshield.json"
+                },  
+               {
+                    "Name": "Maximilian",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_223_athena_commando_m_dieselpunk/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Maximilian.json"
+                },  
+                {
+                    "Name": "Star-Spangled Ranger",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_158_athena_commando_f_starsandstripes/variants/parts/stage2.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/StarSpangledRanger.json"
+                },  
+                {
+                    "Name": "Dyno + Rainbow Clover",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1212851460992147507/Preview.png?ex=65f356f1&is=65e0e1f1&hm=b60e8d56770c7fb2e563f362d094515c4c661346db2f3df0db889abdc0b580f9&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Dynamo+Rainbowclover.json"
+                }, 
                 {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
