@@ -404,6 +404,11 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Maximilian.json"
                 },  
                 {
+                    "Name": "Star-Spangled Ranger",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_158_athena_commando_f_starsandstripes/variants/parts/stage2.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/StarSpangledRanger.json"
+                },  
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
