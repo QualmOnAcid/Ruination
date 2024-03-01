@@ -427,6 +427,11 @@
                     "Name": "Tilted Teknique + Coin",
                     "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213154808538865784/icon.png?ex=65f47175&is=65e1fc75&hm=7ec078e621f044285518139ad63e30c4fa8d5e8e59fb36e6f5e917d925651414&",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Tilted%20Teknique%20+%20Coin.json"
+                },
+                {
+                    "Name": "Rufus",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_feraltrash/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/rufus.json"
                 }, 
                 {
                     "Name": "Kalia",
