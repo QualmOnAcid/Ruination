@@ -418,6 +418,11 @@
                     "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213112522698399764/Preview.png?ex=65f44a13&is=65e1d513&hm=8c778e2858e69169830b4cfb050a5b68ba9aba802a257b48dae285964827fddc&",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/purpleskull+gold%20token.json"
                 }, 
+              {
+                    "Name": "AXO",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_834_athena_commando_m_axl/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/axo.json"
+                }, 
                 {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
