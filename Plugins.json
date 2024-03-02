@@ -434,6 +434,21 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/rufus.json"
                 }, 
                 {
+                    "Name": "Luxe (White)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_352_athena_commando_f_shiny/variants/material/mat2.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/luxe.json"
+                }, 
+                {
+                    "Name": "Reaper + Coin",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213429209125494785/icon_1.png?ex=65f57103&is=65e2fc03&hm=25a0e9a3da78c2a4839a5196597cb14d79408b39b094e30c8955c26bdfc15794&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/reaper+coin.json"
+                }, 
+                {
+                    "Name": "Sunset alto + RainbowClover",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213439039802179675/icon_1.png?ex=65f57a2b&is=65e3052b&hm=8ff1e27f87d0cff7c619a8ee2a0c19f480b94b2388ed8b437c22849e1c89edd0&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sunset%20alto.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
