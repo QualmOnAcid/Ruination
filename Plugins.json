@@ -479,6 +479,11 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/tonystark+coin.json"
                 }, 
                 {
+                    "Name": "Laracroft+ Coin",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213464503728087090/plus.png?ex=65f591e2&is=65e31ce2&hm=5c3c1fce0c3a67af01aeeedc2f34c91068fcf0cf0d5ff2b8074ae05658f9c15e&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/laracroft+coin.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
