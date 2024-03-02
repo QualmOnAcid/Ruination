@@ -510,8 +510,8 @@
               
                 }, 
                 {
-                    "Name": "Harmonizer",
-                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_171_athena_commando_f_stands_d/icon.png",
+                    "Name": "Harmonizer (white style)",
+                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_171_athena_commando_f_stands_d/variants/material/mat2.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/harmonizer.json"
                 }, 
                 {
