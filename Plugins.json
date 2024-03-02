@@ -464,6 +464,16 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/laracroft+redshield.json"
                 }, 
                 {
+                    "Name": "special forces",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_020_athena_commando_m/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/special%20forces.json"
+                }, 
+                {
+                    "Name": "Sash Sergeant",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_072_athena_commando_m_scout/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sash%20Sergeant.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
