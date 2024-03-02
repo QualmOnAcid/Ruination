@@ -504,6 +504,17 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Dark%20skully.json"
                 }, 
                 {
+                    "Name": "Sirene + Coin",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213531721706766406/plus.png?ex=65f5d07c&is=65e35b7c&hm=3b4d283ef126f3b5c59883d40bef931c3b5273f54dfd0cd52867286577dead7f&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Siren%20+%20Coin.json"
+              
+                }, 
+                {
+                    "Name": "Harmonizer",
+                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_171_athena_commando_f_stands_d/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/harmonizer.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
