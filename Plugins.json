@@ -459,6 +459,11 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/dutch.json"
                 }, 
                 {
+                    "Name": "laracroft+redshield.json",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_040_athena_commando_f_temple/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/laracroft+redshield.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
