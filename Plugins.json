@@ -460,7 +460,7 @@
                 }, 
                 {
                     "Name": "laracroft+redshield.json",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213455359579258931/plus.png?ex=65f5895e&is=65e3145e&hm=c7df7ba55f7676eedf31275292cd68a67fa2dbd855f50f9f38b420bc075a7813&",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_040_athena_commando_f_temple/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/laracroft+redshield.json"
                 }, 
                 {
@@ -472,6 +472,11 @@
                     "Name": "Sash Sergeant",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_072_athena_commando_m_scout/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sash%20Sergeant.json"
+                }, 
+                {
+                    "Name": "Tony Stark + Coin",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213460244693262336/plus.png?ex=65f58deb&is=65e318eb&hm=893f00135e6920755e1666c78649d86b595bf4a2d00791f1a2f328a3b9f5096b&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/tonystark+coin.json"
                 }, 
                 {
                     "Name": "Kalia",
