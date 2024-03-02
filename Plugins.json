@@ -489,6 +489,21 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/renegade%20+%20shield.json"
                 }, 
                 {
+                    "Name": "Double Helix",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_183_athena_commando_m_modernmilitaryred/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/double%20helix.json"
+                }, 
+                {
+                    "Name": "Master Key (white+mask)",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_350_athena_commando_m_masterkey/variants/material/mat2.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Master%20key%20(white%20mask).json"
+                }, 
+                {
+                    "Name": "Dark Skully",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_850_athena_commando_f_skullbritecube/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Dark%20skully.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
