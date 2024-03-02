@@ -449,6 +449,16 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sunset%20alto.json"
                 }, 
                 {
+                    "Name": "SANDSHARK DRIVER",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_796_athena_commando_f_tank/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/SANDSHARKDRIVER.json"
+                }, 
+                {
+                    "Name": "Dutch",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_051_athena_commando_m_hiphare/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/dutch.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
