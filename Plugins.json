@@ -535,6 +535,11 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/sparkleidk.json"
                 },    
                 {
+                    "Name": "Sparkle+BLACK SHIELD",
+                     "Icon": "https://cdn.discordapp.com/attachments/1213590297280389242/1213850834027151411/plus.png?ex=65f6f9af&is=65e484af&hm=041aed835592802bf9fa232e2bf84774fada4d39b1be875fe73474adf3d34566&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/sparkle.json"
+                }, 
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
