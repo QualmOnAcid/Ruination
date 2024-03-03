@@ -543,6 +543,11 @@
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
+                },
+                {
+                    "Name": "Huntmaster (Style 2)+ Coin",
+                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213866442324443206/plus.png?ex=65f70838&is=65e49338&hm=9521aa3f3f9aaed30c82dfb322c4e3e46608417b189ac53c77530992cd558bff&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/huntmaster%20saber.json"
                 }
             ]
         }
