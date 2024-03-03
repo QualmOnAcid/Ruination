@@ -525,6 +525,16 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Jules%20(mask%20on).json"
                 }, 
                 {
+                    "Name": "Midas + GHOST SKIMBOARD",
+                     "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213802001117351976/plus.png?ex=65f6cc34&is=65e45734&hm=b2376c9e4c41f2c44981028daa219f9eb9398e080495633ad557d84e15a68db4&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/midas+idk.json"
+                }, 
+                {
+                    "Name": "Sparkle Supreme",
+                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_485_athena_commando_f_sparkleremix/variants/material/mat5.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/sparkleidk.json"
+                },    
+                {
                     "Name": "Kalia",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
