@@ -548,6 +548,21 @@
                     "Name": "Huntmaster (Style 2)+ Coin",
                     "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213866442324443206/plus.png?ex=65f70838&is=65e49338&hm=9521aa3f3f9aaed30c82dfb322c4e3e46608417b189ac53c77530992cd558bff&",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/huntmaster%20saber.json"
+                },
+                {
+                    "Name": "ARIANA Grande",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_158_athena_commando_f_buffet_yc20h/variants/parts/stage2.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/ariana%20grande.json"
+                },
+                {
+                    "Name": "A goat",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_billy/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/goat.json"
+                },
+                {
+                    "Name": "LeBron James",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Lebron%20James.json"
                 }
             ]
         }
