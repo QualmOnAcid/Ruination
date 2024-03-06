@@ -563,6 +563,11 @@
                     "Name": "Cozy Jonesy",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_981_athena_commando_m_jonesyholiday/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Cozy%20jonesy.json"
+                },
+                {
+                    "Name": "Tune Squad Lebron",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/CID_A_137_Athena_Commando_M_MajestyBlue_3RVJS/smallicon.png",
+                    "PluginURL": "https://cdn.discordapp.com/attachments/1210192326186635266/1215069556687773736/1709765150_lebron.json?ex=65fb68b5&is=65e8f3b5&hm=6dda46a9e6af36b457528946fb878ef7ad5f8f4a4b67acf72c55f5eb033aa1bb&"
                 }
             ]
         }
