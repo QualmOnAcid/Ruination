@@ -550,6 +550,11 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/huntmaster%20saber.json"
                 },
                 {
+                    "Name": "ARIANA Grande",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_158_athena_commando_f_buffet_yc20h/variants/parts/stage2.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/ariana%20grande.json"
+                },
+                {
                     "Name": "A goat",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/character_billy/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/goat.json"
@@ -558,6 +563,11 @@
                     "Name": "LeBron James",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Lebron%20James.json"
+                },
+                {
+                    "Name": "Cozy Jonesy",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_981_athena_commando_m_jonesyholiday/icon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Cozy%20jonesy.json"
                 }
             ]
         }
