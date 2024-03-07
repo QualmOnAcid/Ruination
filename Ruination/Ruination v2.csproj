@@ -1,0 +1,110 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <RootNamespace>Ruination_v2</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationIcon>RuinationTransparent.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="boi.jpg" />
+    <None Remove="commandsIcon.png" />
+    <None Remove="dash.png" />
+    <None Remove="emote.png" />
+    <None Remove="Fonts\Poppins.ttf" />
+    <None Remove="hacke.png" />
+    <None Remove="HomeIcon.png" />
+    <None Remove="Images\ArrowIcon.png" />
+    <None Remove="Images\banner2.png" />
+    <None Remove="Images\battlepass.png" />
+    <None Remove="Images\bx5.png" />
+    <None Remove="Images\CarsIcon.png" />
+    <None Remove="Images\common %281%29.png" />
+    <None Remove="Images\connected2.png" />
+    <None Remove="Images\image 404.png" />
+    <None Remove="Images\imamge.png" />
+    <None Remove="Images\kaka.png" />
+    <None Remove="Images\lupe2.png" />
+    <None Remove="Images\mainbox %281%29.png" />
+    <None Remove="Images\newshield.png" />
+    <None Remove="Images\outfit.png" />
+    <None Remove="Images\pluginicon.png" />
+    <None Remove="Images\Ruination.png" />
+    <None Remove="Images\settings3.png" />
+    <None Remove="Images\shotgun.png" />
+    <None Remove="Images\uwu.png" />
+    <None Remove="Images\Vector.png" />
+    <None Remove="invIcon.png" />
+    <None Remove="presenceIcon.png" />
+    <None Remove="SettingsIcon%281%29.png" />
+    <None Remove="SkinsIcon%281%29.png" />
+    <None Remove="statsIcon.png" />
+    <None Remove="storeIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+    <PackageReference Include="DotNetZip" Version="1.16.0" />
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Infrablack.UE4Config" Version="0.7.2.97" />
+    <PackageReference Include="K4os.Compression.LZ4" Version="1.3.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="SevenZip" Version="19.0.0" />
+    <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0030" />
+    <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0030" />
+    <PackageReference Include="SkiaSharp" Version="2.88.7" />
+    <PackageReference Include="ZstdSharp.Port" Version="0.7.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="boi.jpg" />
+    <Resource Include="commandsIcon.png" />
+    <Resource Include="dash.png" />
+    <Resource Include="emote.png" />
+    <Resource Include="Fonts\POPPINS.ttf" />
+    <Resource Include="hacke.png" />
+    <Resource Include="HomeIcon.png" />
+    <Resource Include="Images\ArrowIcon.png" />
+    <Resource Include="Images\banner2.png" />
+    <Resource Include="Images\battlepass.png" />
+    <Resource Include="Images\bx5.png" />
+    <Resource Include="Images\CarsIcon.png" />
+    <Resource Include="Images\common (1).png" />
+    <Resource Include="Images\connected2.png" />
+    <Resource Include="Images\image 404.png" />
+    <Resource Include="Images\imamge.png" />
+    <Resource Include="Images\kaka.png" />
+    <Resource Include="Images\lupe2.png" />
+    <Resource Include="Images\mainbox (1).png" />
+    <Resource Include="Images\newshield.png" />
+    <Resource Include="Images\outfit.png" />
+    <Resource Include="Images\pluginicon.png" />
+    <Resource Include="Images\Ruination.png" />
+    <Resource Include="Images\settings3.png" />
+    <Resource Include="Images\shotgun.png" />
+    <Resource Include="Images\uwu.png" />
+    <Resource Include="Images\Vector.png" />
+    <Resource Include="invIcon.png" />
+    <Resource Include="presenceIcon.png" />
+    <Resource Include="SettingsIcon(1).png" />
+    <Resource Include="SkinsIcon(1).png" />
+    <Resource Include="statsIcon.png" />
+    <Resource Include="storeIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ItemCard5.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="CUE4Parse\CUE4Parse.csproj" />
+  </ItemGroup>
+
+</Project>

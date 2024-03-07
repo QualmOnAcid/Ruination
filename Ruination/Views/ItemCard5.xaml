@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Ruination_v2.Views.ItemCard5"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ruination_v2.Views"
+             mc:Ignorable="d" 
+             Height="170" Width="170">
+    <Border BorderBrush="Transparent" BorderThickness="1" CornerRadius="10" Width="150" Background="#101010" x:Name="rarityBorder" Height="150" RenderTransformOrigin="0.5,0.5" Cursor="Hand">
+        <Border.RenderTransform>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+        </Border.RenderTransform>
+
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Border.MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.1" Duration="0:0:0.2">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.1" Duration="0:0:0.2">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Border.MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1" Duration="0:0:0.2"/>
+                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+
+        <Grid>
+            <Border CornerRadius="10" Cursor="" Width="110" Height="110" Margin="19,5,19,33">
+                <Border.Background>
+                    <ImageBrush x:Name="skinIcon" ImageSource="../Images/image 404.png"></ImageBrush>
+                </Border.Background>
+            </Border>
+
+            <TextBlock x:Name="skinnamelabel" TextAlignment="Center" FontSize="14" TextWrapping="Wrap" Text="Renegade Raider (Checkerd)" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0" Height="28" Width="148"></TextBlock>
+        </Grid>
+
+    </Border>
+</UserControl>

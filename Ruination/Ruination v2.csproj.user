@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="newui.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\HomeControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\LoadingForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OptionForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SwapForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UEFNSkinSwapForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="customcontrols\MenuButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="newui.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HomeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ItemCard5.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\LoadingForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OptionForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SwapForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UEFNSkinSwapForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
