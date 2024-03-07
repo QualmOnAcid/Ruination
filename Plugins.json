@@ -577,7 +577,12 @@
                     "Name": "Giannis Antetokounmpo",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_CoyoteTrail/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Giannis%20Antetokounmpo.json"
-                }
+                },
+                {
+                    "Name": "Heidi",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/CID_226_Athena_Commando_F_Octoberfest/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/heidi.json"
+                 }
             ]
         }
     ]
