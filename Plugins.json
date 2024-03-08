@@ -612,6 +612,11 @@
                     "Name": "white out + rainbowclover",
                     "Icon": "https://cdn.discordapp.com/attachments/1185346751624925245/1215748862183215276/plus.png?ex=65fde15c&is=65eb6c5c&hm=f26fff00274ba3587e69227574fd854d9d0da832d7cdd684c96490af8b468b0b&",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/white%20out%20+%20rainbowclover.json"
+                },
+                {
+                    "Name": "Black Knight + sith trooper blaster",
+                    "Icon": "https://cdn.discordapp.com/attachments/1185346751624925245/1215758308548542474/plus.png?ex=65fdea28&is=65eb7528&hm=a87cf996e37a7d0f6c28fbacabe3fbcbfb42c6768775f52d1f551c3f677adc51&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/blackknight+%20sith%20blaster.json"
                 }
             ]
         }
