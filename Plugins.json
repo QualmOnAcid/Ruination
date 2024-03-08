@@ -607,6 +607,11 @@
                     "Name": "Evie",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/CID_A_425_Athena_Commando_F_BlueJay/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/evie.json"
+                },
+                {
+                    "Name": "white out + rainbowclover",
+                    "Icon": "https://cdn.discordapp.com/attachments/1185346751624925245/1215748862183215276/plus.png?ex=65fde15c&is=65eb6c5c&hm=f26fff00274ba3587e69227574fd854d9d0da832d7cdd684c96490af8b468b0b&",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/white%20out%20+%20rainbowclover.json"
                 }
             ]
         }
