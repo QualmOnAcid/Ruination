@@ -597,6 +597,11 @@
                     "Name": "Korra",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_PlantStand/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/wasser.jsonc"
+                },
+                {
+                    "Name": "Disco Tek Manic",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_TacticalRed_Disco/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Disco%20Tek%20Manic.json"
                 }
             ]
         }
