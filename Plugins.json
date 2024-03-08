@@ -619,6 +619,12 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/blackknight+%20sith%20blaster.json"
                 }
             ]
+        },
+        {
+            "Version": "29.00",
+            "Plugins": [
+
+            ]
         }
     ]
 }
