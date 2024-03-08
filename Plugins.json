@@ -602,6 +602,11 @@
                     "Name": "Disco Tek Manic",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_TacticalRed_Disco/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Disco%20Tek%20Manic.json"
+                },
+                {
+                    "Name": "Evie",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/CID_A_425_Athena_Commando_F_BlueJay/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/evie.json"
                 }
             ]
         }
