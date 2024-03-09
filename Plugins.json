@@ -384,181 +384,6 @@
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/RioGrande.json"
                 },
                 {
-                    "Name": "Tilted Teknique",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_483_athena_commando_f_graffitiremix/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Tilted%20Teknique.json"
-                },
-                {
-                    "Name": "Black Knight + Black Shield",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1212813945128361984/Preview.png?ex=65f33401&is=65e0bf01&hm=32849fa9fd542729256a609eff012aa9d5dbf1720c6faefce5fdeec7fe35c86a&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/blackknight+blackshield.json"
-                },
-                {
-                    "Name": "Maximilian",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_223_athena_commando_m_dieselpunk/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Maximilian.json"
-                },
-                {
-                    "Name": "Star-Spangled Ranger",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_158_athena_commando_f_starsandstripes/variants/parts/stage2.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/StarSpangledRanger.json"
-                },
-                {
-                    "Name": "Dynamo + Rainbow Clover",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1212851460992147507/Preview.png?ex=65f356f1&is=65e0e1f1&hm=b60e8d56770c7fb2e563f362d094515c4c661346db2f3df0db889abdc0b580f9&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Dynamo+Rainbowclover.json"
-                },
-                {
-                    "Name": "PurpleSkull+GoldCoin",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213112522698399764/Preview.png?ex=65f44a13&is=65e1d513&hm=8c778e2858e69169830b4cfb050a5b68ba9aba802a257b48dae285964827fddc&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/purpleskull+gold%20token.json"
-                },
-                {
-                    "Name": "AXO",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_834_athena_commando_m_axl/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/axo.json"
-                },
-                {
-                    "Name": "Tilted Teknique + Coin",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213154808538865784/icon.png?ex=65f47175&is=65e1fc75&hm=7ec078e621f044285518139ad63e30c4fa8d5e8e59fb36e6f5e917d925651414&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Tilted%20Teknique%20+%20Coin.json"
-                },
-                {
-                    "Name": "Rufus",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_feraltrash/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/rufus.json"
-                },
-                {
-                    "Name": "Luxe (White)",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_352_athena_commando_f_shiny/variants/material/mat2.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/luxe.json"
-                },
-                {
-                    "Name": "Reaper + Coin",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213429209125494785/icon_1.png?ex=65f57103&is=65e2fc03&hm=25a0e9a3da78c2a4839a5196597cb14d79408b39b094e30c8955c26bdfc15794&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/reaper+coin.json"
-                },
-                {
-                    "Name": "Sunset alto + RainbowClover",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213439039802179675/icon_1.png?ex=65f57a2b&is=65e3052b&hm=8ff1e27f87d0cff7c619a8ee2a0c19f480b94b2388ed8b437c22849e1c89edd0&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sunset%20alto.json"
-                },
-                {
-                    "Name": "SANDSHARK DRIVER",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_796_athena_commando_f_tank/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/SANDSHARKDRIVER.json"
-                },
-                {
-                    "Name": "Dutch",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_051_athena_commando_m_hiphare/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/dutch.json"
-                },
-                {
-                    "Name": "laracroft+redshield",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213455359579258931/plus.png?ex=65f5895e&is=65e3145e&hm=c7df7ba55f7676eedf31275292cd68a67fa2dbd855f50f9f38b420bc075a7813&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/laracroft+redshield.json"
-                },
-                {
-                    "Name": "special forces",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_020_athena_commando_m/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/special%20forces.json"
-                },
-                {
-                    "Name": "Sash Sergeant",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_072_athena_commando_m_scout/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Sash%20Sergeant.json"
-                },
-                {
-                    "Name": "Tony Stark + Coin",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213460244693262336/plus.png?ex=65f58deb&is=65e318eb&hm=893f00135e6920755e1666c78649d86b595bf4a2d00791f1a2f328a3b9f5096b&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/tonystark+coin.json"
-                },
-                {
-                    "Name": "Laracroft+ Coin",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213464503728087090/plus.png?ex=65f591e2&is=65e31ce2&hm=5c3c1fce0c3a67af01aeeedc2f34c91068fcf0cf0d5ff2b8074ae05658f9c15e&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/laracroft+coin.json"
-                },
-                {
-                    "Name": "Renegade + Blackshield",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213474960853434438/plus.png?ex=65f59b9f&is=65e3269f&hm=3c08376329f5e59d8e9074127682dfdee3f0ceb3921ca446e386ede73a12c9dd&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/renegade%20+%20shield.json"
-                },
-                {
-                    "Name": "Double Helix",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_183_athena_commando_m_modernmilitaryred/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/double%20helix.json"
-                },
-                {
-                    "Name": "Master Key (white+mask)",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_350_athena_commando_m_masterkey/variants/material/mat2.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Master%20key%20(white%20mask).json"
-                },
-                {
-                    "Name": "Dark Skully",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_850_athena_commando_f_skullbritecube/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Dark%20skully.json"
-                },
-                {
-                    "Name": "Sirene + Coin",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213531721706766406/plus.png?ex=65f5d07c&is=65e35b7c&hm=3b4d283ef126f3b5c59883d40bef931c3b5273f54dfd0cd52867286577dead7f&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Siren%20+%20Coin.json"
-                },
-                {
-                    "Name": "Harmonizer",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_171_athena_commando_f_stands_d/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/harmonizer.json"
-                },
-                {
-                    "Name": "Jules",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_770_athena_commando_f_mechanicalengineer/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/jules.json"
-                },
-                {
-                    "Name": "Jules (MASK ON)",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_770_athena_commando_f_mechanicalengineer/variants/progressive/stage3.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Jules%20(mask%20on).json"
-                },
-                {
-                    "Name": "Midas + GHOST SKIMBOARD",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213802001117351976/plus.png?ex=65f6cc34&is=65e45734&hm=b2376c9e4c41f2c44981028daa219f9eb9398e080495633ad557d84e15a68db4&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/midas+idk.json"
-                },
-                {
-                    "Name": "Sparkle Supreme",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_485_athena_commando_f_sparkleremix/variants/material/mat5.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/sparkleidk.json"
-                },
-                {
-                    "Name": "Sparkle+BLACK SHIELD",
-                    "Icon": "https://cdn.discordapp.com/attachments/1213590297280389242/1213850834027151411/plus.png?ex=65f6f9af&is=65e484af&hm=041aed835592802bf9fa232e2bf84774fada4d39b1be875fe73474adf3d34566&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/sparkle.json"
-                },
-                {
-                    "Name": "Kalia",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_823_athena_commando_f_islander/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Kalia.json"
-                },
-                {
-                    "Name": "Huntmaster (Style 2)+ Coin",
-                    "Icon": "https://cdn.discordapp.com/attachments/866678112766787604/1213866442324443206/plus.png?ex=65f70838&is=65e49338&hm=9521aa3f3f9aaed30c82dfb322c4e3e46608417b189ac53c77530992cd558bff&",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/huntmaster%20saber.json"
-                },
-                {
-                    "Name": "A goat",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/character_billy/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/goat.json"
-                },
-                {
-                    "Name": "LeBron James",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Lebron%20James.json"
-                },
-                {
-                    "Name": "Cozy Jonesy",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_981_athena_commando_m_jonesyholiday/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Cozy%20jonesy.json"
-                },
-                {
                     "Name": "Tune Squad Lebron",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/CID_A_137_Athena_Commando_M_MajestyBlue_3RVJS/smallicon.png",
                     "PluginURL": "https://cdn.discordapp.com/attachments/1210192326186635266/1215069556687773736/1709765150_lebron.json?ex=65fb68b5&is=65e8f3b5&hm=6dda46a9e6af36b457528946fb878ef7ad5f8f4a4b67acf72c55f5eb033aa1bb&"
@@ -792,6 +617,21 @@
                     "Name": "Cozy Jonesy",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_981_athena_commando_m_jonesyholiday/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Cozy%20jonesy.json"
+                },
+                {
+                    "Name": "Prince anwar",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_PaperBlaze/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/prince%20anwar.json"
+                },
+                {
+                    "Name": "Aphrodite",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_LiftingAura_Wave/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Aphrodite.json"
+                },
+                {
+                    "Name": "Odyssey",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_RankedOlympus/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Odyssey.json"
                 }
             ]
         }
