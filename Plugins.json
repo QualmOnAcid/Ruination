@@ -632,6 +632,16 @@
                     "Name": "Odyssey",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_RankedOlympus/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Odyssey.json"
+                },
+                {
+                    "Name": "zeus",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_StunningMountain_Armor/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/zeus.json"
+                },
+                {
+                    "Name": "hades",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_DarkStance_Inferno/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/hades.json"
                 }
             ]
         }
