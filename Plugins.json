@@ -647,6 +647,21 @@
                     "Name": "Comet",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_BrightIon/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/comet.json"
+                },
+                {
+                    "Name": "Poseidon",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_TideKing_Regal/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/poseidon.json"
+                },
+                {
+                    "Name": "Artemis",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_SeleneCobra_Stride/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/artemis.json"
+                },
+                {
+                    "Name": "Medusa",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_ReptilianOcean_Sleek/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Medusa.json"
                 }
             ]
         }
