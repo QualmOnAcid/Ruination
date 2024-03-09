@@ -667,6 +667,11 @@
                     "Name": "Cerberus",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_GateHound_Spectral/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/cerberus.json"
+                },
+                {
+                    "Name": "Remedy Vs Toxin",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/CID_567_Athena_Commando_F_RebirthMedic/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/REMEDY%20VS%20TOXIN.json"
                 }
             ]
         }
