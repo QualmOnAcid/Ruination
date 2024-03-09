@@ -384,11 +384,6 @@
                     "PluginURL": "https://github.com/EDsLA/Plugin/raw/main/RioGrande.json"
                 },
                 {
-                    "Name": "DreamFlower",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_193_athena_commando_f_hippie/icon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/dreamflower.json"
-                },
-                {
                     "Name": "Tilted Teknique",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_483_athena_commando_f_graffitiremix/icon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Tilted%20Teknique.json"
@@ -567,7 +562,12 @@
                     "Name": "Tune Squad Lebron",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/CID_A_137_Athena_Commando_M_MajestyBlue_3RVJS/smallicon.png",
                     "PluginURL": "https://cdn.discordapp.com/attachments/1210192326186635266/1215069556687773736/1709765150_lebron.json?ex=65fb68b5&is=65e8f3b5&hm=6dda46a9e6af36b457528946fb878ef7ad5f8f4a4b67acf72c55f5eb033aa1bb&"
-                },
+                }
+            ]
+        },
+        {
+            "Version": "29.00",
+            "Plugins": [
                 {
                     "Name": "Marshmello",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/cid_333_athena_commando_m_squishy/icon.png",
@@ -589,16 +589,6 @@
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Midas%20tbd.json"
                 },
                 {
-                    "Name": "Princess Noorah",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_PaperGlow/smallicon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Princess%20Noorah.json"
-                },
-                {
-                    "Name": "Korra",
-                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_PlantStand/smallicon.png",
-                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/wasser.jsonc"
-                },
-                {
                     "Name": "Disco Tek Manic",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_TacticalRed_Disco/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Disco%20Tek%20Manic.json"
@@ -617,13 +607,17 @@
                     "Name": "Black Knight + sith trooper blaster",
                     "Icon": "https://cdn.discordapp.com/attachments/1185346751624925245/1215758308548542474/plus.png?ex=65fdea28&is=65eb7528&hm=a87cf996e37a7d0f6c28fbacabe3fbcbfb42c6768775f52d1f551c3f677adc51&",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/blackknight+%20sith%20blaster.json"
+                },
+                {
+                    "Name": "Princess Noorah",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_PaperGlow/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/Princess%20Noorah.json"
+                },
+                {
+                    "Name": "Korra",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_PlantStand/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/wasser.json"
                 }
-            ]
-        },
-        {
-            "Version": "29.00",
-            "Plugins": [
-
             ]
         }
     ]
