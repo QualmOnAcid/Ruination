@@ -642,6 +642,11 @@
                     "Name": "hades",
                     "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_DarkStance_Inferno/smallicon.png",
                     "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/hades.json"
+                },
+                {
+                    "Name": "Comet",
+                    "Icon": "https://fortnite-api.com/images/cosmetics/br/Character_BrightIon/smallicon.png",
+                    "PluginURL": "https://github.com/FLUXXYYYONTOP/plugins/raw/main/comet.json"
                 }
             ]
         }
