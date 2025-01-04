@@ -1,4 +1,5 @@
-"PickaxeCache": [
+{
+        "PickaxeCache": [
         {
             "ID": "DefaultPickaxe",
             "WeaponAnim": "/Game/Athena/Items/Weapons/Abilities/GAB_Melee_ImpactCombo_Athena.GAB_Melee_ImpactCombo_Athena_C",
@@ -8160,3 +8161,4 @@
             "WID": "/BRCosmetics/Athena/Items/Weapons/Weapon_Pickaxe_VioletFare.Weapon_Pickaxe_VioletFare"
         }
     ]
+}
