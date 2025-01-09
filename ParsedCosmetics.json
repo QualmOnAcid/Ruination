@@ -811,12 +811,6 @@
         "WID": "/BRCosmetics/Athena/Items/Weapons/WID_Harvest_Pickaxe_Nutcracker.WID_Harvest_Pickaxe_Nutcracker"
     },
     {
-        "ID": "Pickaxe_ID_138_Gnome",
-        "WeaponAnim": "/Game/Athena/Items/Weapons/Abilities/GAB_Melee_ImpactCombo_Athena.GAB_Melee_ImpactCombo_Athena_C",
-        "Series": "",
-        "WID": "/BRCosmetics/Athena/Items/Weapons/WID_Harvest_Pickaxe_Gnome.WID_Harvest_Pickaxe_Gnome"
-    },
-    {
         "ID": "Pickaxe_ID_139_Gingerbread",
         "WeaponAnim": "/Game/Athena/Items/Weapons/Abilities/GAB_Melee_ImpactCombo_Athena.GAB_Melee_ImpactCombo_Athena_C",
         "Series": "",
