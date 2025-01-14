@@ -24642,6 +24642,739 @@
           "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_WolfHunter_Feral.CP_Athena_Body_M_WolfHunter_Feral",
           "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_WolfHunter_Feral_FaceAcc.CP_M_MED_WolfHunter_Feral_FaceAcc"
         ]
+      },
+      {
+        "Id": "Character_BengalBasher_NPC",
+        "Name": "NPC",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_BengalBasher_NPC",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_LRG_EmptyHead.CP_Athena_Head_M_LRG_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_BengalBasher_NPC.CP_Athena_Body_M_BengalBasher_NPC"
+        ]
+      },
+      {
+        "Id": "Character_BlingHearts_NPC",
+        "Name": "null",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_BlingHearts_NPC",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_BlingHearts_NPC.CP_Athena_Body_M_BlingHearts_NPC"
+        ]
+      },
+      {
+        "Id": "Character_CeremonialGuard_Fencer_NPC",
+        "Name": "NPC",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_CeremonialGuard_Fencer_NPC",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Female/Medium/Heads/CP_Head_F_EmptyHead.CP_Head_F_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_CeremonialGuard_Fencer_NPC.CP_Athena_Body_F_CeremonialGuard_Fencer_NPC"
+        ]
+      },
+      {
+        "Id": "Character_DiamondHeart_NPC",
+        "Name": "NPC",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_DiamondHeart_NPC",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_DiamondHeart_NPC.CP_Athena_Body_M_DiamondHeart_NPC"
+        ]
+      },
+      {
+        "Id": "Character_EchoAngel_NPC",
+        "Name": "NPC",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_EchoAngel_NPC",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Common/CP_Head_Med_Empty.CP_Head_Med_Empty",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_EchoAngel_NPC.CP_Athena_Body_M_EchoAngel_NPC"
+        ]
+      },
+      {
+        "Id": "Character_EchoNyx_NPC",
+        "Name": "NPC",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_EchoNyx_NPC",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Common/CP_Head_Med_Empty.CP_Head_Med_Empty",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_EchoNyx_NPC.CP_Athena_Body_M_EchoNyx_NPC"
+        ]
+      },
+      {
+        "Id": "Character_HabitSecurity",
+        "Name": "Battalion Brawler",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HabitSecurity",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_A.CP_Athena_Head_M_Prime_A",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_A.CP_M_MED_FaceAcc_Prime_A"
+        ]
+      },
+      {
+        "Id": "Character_HabitSecurity_B",
+        "Name": "Stealth Specialist",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HabitSecurity_B",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_B.CP_Athena_Head_M_Prime_B",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_B.CP_M_MED_FaceAcc_Prime_B"
+        ]
+      },
+      {
+        "Id": "Character_HabitSecurity_C",
+        "Name": "Field Commander",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HabitSecurity_C",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_C.CP_Athena_Head_M_Prime_C",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_C.CP_M_MED_FaceAcc_Prime_C"
+        ]
+      },
+      {
+        "Id": "Character_HabitSecurity_D",
+        "Name": "Munitions Master",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HabitSecurity_D",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_D.CP_Athena_Head_M_Prime_D",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_D.CP_M_MED_FaceAcc_Prime_D"
+        ]
+      },
+      {
+        "Id": "Character_HabitSecurity_E",
+        "Name": "Siege Sergeant",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HabitSecurity_E",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_E.CP_Athena_Head_M_Prime_E",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_E.CP_M_MED_FaceAcc_Prime_E"
+        ]
+      },
+      {
+        "Id": "Character_HabitSecurity_F",
+        "Name": "Cavalry Captain",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HabitSecurity_F",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_F.CP_Athena_Head_M_Prime_F",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_F.CP_M_MED_FaceAcc_Prime_F"
+        ]
+      },
+      {
+        "Id": "Character_HabitSecurity_G",
+        "Name": "Tank Gunner",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HabitSecurity_G",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_G.CP_Athena_Head_M_Prime_G",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime_G.CP_Athena_Body_M_Prime_G",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_G.CP_M_MED_FaceAcc_Prime_G"
+        ]
+      },
+      {
+        "Id": "Character_HeistSleek_NPC",
+        "Name": "null",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_HeistSleek_NPC",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Female/Medium/Heads/CP_Head_F_EmptyHead.CP_Head_F_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_HeistSleek_NPC.CP_Athena_Body_F_HeistSleek_NPC"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux",
+        "Name": "Battalion Brawler",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_H.CP_Athena_Head_M_Prime_H",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_H.CP_M_MED_FaceAcc_Prime_H"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_B",
+        "Name": "Battalion Brawler",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_B",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_I.CP_Athena_Head_M_Prime_I",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_PrimeRedux_B.CP_Athena_Body_M_PrimeRedux_B",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_I.CP_M_MED_FaceAcc_Prime_I"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_C",
+        "Name": "Battalion Brawler",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_C",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_J.CP_Athena_Head_M_Prime_J",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_J.CP_M_MED_FaceAcc_Prime_J"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_D",
+        "Name": "Battalion Brawler",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_D",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_K.CP_Athena_Head_M_Prime_K",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_K.CP_M_MED_FaceAcc_Prime_K"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_E",
+        "Name": "Battalion Brawler",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_E",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_L.CP_Athena_Head_M_Prime_L",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_L.CP_M_MED_FaceAcc_Prime_L"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_F",
+        "Name": "Recon Raider",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_F",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_H.CP_Athena_Head_F_Prime_H",
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_A.CP_Athena_Body_F_Prime_A",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_H.CP_F_MED_Prime_H"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_G",
+        "Name": "Recon Raider",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_G",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_I.CP_Athena_Head_F_Prime_I",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_PrimeRedux_B.CP_Athena_Body_F_PrimeRedux_B",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_I.CP_F_MED_Prime_I"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_H",
+        "Name": "Recon Raider",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_H",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_J.CP_Athena_Head_F_Prime_J",
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_A.CP_Athena_Body_F_Prime_A",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_J.CP_F_MED_Prime_J"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_I",
+        "Name": "Recon Raider",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_I",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_K.CP_Athena_Head_F_Prime_K",
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_A.CP_Athena_Body_F_Prime_A",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_K.CP_F_MED_Prime_K"
+        ]
+      },
+      {
+        "Id": "Character_PrimeRedux_J",
+        "Name": "Recon Raider",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_PrimeRedux_J",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_L.CP_Athena_Head_F_Prime_L",
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_A.CP_Athena_Body_F_Prime_A",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_L.CP_F_MED_Prime_L"
+        ]
+      },
+      {
+        "Id": "Character_TigerRootFame",
+        "Name": "Desert Dawn Lyric",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_TigerRootFame",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_TigerRootFame.CP_Athena_Head_F_TigerRootFame",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_TigerRootFame.CP_Athena_Body_F_TigerRootFame",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_TigerRootFame_FaceAcc.CP_F_MED_TigerRootFame_FaceAcc"
+        ]
+      },
+      {
+        "Id": "Character_TigerRootHype",
+        "Name": "Sunset Alto",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_TigerRootHype",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_TigerRootHype.CP_Athena_Head_M_TigerRootHype",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_TigerRootHype.CP_Athena_Body_M_TigerRootHype",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_TigerRootHype_FaceAcc.CP_M_MED_TigerRootHype_FaceAcc"
+        ]
+      },
+      {
+        "Id": "Character_TrainingGroundBot_NPC",
+        "Name": "null",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_TrainingGroundBot_NPC",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_TrainingGround_NPC.CP_Athena_Body_M_TrainingGround_NPC"
+        ]
+      },
+      {
+        "Id": "Character_WaterfallCharm",
+        "Name": "Recon Raider",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WaterfallCharm",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime.CP_Athena_Head_F_Prime",
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_A.CP_Athena_Body_F_Prime_A",
+          "/Game/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_Emmy3L_FaceAcc.CP_F_MED_Prime_Emmy3L_FaceAcc"
+        ]
+      },
+      {
+        "Id": "Character_WaterfallCharm_B",
+        "Name": "Sentry Specialist",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WaterfallCharm_B",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_B.CP_Athena_Head_F_Prime_B",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_B.CP_Athena_Body_F_Prime_B",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_B.CP_F_MED_Prime_B"
+        ]
+      },
+      {
+        "Id": "Character_WaterfallCharm_C",
+        "Name": "Tactical Tracker",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WaterfallCharm_C",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_C.CP_Athena_Head_F_Prime_C",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_C.CP_Athena_Body_F_Prime_C",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_C.CP_F_MED_Prime_C"
+        ]
+      },
+      {
+        "Id": "Character_WaterfallCharm_D",
+        "Name": "Infantry Commander",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WaterfallCharm_D",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_D.CP_Athena_Head_F_Prime_D",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime.CP_Athena_Body_F_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_D.CP_F_MED_Prime_D"
+        ]
+      },
+      {
+        "Id": "Character_WaterfallCharm_E",
+        "Name": "Squad Leader",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WaterfallCharm_E",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_E.CP_Athena_Head_F_Prime_E",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_E.CP_Athena_Body_F_Prime_E",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_E.CP_F_MED_Prime_E"
+        ]
+      },
+      {
+        "Id": "Character_WaterfallCharm_F",
+        "Name": "Ballistics Tech",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WaterfallCharm_F",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_F.CP_Athena_Head_F_Prime_F",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime.CP_Athena_Body_F_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_F.CP_F_MED_Prime_F"
+        ]
+      },
+      {
+        "Id": "Character_WaterfallCharm_G",
+        "Name": "Battalion Leader",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_WaterfallCharm_G",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_G.CP_Athena_Head_F_Prime_G",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_G.CP_Athena_Body_F_Prime_G",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_G.CP_F_MED_Prime_G"
+        ]
+      },
+      {
+        "Id": "Character_ZebraScramble_NPC",
+        "Name": "NPC",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/Character_ZebraScramble_NPC",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_ZebraScramble_Bacon_NPC.CP_Athena_Head_M_ZebraScramble_Bacon_NPC",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_ZebraScramble_NPC.CP_Athena_Body_M_ZebraScramble_NPC"
+        ]
+      },
+      {
+        "Id": "CID_A_272_Athena_Commando_F_Prime",
+        "Name": "Recon Raider",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_272_Athena_Commando_F_Prime",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime.CP_Athena_Head_F_Prime",
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_A.CP_Athena_Body_F_Prime_A",
+          "/Game/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_Emmy3L_FaceAcc.CP_F_MED_Prime_Emmy3L_FaceAcc"
+        ]
+      },
+      {
+        "Id": "CID_A_273_Athena_Commando_F_Prime_B",
+        "Name": "Sentry Specialist",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_273_Athena_Commando_F_Prime_B",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_B.CP_Athena_Head_F_Prime_B",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_B.CP_Athena_Body_F_Prime_B",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_B.CP_F_MED_Prime_B"
+        ]
+      },
+      {
+        "Id": "CID_A_274_Athena_Commando_F_Prime_C",
+        "Name": "Tactical Tracker",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_274_Athena_Commando_F_Prime_C",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_C.CP_Athena_Head_F_Prime_C",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_C.CP_Athena_Body_F_Prime_C",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_C.CP_F_MED_Prime_C"
+        ]
+      },
+      {
+        "Id": "CID_A_275_Athena_Commando_F_Prime_D",
+        "Name": "Infantry Commander",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_275_Athena_Commando_F_Prime_D",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_D.CP_Athena_Head_F_Prime_D",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime.CP_Athena_Body_F_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_D.CP_F_MED_Prime_D"
+        ]
+      },
+      {
+        "Id": "CID_A_276_Athena_Commando_F_Prime_E",
+        "Name": "Squad Leader",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_276_Athena_Commando_F_Prime_E",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_E.CP_Athena_Head_F_Prime_E",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_E.CP_Athena_Body_F_Prime_E",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_E.CP_F_MED_Prime_E"
+        ]
+      },
+      {
+        "Id": "CID_A_277_Athena_Commando_F_Prime_F",
+        "Name": "Ballistics Tech",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_277_Athena_Commando_F_Prime_F",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_F.CP_Athena_Head_F_Prime_F",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime.CP_Athena_Body_F_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_F.CP_F_MED_Prime_F"
+        ]
+      },
+      {
+        "Id": "CID_A_278_Athena_Commando_F_Prime_G",
+        "Name": "Battalion Leader",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_278_Athena_Commando_F_Prime_G",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Female/Medium/Heads/CP_Athena_Head_F_Prime_G.CP_Athena_Head_F_Prime_G",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_F_Prime_G.CP_Athena_Body_F_Prime_G",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_F_MED_Prime_G.CP_F_MED_Prime_G"
+        ]
+      },
+      {
+        "Id": "CID_A_279_Athena_Commando_M_Prime",
+        "Name": "Battalion Brawler",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_279_Athena_Commando_M_Prime",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_A.CP_Athena_Head_M_Prime_A",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_A.CP_M_MED_FaceAcc_Prime_A"
+        ]
+      },
+      {
+        "Id": "CID_A_280_Athena_Commando_M_Prime_B",
+        "Name": "Stealth Specialist",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_280_Athena_Commando_M_Prime_B",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_B.CP_Athena_Head_M_Prime_B",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_B.CP_M_MED_FaceAcc_Prime_B"
+        ]
+      },
+      {
+        "Id": "CID_A_281_Athena_Commando_M_Prime_C",
+        "Name": "Field Commander",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_281_Athena_Commando_M_Prime_C",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_C.CP_Athena_Head_M_Prime_C",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_C.CP_M_MED_FaceAcc_Prime_C"
+        ]
+      },
+      {
+        "Id": "CID_A_282_Athena_Commando_M_Prime_D",
+        "Name": "Munitions Master",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_282_Athena_Commando_M_Prime_D",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_D.CP_Athena_Head_M_Prime_D",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_D.CP_M_MED_FaceAcc_Prime_D"
+        ]
+      },
+      {
+        "Id": "CID_A_283_Athena_Commando_M_Prime_E",
+        "Name": "Siege Sergeant",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_283_Athena_Commando_M_Prime_E",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_E.CP_Athena_Head_M_Prime_E",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_E.CP_M_MED_FaceAcc_Prime_E"
+        ]
+      },
+      {
+        "Id": "CID_A_284_Athena_Commando_M_Prime_F",
+        "Name": "Cavalry Captain",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_284_Athena_Commando_M_Prime_F",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_F.CP_Athena_Head_M_Prime_F",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime.CP_Athena_Body_M_Prime",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_F.CP_M_MED_FaceAcc_Prime_F"
+        ]
+      },
+      {
+        "Id": "CID_A_285_Athena_Commando_M_Prime_G",
+        "Name": "Tank Gunner",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_A_285_Athena_Commando_M_Prime_G",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_Prime_G.CP_Athena_Head_M_Prime_G",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Prime_G.CP_Athena_Body_M_Prime_G",
+          "/BRCosmetics/Characters/CharacterParts/FaceAccessories/CP_M_MED_FaceAcc_Prime_G.CP_M_MED_FaceAcc_Prime_G"
+        ]
+      },
+      {
+        "Id": "CID_Creative_Mannequin_M_Default",
+        "Name": "Recruit",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_Creative_Mannequin_M_Default",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Mannequin_Body.CP_Mannequin_Body",
+          "/Game/Athena/Heroes/Meshes/Heads/Dev_TestAsset_Head_01.Dev_TestAsset_Head_01"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_F_MarauderElite",
+        "Name": "Marauder Elite",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_F_MarauderElite",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Body_Commando_F_MarauderElite.CP_Body_Commando_F_MarauderElite",
+          "/Game/Characters/CharacterParts/Common/CP_Head_Med_Empty.CP_Head_Med_Empty"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_F_RebirthDefault_Henchman",
+        "Name": "Recruit",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_F_RebirthDefault_Henchman",
+        "added": 100,
+        "Gender": "Female",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Female/Medium/Heads/CP_Head_F_RebirthDefaultA.CP_Head_F_RebirthDefaultA",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Body_Commando_F_RebirthDefault_Henchman.CP_Body_Commando_F_RebirthDefault_Henchman"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_AlienSummer",
+        "Name": "Human Bill",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_AlienSummer",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_AlienSummer_NPC.CP_Athena_Body_M_AlienSummer_NPC"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_Apparition_Grunt",
+        "Name": "Doombot Agent",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_Apparition_Grunt",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Apparition_Grunt.CP_Athena_Body_M_Apparition_Grunt"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_Apparition_Heavy",
+        "Name": "Doombot Agent",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_Apparition_Heavy",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_L_BuffCat_Empty.CP_Athena_Head_L_BuffCat_Empty",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_Apparition_Heavy.CP_Athena_Body_M_Apparition_Heavy"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_HenchmanBad",
+        "Name": "PERF OPTIMIZED",
+        "CID": "FortniteGame/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_HenchmanBad",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_HenchmanBad_Optimized.CP_Athena_Body_M_HenchmanBad_Optimized",
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_HenchmanGood",
+        "Name": "PERF OPTIMIZED",
+        "CID": "FortniteGame/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_HenchmanGood",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/Game/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_HenchmanGood_Optimized.CP_Athena_Body_M_HenchmanGood_Optimized"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_HenchmanSummer",
+        "Name": "The Underwriter",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_HenchmanSummer",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_HenchmanSummer_NPC.CP_Athena_Body_M_HenchmanSummer_NPC"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_HightowerHenchman",
+        "Name": "Stark Auto-Defense Unit",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_HightowerHenchman",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_HightowerHenchman.CP_Athena_Body_M_HightowerHenchman"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_HightowerHenchman_Date",
+        "Name": "Doombot Agent",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_HightowerHenchman_Date",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/Game/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_M_EmptyHead.CP_Athena_Head_M_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_HightowerHenchman_Date.CP_Athena_Body_M_HightowerHenchman_Date"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_Kyle",
+        "Name": "Marauder Heavy",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_Kyle",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Large/Heads/M_LRG_Constructor_Head_01.M_LRG_Constructor_Head_01",
+          "/BRCosmetics/Characters/CharacterParts/Male/Large/Bodies/M_L_Constructor_01.M_L_Constructor_01"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_MarauderGrunt",
+        "Name": "Marauder",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_MarauderGrunt",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_S_EmptyHead.CP_Athena_Head_S_EmptyHead",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_MarauderGrunt.CP_Athena_Body_M_MarauderGrunt"
+        ]
+      },
+      {
+        "Id": "CID_NPC_Athena_Commando_M_MarauderHeavy",
+        "Name": "Marauder Heavy",
+        "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_NPC_Athena_Commando_M_MarauderHeavy",
+        "added": 100,
+        "Gender": "Male",
+        "BaseCharacterParts": [
+          "/BRCosmetics/Characters/CharacterParts/Male/Medium/Heads/CP_Athena_Head_L_BuffCat_Empty.CP_Athena_Head_L_BuffCat_Empty",
+          "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_Athena_Body_M_LRG_MarauderHeavy.CP_Athena_Body_M_LRG_MarauderHeavy"
+        ]
       }
     ],
     "Options": [
@@ -24782,6 +25515,34 @@
       "OffsetAndLengthOffset": 5071554,
       "OriginalDataLength": 752,
       "ChunkIdOffset": 749556,
+      "OverrideData": null,
+      "isCompressed": true,
+      "PartitionIndex": 1
+    },
+    {
+      "Path": "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_028_Athena_Body",
+      "Data": "AAAAAJwEAAANAAAAAAAAAAAiAIDiBgAAiAMAAIgDAAC4AwAASAQAAGgEAACQBAAAmAQAAA4AAACmAgAAAABkwQAAAADaGQiYLJDiJKmgk0NI3YrxelBxOaoJxPxbPqxUspG0OEOVgOsxbVgAdW2EN/xnQMXU5Ofq7GsJs+KIGrhaDsAx3V+17w8iojvCLTWmWw83dUl3coiGFJh8OSo1uu2oqHqj+aZ3XOrXQDL1dpzAQogAAEQAVQBlAFkAbAAYABAAFAAiAAQAGQAbABIAOy9HYW1lL0NoYXJhY3RlcnMvUGxheWVyL0ZlbWFsZS9NZWRpdW0vQmFzZS9TS19NX0ZlbWFsZV9CYXNlX1NrZWxldG9uL0dhbWUvQ2hhcmFjdGVycy9QbGF5ZXIvRmVtYWxlL01lZGl1bS9Cb2RpZXMvRl9NZWRfU29sZGllcl8wMS9NZXNoZXMvRl9NZWRfU29sZGllcl8wMS9HYW1lL0NoYXJhY3RlcnMvUGxheWVyL0ZlbWFsZS9NZWRpdW0vQm9kaWVzL0ZfTWVkX1NvbGRpZXJfMDEvTWVzaGVzL0ZfTWVkX1NvbGRpZXJfMDFfU2tlbGV0b25fQW5pbUJQL0dhbWUvQ2hhcmFjdGVycy9QbGF5ZXIvRmVtYWxlL01lZGl1bS9Cb2RpZXMvRl9NZWRfU29sZGllcl8wMS9Nb3JwaHMvRl9NZWRfU29sZGllcl8wMV9BZGovR2FtZS9DaGFyYWN0ZXJzL1BsYXllci9GZW1hbGUvTWVkaXVtL0JvZGllcy9GX01lZF9Tb2xkaWVyXzAxL1NraW5zL1RWXzIwL01hdGVyaWFscy9GX01FRF9Db21tYW5kb19Cb2R5X1RWMjBGX01FRF9Db21tYW5kb19Cb2R5X1RWMjBGX01lZF9Tb2xkaWVyXzAxRl9NZWRfU29sZGllcl8wMV9BZGpGX01lZF9Tb2xkaWVyXzAxX1NrZWxldG9uX0FuaW1CUF9DTm9uZVNLX01fRmVtYWxlX0Jhc2VfU2tlbGV0b25DdXN0b21DaGFyYWN0ZXJCb2R5UGFydERhdGFDUF8wMjhfQXRoZW5hX0JvZHkvQlJDb3NtZXRpY3MvQXRoZW5hL0hlcm9lcy9NZXNoZXMvQm9kaWVzL0NQXzAyOF9BdGhlbmFfQm9keQIAAAAAAAAAAAAAAAAAAAAAAFR7hQwtOux7fqJCYxCDenPpcQu2Vze0eRhpQFaZZc9p4yJYpW1V+HBTlFpChnDbRwAAAAAAAAAAGgAAAAAAAAALAAAAAQAAAAEAAAAAAAAAVHuFDC067Hv//////////+lxC7ZXN7R5AAAAAAAAAAAAAAAAAAAAABoAAAAAAAAAmwAAAAAAAAAMAAAAAAAAAP//////////fqJCYxCDenP//////////xhpQFaZZc9pFRoyjvqLXj8LAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAIAAAABAAAAAAAAAAADAgAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAQYKAgUEgQICAgUCBwMBAgIBAQAAAAEAAAAAAAAABgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAACgAAAAAAAAAAAAAAAQAAAIAFAQQAAAAAAAAABQAAAAAAAAAAAAAAAQAAAAEAAAD6////KgAAAAAFAwAAAAAAAAAHAAAAAAAAAAAAAAAJAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAA=",
+      "Ucas": "pakchunk100-WindowsClient_s1",
+      "Utoc": "pakchunk100-WindowsClient",
+      "Offset": 2004041728,
+      "CompressionBlockOffset": 13855874,
+      "OffsetAndLengthOffset": 4827644,
+      "OriginalDataLength": 720,
+      "ChunkIdOffset": 456864,
+      "OverrideData": null,
+      "isCompressed": true,
+      "PartitionIndex": 1
+    },
+    {
+      "Path": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_028_Athena_Commando_F",
+      "Data": "AAAAAP4LAAAsAAAAAAAAAAAiBICXEAAAQAoAAEgKAADICgAAWAsAAHgLAACgCwAArAsAAC0AAAAoCAAAAABkwQAAAACFi3eaf+M+vDL1dpzAQogAXMtywhZb6POa6hRdTwG4YyM3yQAhAquHIJWxPvpezqLiHq5wY6qZBdimw/ng5fJqAUQ244jIVcbuVFfDaA9OfqYZ/ie6fM3tTYYYMAZ1Y1BDlYDrMW1YADssAZ1xV6iKocwra5agHIcnZyUzSROJgHdkbkG/fY2BfuiMNxpLaPTK8//N81MJcZ/8pR41gacYqEo4hpZg2lHSfZB9uI5S3xvu2cmoc6kLo/mmd1zq10CiVELhKMDOeXVthDf8Z0DFlFV80Z60d2z9qO0LfRrNfddrD62ibQbL/YsjeE+09XlGXrJydp88C31AdYX6b0/lvn+YDwBG7IETnY/nk1PlNMItNaZbDzd1t5YurvugpGtm2iNgBZjgFY82GESCITbuqk1PAK8ysEJqygduP/YnqFU5LtDZ8nT7nUN/Nq0rIu6k406DF11MU7o/NtFTD2K25yE/LcSnzqkAPgA7AEMAQQBzAHYAXQBfAGcAYgAzAEUAbABsABkAHAAcACMAJQAiAB8AHwAfABIAGwAYABgAEgAWABUAFgAMABsAHgAEACkAHgAkABkAGwAjAB4AGQAbAEgvQlJDb3NtZXRpY3MvQWNjZXNzb3JpZXMvSGF0cy9NYXRlcmlhbHMvRmVtYWxlX0NvbW1hbmRvXzA3X1YwMS9CUkNvc21ldGljcy9BdGhlbmEvSGVyb2VzL01lc2hlcy9Cb2RpZXMvQ1BfMDI4X0F0aGVuYV9Cb2R5L0JSQ29zbWV0aWNzL0F0aGVuYS9IZXJvZXMvTWVzaGVzL0hlYWRzL0ZfTUVEX0FTTl9TYXJhaF9IZWFkXzAyX0FUSC9CUkNvc21ldGljcy9DaGFyYWN0ZXJzL0NoYXJhY3RlclBhcnRzL0hhdHMvSGF0X0ZfQ29tbWFuZG9fMDhfVjAxL0JSQ29zbWV0aWNzL0NoYXJhY3RlcnMvUGxheWVyL0ZlbWFsZS9NZWRpdW0vQm9kaWVzL0ZfTUVEX1JlbmVnYWRlUmFpZGVyX09ueXgvTWF0ZXJpYWxzL01JX1JlbmVnYWRlUmFpZGVyX09ueXhfQm9keS9CUkNvc21ldGljcy9DaGFyYWN0ZXJzL1BsYXllci9GZW1hbGUvTWVkaXVtL0JvZGllcy9GX01FRF9SZW5lZ2FkZVJhaWRlcl9Pbnl4L01hdGVyaWFscy9NSV9SZW5lZ2FkZVJhaWRlcl9Pbnl4X0ZhY2VBY2MvQlJDb3NtZXRpY3MvVUkvRm91bmRhdGlvbi9UZXh0dXJlcy9JY29ucy9IZXJvZXMvQXRoZW5hL1NvbGRpZXIvUzMzL1RfU29sZGllcl9SZW5lZ2FkZVJhaWRlckYvQlJDb3NtZXRpY3MvVUkvRm91bmRhdGlvbi9UZXh0dXJlcy9JY29ucy9IZXJvZXMvQXRoZW5hL1NvbGRpZXIvUzMzL1RfU29sZGllcl9SZW5lZ2FkZVJhaWRlckZfTC9CUkNvc21ldGljcy9VSS9Gb3VuZGF0aW9uL1RleHR1cmVzL0ljb25zL0hlcm9lcy9BdGhlbmEvU29sZGllci9TMzMvVF9Tb2xkaWVyX1JlbmVnYWRlUmFpZGVyRl9MZWdlbmRhcnkvQlJDb3NtZXRpY3MvVUkvRm91bmRhdGlvbi9UZXh0dXJlcy9JY29ucy9IZXJvZXMvQXRoZW5hL1NvbGRpZXIvUzMzL1RfU29sZGllcl9SZW5lZ2FkZVJhaWRlckZfT255eC9HYW1lL0FjY2Vzc29yaWVzL0hhdHMvTWF0ZXJpYWxzL0ZlbWFsZV9Db21tYW5kb18wNy9HYW1lL0FuaW1hdGlvbi9HYW1lL01haW5QbGF5ZXIvTWVudS9Nb250YWdlTG9va1VwVGFibGVzL01lZGl1bUZlbWFsZS9HYW1lL0NoYXJhY3RlcnMvUGxheWVyL0ZlbWFsZS9NZWRpdW0vQm9kaWVzL0ZfTWVkX1NvbGRpZXJfMDEvU2tpbnMvVFZfMjAvTWF0ZXJpYWxzL0ZfTUVEX0NvbW1hbmRvX0JvZHlfVFYyMC9HYW1lL0NoYXJhY3RlcnMvUGxheWVyL0ZlbWFsZS9NZWRpdW0vQm9kaWVzL0ZfTWVkX1NvbGRpZXJfMDEvU2tpbnMvVFZfMjEvTWF0ZXJpYWxzL0ZfTUVEX0NvbW1hbmRvX0JvZHlfVFYyMUNvc21ldGljcy5GaWx0ZXIuU2Vhc29uLjFDb3NtZXRpY3MuR2F0aW5nLkFsbG93LlNob2VzQ29zbWV0aWNzLlNldC5TdG9ybVNjYXZlbmdlckNvc21ldGljcy5Tb3VyY2UuU2Vhc29uMS5TZWFzb25TaG9wQ29zbWV0aWNzLlVzZXJGYWNpbmdGbGFncy5IYXNWYXJpYW50c0Nvc21ldGljcy5WYXJpYW50LkNoYW5uZWwuTWF0ZXJpYWxDb3NtZXRpY3MuVmFyaWFudC5Qcm9wZXJ0eS5NYXQxQ29zbWV0aWNzLlZhcmlhbnQuUHJvcGVydHkuTWF0MkNvc21ldGljcy5WYXJpYW50LlByb3BlcnR5Lk1hdDNDUF8wMjhfQXRoZW5hX0JvZHlGX01FRF9BU05fU2FyYWhfSGVhZF8wMl9BVEhGX01FRF9Db21tYW5kb19Cb2R5X1RWMjBGX01FRF9Db21tYW5kb19Cb2R5X1RWMjFGZW1hbGVfQ29tbWFuZG9fMDdGZW1hbGVfQ29tbWFuZG9fMDdfVjAxSGF0X0ZfQ29tbWFuZG9fMDhfVjAxSXRlbS5UcmFpdC5TaW5nbGVTdGFja01lZGl1bUZlbWFsZU1JX1JlbmVnYWRlUmFpZGVyX09ueXhfQm9keU1JX1JlbmVnYWRlUmFpZGVyX09ueXhfRmFjZUFjY05vbmVTb3VuZExpYnJhcnkuSUQuQ2xvdGhpbmdUeXBlLkdlYXJUYWN0aWNhbFNvdW5kTGlicmFyeS5JRC5IYW5kVHlwZS5HbG92ZVNvdW5kTGlicmFyeS5JRC5TdGVwVHlwZS5Cb290c0NvbWJhdFRfU29sZGllcl9SZW5lZ2FkZVJhaWRlckZUX1NvbGRpZXJfUmVuZWdhZGVSYWlkZXJGX0xUX1NvbGRpZXJfUmVuZWdhZGVSYWlkZXJGX0xlZ2VuZGFyeVRfU29sZGllcl9SZW5lZ2FkZVJhaWRlckZfT255eENJRF8wMjhfQXRoZW5hX0NvbW1hbmRvX0ZGb3J0Q29zbWV0aWNNYXRlcmlhbFZhcmlhbnQvQlJDb3NtZXRpY3MvQXRoZW5hL0l0ZW1zL0Nvc21ldGljcy9DaGFyYWN0ZXJzL0NJRF8wMjhfQXRoZW5hX0NvbW1hbmRvX0YCAAAAAAAAAAAAAAAAAAAAAAAkOyJRuvc6Z/ODRZJ2x8VDC9BDkATeUnhsosmOl+PFWusc//J2qD1CAAAAAAAAAID//////////+MiWKVtVfhwDfy5NHWucHhBfpaJ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",
+      "Ucas": "pakchunk100-WindowsClient_s1",
+      "Utoc": "pakchunk100-WindowsClient",
+      "Offset": 1574332416,
+      "CompressionBlockOffset": 13242710,
+      "OffsetAndLengthOffset": 7222034,
+      "OriginalDataLength": 2272,
+      "ChunkIdOffset": 3330132,
       "OverrideData": null,
       "isCompressed": true,
       "PartitionIndex": 1
