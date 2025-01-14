@@ -24650,7 +24650,7 @@
         "Name": "Renegade Raider",
         "CID": "FortniteGame/Plugins/GameFeatures/BRCosmetics/Content/Athena/Items/Cosmetics/Characters/CID_028_Athena_Commando_F",
         "added": 1,
-        "Gender": null,
+        "Gender": "Female",
         "BaseCharacterParts": [
           "/BRCosmetics/Athena/Heroes/Meshes/Bodies/CP_028_Athena_Body.CP_028_Athena_Body",
           "/BRCosmetics/Athena/Heroes/Meshes/Heads/F_MED_ASN_Sarah_Head_02_ATH.F_MED_ASN_Sarah_Head_02_ATH",
